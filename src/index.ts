@@ -5,6 +5,8 @@ import * as dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import { errorHandler } from "./middleware/error.middleware";
+import { notFoundHandler } from "./middleware/not-found.middleware";
 
 /**
  * Required Routes
@@ -29,10 +31,10 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-/**
- * Configuring Routes
- */
 app.use('/api/country', countriesRouter);
+
+app.use(errorHandler);
+app.use(notFoundHandler);
 
 /**
  * Server Activation
