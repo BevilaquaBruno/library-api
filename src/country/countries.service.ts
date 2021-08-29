@@ -53,3 +53,13 @@ export const update = async (id: number, countryUpdate: BaseCountry): Promise<Co
 
   return countries[id];
 };
+
+export const remove = async (id: number): Promise<null | void> => {
+  const country = await find(id);
+
+  if (!country) {
+    return null;
+  }
+
+  delete countries[id];
+};
