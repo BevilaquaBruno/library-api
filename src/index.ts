@@ -6,6 +6,11 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 
+/**
+ * Required Routes
+ */
+import countriesRouter from './country/countries.router';
+
 dotenv.config();
 /**
  * App Variables
@@ -23,6 +28,11 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+
+/**
+ * Configuring Routes
+ */
+app.use('/api/country', countriesRouter);
 
 /**
  * Server Activation
