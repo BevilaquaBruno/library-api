@@ -11,7 +11,7 @@ let countries: Countries = {
     id: 1,
     name: "Brasil",
     full_name: "República Federativa do Brasil",
-    short: "BR",
+    short: "BRA",
     flag: "brasil_flag.png"
   },
   2: {
