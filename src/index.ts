@@ -5,7 +5,6 @@ import * as dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import { errorHandler } from "./middleware/error.middleware";
 import { notFoundHandler } from "./middleware/not-found.middleware";
 
 /**
@@ -33,7 +32,6 @@ app.use(express.json());
 
 app.use('/api/country', countriesRouter);
 
-app.use(errorHandler);
 app.use(notFoundHandler);
 
 /**
