@@ -2,9 +2,9 @@
  * Required External Modules and Interfaces
  */
 import express, { Request, Response } from "express";
-import  * as CountryService from './countries.service';
-import { BaseCountry, Country } from "./country.interface";
-
+import CountryModel from '../model/countries.model';
+import Country from '../classes/Country.class';
+const countryModel = new CountryModel();
 /**
  * Router Definition
  */
@@ -17,7 +17,7 @@ const countriesRouter = express.Router();
 // GET countries
 countriesRouter.get('/', async (req: Request, res: Response) =>{
   try {
-    const countries: Country[] = await CountryService.findAll();
+    const countries: Country[] = await countryModel.findAll();
 
     res.status(200).json({ data: countries, status: { error: false, message: 'List of all countries'} });
   } catch (e) {
@@ -30,7 +30,7 @@ countriesRouter.get('/:id', async (req: Request, res: Response) =>{
   const id: number = parseInt(req.params.id, 10);
 
   try {
-    const country: Country = await CountryService.find(id);
+    const country: Country = await countryModel.find(id);
 
     if (country) {
       return res.status(200).json({ data: country, status: { error: false, message: 'Country finded'} });
@@ -45,9 +45,14 @@ countriesRouter.get('/:id', async (req: Request, res: Response) =>{
 // POST countries
 countriesRouter.post('/', async (req: Request, res: Response) => {
   try {
-    const country: BaseCountry = req.body;
+    const country: Country = new Country(
+      req.body.name,
+      req.body.fullName,
+      req.body.short,
+      req.body.flag
+    );
 
-    const newCountry = await CountryService.create(country);
+    const newCountry = await countryModel.create(country);
 
     res.status(201).json({ data: country, status: { error: false, message: 'Country created'} });
   } catch (e) {
@@ -60,12 +65,18 @@ countriesRouter.put('/:id', async (req: Request, res: Response) => {
   const id: number = parseInt(req.params.id);
 
   try {
-    const countryUpdate: Country = req.body;
+    const countryUpdate: Country = new Country(
+      req.body.name,
+      req.body.fullName,
+      req.body.short,
+      req.body.flag,
+      id
+    );
 
-    const existingCountry = await CountryService.find(id);
+    const existingCountry = await countryModel.find(id);
 
     if (existingCountry) {
-      const updatedCountry = await CountryService.update(id, countryUpdate);
+      const updatedCountry = await countryModel.update(countryUpdate);
       return res.status(200).json({ data: updatedCountry, status: { error: false, message: 'Country updated'} });
     }
 
@@ -79,7 +90,8 @@ countriesRouter.put('/:id', async (req: Request, res: Response) => {
 countriesRouter.delete('/:id', async (req: Request, res: Response) => {
   try {
     const id: number = parseInt(req.params.id, 10);
-    await CountryService.remove(id);
+    let country: Country = await countryModel.find(id);
+    await countryModel.remove(country);
 
     res.status(200).json({ status: { error: false, message: 'Country removed'} });
   } catch (e) {
