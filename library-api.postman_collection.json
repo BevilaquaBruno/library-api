@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b2c45306-6fc3-40a1-a4be-a24b48d22d03",
+		"_postman_id": "ed2ad466-1e4d-4a71-b9f9-31b16fea0af4",
 		"name": "library-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -52,7 +52,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"\",\r\n    \"full_name\": \"\",\r\n    \"short\": \"\",\r\n    \"flag\": \"\"\r\n}",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"fullName\": \"\",\r\n    \"short\": \"\",\r\n    \"flag\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -79,7 +79,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"\",\r\n    \"full_name\": \"\",\r\n    \"short\": \"\",\r\n    \"flag\": \"\"\r\n}",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"fullName\": \"\",\r\n    \"short\": \"\",\r\n    \"flag\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
