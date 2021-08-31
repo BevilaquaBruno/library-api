@@ -10,7 +10,7 @@ import { notFoundHandler } from "./middleware/not-found.middleware";
 /**
  * Required Routes
  */
-import countriesRouter from './routes/countries.router';
+import countriesRouter from './routes/Country.router';
 
 dotenv.config();
 /**
