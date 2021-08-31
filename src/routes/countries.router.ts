@@ -4,6 +4,7 @@
 import express, { Request, Response } from "express";
 import CountryModel from '../model/countries.model';
 import Country from '../classes/Country.class';
+
 const countryModel = new CountryModel();
 /**
  * Router Definition
@@ -30,9 +31,9 @@ countriesRouter.get('/:id', async (req: Request, res: Response) =>{
   const id: number = parseInt(req.params.id, 10);
 
   try {
-    const country: Country = await countryModel.find(id);
+    const country: Country | boolean = await countryModel.find(id);
 
-    if (country) {
+    if (typeof country != "boolean") {
       return res.status(200).json({ data: country, status: { error: false, message: 'Country finded'} });
     }
 
@@ -90,11 +91,13 @@ countriesRouter.put('/:id', async (req: Request, res: Response) => {
 countriesRouter.delete('/:id', async (req: Request, res: Response) => {
   try {
     const id: number = parseInt(req.params.id, 10);
-    let country: Country = await countryModel.find(id);
-    await countryModel.remove(country);
-
+    let country: Country | boolean = await countryModel.find(id);
+    if (typeof country != "boolean") {
+      await countryModel.remove(country);
+    }
     res.status(200).json({ status: { error: false, message: 'Country removed'} });
   } catch (e) {
+    console.log(e);
     res.status(500).json({ status: { error: true, message: 'Something bad happened'} });
   }
 });

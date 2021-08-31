@@ -2,15 +2,12 @@
  * Data Model Interfaces
  */
 import Country from '../classes/Country.class';
-interface Countries {
-  [key: number]: Country;
-}
-
+import { CountryList } from "../interfaces/Country.interface";
 
 /**
  * In-Memory Store
  */
-let countries: Countries = {
+let countries: CountryList = {
   1: new Country("Brasil", "República Federativa do Brasil", "BRA", "brasil_flag.png", 1),
   2: new Country("Estados Unidos", "Estados Unidos da América", "EUA", "estados_unidos_flag.png", 2)
 };
@@ -21,10 +18,13 @@ export default class CountryModel {
     return allCountries;
   }
 
-  public find = async (id: number): Promise<Country> => {
+  public find = async (id: number): Promise<Country | boolean> => {
     let arr = countries[id];
-    let country = new Country(arr.name, arr.fullName, arr.short, arr.flag, id);
-    return country;
+    if (arr) {
+      let country = new Country(arr.name, arr.fullName, arr.short, arr.flag, id);
+      return country;
+    }
+    return false;
   }
 
   public create = async (newCountry: Country): Promise<Country> => {
