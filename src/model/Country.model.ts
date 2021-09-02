@@ -2,8 +2,10 @@
  * Data Model Interfaces
  */
 import Country from '../classes/Country.class';
-import { CountryList } from "../interfaces/Country.interface";
-
+import { CountryList, CountryData } from "../interfaces/Country.interface";
+import DatabaseConnection from '../../db/db';
+import { Query } from 'mysql2';
+var conn = DatabaseConnection.getConnection();
 /**
  * In-Memory Store
  */
@@ -14,7 +16,11 @@ let countries: CountryList = {
 
 export default class CountryModel {
   public findAll = async (): Promise<Country[]> => {
-    let allCountries: Country[] = Object.values(countries);
+    let allCountries: Country[] = [];
+    const [ rows ] = await (await conn).execute("SELECT id, name, fullName, short, flag FROM country");
+    Object.values(rows).forEach((el: CountryData) => {
+      allCountries.push(new Country(el.name, el.fullName, el.short, el.flag, el.id));
+    });
     return allCountries;
   }
 

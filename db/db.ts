@@ -1,11 +1,16 @@
-import mysql from 'mysql';
+import mysql from 'mysql2/promise';
 import * as dotenv from 'dotenv';
+dotenv.config();
 
-var connection: mysql.Connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE
-});
+ class DatabaseConnection {
+  static async getConnection() {
+    return await mysql.createConnection({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE
+    });
+  }
+}
 
-export default connection;
+export default DatabaseConnection;
