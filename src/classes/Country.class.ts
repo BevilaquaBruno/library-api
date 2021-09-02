@@ -1,3 +1,5 @@
+import { CountryData } from "../interfaces/Country.interface";
+
 export default class Country {
   /**
    * Attributes
@@ -70,5 +72,19 @@ export default class Country {
 
   public set flag(v : string) {
       this._flag = v;
+  }
+
+  /**
+   * Methods
+   */
+  public toJson() {
+    const ct: CountryData = {
+      id: this._id,
+      name: this._name,
+      fullName: this._fullName,
+      short: this._short,
+      flag: this._flag
+    }
+    return ct;
   }
 }

@@ -20,7 +20,7 @@ countriesRouter.get('/', async (req: Request, res: Response) =>{
   try {
     const countries: Country[] = await countryModel.findAll();
 
-    res.status(200).json({ data: countries, status: { error: false, message: 'List of all countries'} });
+    res.status(200).json({ data: countries.map(ct => ct.toJson()), status: { error: false, message: 'List of all countries'} });
   } catch (e) {
     res.status(500).json({ status: { error: true, message: 'Something bad happened' } });
   }
