@@ -2,7 +2,7 @@ import mysql from 'mysql2/promise';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
- class DatabaseConnection {
+class DatabaseConnection {
   static async getConnection() {
     return await mysql.createConnection({
       host: process.env.DB_HOST,
