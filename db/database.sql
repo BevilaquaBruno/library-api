@@ -4,15 +4,12 @@ USE bevilaqualibrary;
 
 /* Tables */
 CREATE TABLE country (
-	id INT NOT NULL,
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     fullName VARCHAR(100),
     short CHAR(3) NOT NULL,
-    flag VARCHAR(50
+    flag VARCHAR(50)
 );
-
-/* Primary Keys */
-ALTER TABLE country CHANGE id id INT AUTO_INCREMENT PRIMARY KEY NOT NULL;
 
 /* Foreign Keys */
 
