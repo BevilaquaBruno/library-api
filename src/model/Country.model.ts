@@ -4,7 +4,7 @@
 import Country from '../classes/Country.class';
 import { CountryList, CountryData } from "../interfaces/Country.interface";
 import DatabaseConnection from '../../db/db';
-import { Query } from 'mysql2';
+
 var conn = DatabaseConnection.getConnection();
 /**
  * In-Memory Store
