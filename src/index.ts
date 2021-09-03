@@ -5,7 +5,7 @@ import * as dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import { notFoundHandler } from "./middleware/not-found.middleware";
+import { notFoundHandler } from "./middlewares/not-found.middleware";
 
 /**
  * Required Routes
