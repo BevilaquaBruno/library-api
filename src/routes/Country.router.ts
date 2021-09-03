@@ -2,7 +2,7 @@
  * Required External Modules and Interfaces
  */
 import express, { Request, Response } from "express";
-import CountryModel from '../model/Country.model';
+import CountryModel from '../models/Country.model';
 import Country from '../classes/Country.class';
 
 const countryModel = new CountryModel();
