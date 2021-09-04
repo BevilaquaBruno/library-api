@@ -24,38 +24,49 @@ export default class CountryModel {
     return allCountries;
   }
 
-  public find = async (id: number): Promise<Country | boolean> => {
+  public findById = async (id: number): Promise<Country> => {
     const [ rows ] = await (await conn).execute("SELECT id, name, fullName, short, flag FROM country WHERE id = ?",
     [id.toString()]);
     let arrCountry: CountryData = Object.values(rows)[0];
-    let country: Country = new Country(arrCountry.name, arrCountry.fullName, arrCountry.short, arrCountry.flag, arrCountry.id);
+    let country: Country;
+    if (undefined === arrCountry) {
+      country = new Country();
+    }else{
+      country = new Country(arrCountry.name, arrCountry.fullName, arrCountry.short, arrCountry.flag, arrCountry.id);
+    }
     return country;
   }
 
-  public create = async (newCountry: Country): Promise<number> => {
+  public create = async (country: Country): Promise<number> => {
     const rst: ResultSetHeader | any = await (await conn).execute("INSERT INTO Country(name, fullName, short, flag) VALUES(?, ?, ?, ?)",
-      [newCountry.name, newCountry.fullName, newCountry.short, newCountry.flag]);
-      if (undefined !== rst[0].insertId) {
-        return rst[0].insertId
-      }else{
-        return 0;
-      }
+      [country.name, country.fullName, country.short, country.flag]);
+      let id: number;
+      if (undefined !== rst[0].insertId)
+        id = rst[0].insertId
+      else
+        id = 0;
+      return id;
   }
 
-  public update = async (countryUpdate: Country): Promise<Country | null> => {
-    const country = await this.find(countryUpdate.id);
-    if (!country) {
-      return null;
-    }
-    countries[countryUpdate.id] = countryUpdate;
-    return countries[countryUpdate.id];
+  public update = async (country: Country): Promise<boolean> => {
+    const rst: ResultSetHeader | any = await (await conn).execute("UPDATE Country set name = ?, fullName = ?, short = ?, flag = ? WHERE id = ?",
+    [ country.name, country.fullName, country.short, country.flag, country.id.toString()]);
+    let cr: boolean;
+    if (undefined !== rst[0].affectedRows)
+      cr = true;
+    else
+      cr = false;
+    return cr;
   }
 
-  public remove = async (country: Country): Promise<null | void> => {
-    const deletedCountry = await this.find(country.id);
-    if (!deletedCountry) {
-      return null;
-    }
-    delete countries[country.id];
+  public remove = async (country: Country): Promise<boolean> => {
+    const rst: ResultSetHeader | any = await (await conn).execute("DELETE FROM Country WHERE id = ?",
+    [country.id.toString()]);
+    let cr: boolean;
+    if (undefined !== rst[0].affectedRows)
+      cr = true;
+    else
+      cr = false;
+    return cr;
   }
 }

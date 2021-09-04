@@ -25,7 +25,7 @@ countriesRouter.get('/', async (req: Request, res: Response) =>{
   } catch (e) {
     response = { data:{}, status: { error: true, message: 'Something bad happened' } };
   }
-  res.status(500).json(response);
+  res.json(response);
 });
 
 // GET countries/:id
@@ -34,7 +34,7 @@ countriesRouter.get('/:id', async (req: Request, res: Response) =>{
   const id: number = parseInt(req.params.id, 10);
 
   try {
-    const country: Country | boolean = await countryModel.find(id);
+    const country: Country | boolean = await countryModel.findById(id);
 
     if (typeof country != "boolean") {
       return res.status(200).json({ data: country.toJson(), status: { error: false, message: 'Country finded'} });
@@ -44,7 +44,7 @@ countriesRouter.get('/:id', async (req: Request, res: Response) =>{
   } catch (e) {
     response = { data: {}, status: { error: true, message: 'Something bad happened' } };
   }
-  res.status(500).json(response);
+  res.json(response);
 });
 
 // POST countries
@@ -77,14 +77,14 @@ countriesRouter.post('/', async (req: Request, res: Response) => {
   } catch (e) {
     response = { data: {}, status: { error: true, message: (e as Error).message } };
   }
-  res.status(201).json(response);
+  res.json(response);
 });
 
 // PUT countries/:id
 countriesRouter.put('/:id', async (req: Request, res: Response) => {
-  const id: number = parseInt(req.params.id);
-
+  let response: ResponseData;
   try {
+    const id: number = parseInt(req.params.id);
     const countryUpdate: Country = new Country(
       req.body.name,
       req.body.fullName,
@@ -93,32 +93,51 @@ countriesRouter.put('/:id', async (req: Request, res: Response) => {
       id
     );
 
-    const existingCountry = await countryModel.find(id);
+    if ("" == countryUpdate.name)
+      throw new Error("Informe o nome do país.");
+    if ("" == countryUpdate.fullName)
+      throw new Error("Informe o nome completo do país.");
+    if ("" == countryUpdate.short)
+      throw new Error("Informe a sigla do país.");
+    if ("" == countryUpdate.flag)
+      throw new Error("Faça o upload da bandeira do país.");
 
-    if (existingCountry) {
-      const updatedCountry = await countryModel.update(countryUpdate);
-      return res.status(200).json({ data: updatedCountry, status: { error: false, message: 'Country updated'} });
+    const existingCountry = await countryModel.findById(id);
+    if (!(existingCountry.id > 0)) {
+      throw new Error("País não encontrado!");
     }
-
-    res.status(400).json({ status: { error: true, message: 'Country not found'} });
+    const updatedCountry = await countryModel.update(countryUpdate);
+    if (true === updatedCountry) {
+      response = { data: countryUpdate.toJson(), status: { error: false, message: 'Country updated'} };
+    }else{
+      throw new Error("Erro ao atualizar país");
+    }
   } catch (e) {
-    res.status(500).json({ status: { error: true, message: 'Something bad happened'} });
+    response = { data: {}, status: { error: true, message: (e as Error).message } };
   }
+  res.json(response);
 });
 
 // DELETE countries/:id
 countriesRouter.delete('/:id', async (req: Request, res: Response) => {
+  let response: ResponseData;
   try {
     const id: number = parseInt(req.params.id, 10);
-    let country: Country | boolean = await countryModel.find(id);
-    if (typeof country != "boolean") {
-      await countryModel.remove(country);
-    }
-    res.status(200).json({ status: { error: false, message: 'Country removed'} });
+    let country: Country = await countryModel.findById(id);
+    console.log(country);
+    if (!(country.id > 0))
+      throw new Error("País não encontrado");
+    let result = await countryModel.remove(country);
+    if (true === result)
+      response = { data: {}, status: { error: false, message: 'Country removed' } };
+    else
+      throw new Error("Erro ao deletar país.");
   } catch (e) {
     console.log(e);
-    res.status(500).json({ status: { error: true, message: 'Something bad happened'} });
+    
+    response = { data:{}, status: { error: true, message: (e as Error).message } };
   }
+  res.json(response);
 });
 
 export default countriesRouter;
