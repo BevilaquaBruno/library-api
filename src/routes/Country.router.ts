@@ -4,6 +4,7 @@
 import express, { Request, Response } from "express";
 import CountryModel from '../models/Country.model';
 import Country from '../classes/Country.class';
+import { ResponseData } from "../interfaces/Common.interface";
 
 const countryModel = new CountryModel();
 /**
@@ -17,17 +18,19 @@ const countriesRouter = express.Router();
 
 // GET countries
 countriesRouter.get('/', async (req: Request, res: Response) =>{
+  let response: ResponseData;
   try {
     const countries: Country[] = await countryModel.findAll();
-
-    res.status(200).json({ data: countries.map(ct => ct.toJson()), status: { error: false, message: 'List of all countries'} });
+    response = { data: countries.map(ct => ct.toJson()), status: { error: false, message: 'List of all countries'} };
   } catch (e) {
-    res.status(500).json({ status: { error: true, message: 'Something bad happened' } });
+    response = { data:{}, status: { error: true, message: 'Something bad happened' } };
   }
+  res.status(500).json(response);
 });
 
 // GET countries/:id
 countriesRouter.get('/:id', async (req: Request, res: Response) =>{
+  let response: ResponseData;
   const id: number = parseInt(req.params.id, 10);
 
   try {
@@ -37,14 +40,16 @@ countriesRouter.get('/:id', async (req: Request, res: Response) =>{
       return res.status(200).json({ data: country.toJson(), status: { error: false, message: 'Country finded'} });
     }
 
-    res.status(400).json({ status: { error: true, message: 'Country not found'} });
+    response = { data: {}, status: { error: true, message: 'Country not found'} };
   } catch (e) {
-    res.status(500).json({ status: { error: true, message: 'Something bad happened' } });
+    response = { data: {}, status: { error: true, message: 'Something bad happened' } };
   }
+  res.status(500).json(response);
 });
 
 // POST countries
 countriesRouter.post('/', async (req: Request, res: Response) => {
+  let response: ResponseData;
   try {
     const country: Country = new Country(
       req.body.name,
@@ -53,12 +58,26 @@ countriesRouter.post('/', async (req: Request, res: Response) => {
       req.body.flag
     );
 
-    const newCountry = await countryModel.create(country);
+    if ("" == country.name)
+      throw new Error("Informe o nome do país.");
+    if ("" == country.fullName)
+      throw new Error("Informe o nome completo do país.");
+    if ("" == country.short)
+      throw new Error("Informe a sigla do país.");
+    if ("" == country.flag)
+      throw new Error("Faça o upload da bandeira do país.");
 
-    res.status(201).json({ data: country, status: { error: false, message: 'Country created'} });
+    const insertId = await countryModel.create(country);
+    if (insertId > 0) {
+      country.id = insertId;
+      response = { data: country.toJson(), status: { error: false, message: 'Country created'} };
+    }else{
+      throw new Error("Erro ao inserir país.");
+    }
   } catch (e) {
-    res.status(500).json({ status: { error: true, message: 'Something bad happened'} });
+    response = { data: {}, status: { error: true, message: (e as Error).message } };
   }
+  res.status(201).json(response);
 });
 
 // PUT countries/:id

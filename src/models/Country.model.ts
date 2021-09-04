@@ -4,6 +4,8 @@
 import Country from '../classes/Country.class';
 import { CountryList, CountryData } from "../interfaces/Country.interface";
 import DatabaseConnection from '../../db/db';
+import { resolve } from 'path/posix';
+import { ResultSetHeader } from 'mysql2';
 
 var conn = DatabaseConnection.getConnection();
 /**
@@ -30,11 +32,14 @@ export default class CountryModel {
     return country;
   }
 
-  public create = async (newCountry: Country): Promise<Country> => {
-    const newId: number = new Date().valueOf();
-    newCountry.id = newId;
-    countries[newId] = newCountry;
-    return countries[newId];
+  public create = async (newCountry: Country): Promise<number> => {
+    const rst: ResultSetHeader | any = await (await conn).execute("INSERT INTO Country(name, fullName, short, flag) VALUES(?, ?, ?, ?)",
+      [newCountry.name, newCountry.fullName, newCountry.short, newCountry.flag]);
+      if (undefined !== rst[0].insertId) {
+        return rst[0].insertId
+      }else{
+        return 0;
+      }
   }
 
   public update = async (countryUpdate: Country): Promise<Country | null> => {
