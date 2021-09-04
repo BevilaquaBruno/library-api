@@ -23,12 +23,11 @@ export default class CountryModel {
   }
 
   public find = async (id: number): Promise<Country | boolean> => {
-    let arr = countries[id];
-    if (arr) {
-      let country = new Country(arr.name, arr.fullName, arr.short, arr.flag, id);
-      return country;
-    }
-    return false;
+    const [ rows ] = await (await conn).execute("SELECT id, name, fullName, short, flag FROM country WHERE id = ?",
+    [id.toString()]);
+    let arrCountry: CountryData = Object.values(rows)[0];
+    let country: Country = new Country(arrCountry.name, arrCountry.fullName, arrCountry.short, arrCountry.flag, arrCountry.id);
+    return country;
   }
 
   public create = async (newCountry: Country): Promise<Country> => {

@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 class DatabaseConnection {
-  static async getConnection() {
+  static async getConnection(): Promise<mysql.Connection> {
     return await mysql.createConnection({
       host: process.env.DB_HOST,
       user: process.env.DB_USER,

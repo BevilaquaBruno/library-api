@@ -34,7 +34,7 @@ countriesRouter.get('/:id', async (req: Request, res: Response) =>{
     const country: Country | boolean = await countryModel.find(id);
 
     if (typeof country != "boolean") {
-      return res.status(200).json({ data: country, status: { error: false, message: 'Country finded'} });
+      return res.status(200).json({ data: country.toJson(), status: { error: false, message: 'Country finded'} });
     }
 
     res.status(400).json({ status: { error: true, message: 'Country not found'} });
