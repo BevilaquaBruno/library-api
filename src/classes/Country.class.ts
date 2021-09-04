@@ -14,7 +14,7 @@ export default class Country {
    *
    * @param id id of the table in the table country
    * @param name name of the coutry e.g.: Brasil
-   * @param full_name full name of the country e.g.: República Federativa do Brasil
+   * @param fullName full name of the country e.g.: República Federativa do Brasil
    * @param short short of the country e.g.: BRA
    * @param flag flag file of the country e.g.: brasil_flag.png
    */
