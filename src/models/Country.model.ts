@@ -2,19 +2,12 @@
  * Data Model Interfaces
  */
 import Country from '../classes/Country.class';
-import { CountryList, CountryData } from "../interfaces/Country.interface";
+import { CountryData } from "../interfaces/Country.interface";
 import DatabaseConnection from '../../db/db';
 import { resolve } from 'path/posix';
 import { ResultSetHeader } from 'mysql2';
 
 var conn = DatabaseConnection.getConnection();
-/**
- * In-Memory Store
- */
-let countries: CountryList = {
-  1: new Country("Brasil", "República Federativa do Brasil", "BRA", "brasil_flag.png", 1),
-  2: new Country("Estados Unidos", "Estados Unidos da América", "EUA", "estados_unidos_flag.png", 2)
-};
 
 export default class CountryModel {
   public findAll = async (): Promise<Country[]> => {
