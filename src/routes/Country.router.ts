@@ -124,7 +124,6 @@ countriesRouter.delete('/:id', async (req: Request, res: Response) => {
   try {
     const id: number = parseInt(req.params.id, 10);
     let country: Country = await countryModel.findById(id);
-    console.log(country);
     if (!(country.id > 0))
       throw new Error("País não encontrado");
     let result = await countryModel.remove(country);
@@ -133,8 +132,6 @@ countriesRouter.delete('/:id', async (req: Request, res: Response) => {
     else
       throw new Error("Erro ao deletar país.");
   } catch (e) {
-    console.log(e);
-    
     response = { data:{}, status: { error: true, message: (e as Error).message } };
   }
   res.json(response);
