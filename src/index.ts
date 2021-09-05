@@ -11,6 +11,7 @@ import { notFoundHandler } from "./middlewares/not-found.middleware";
  * Required Routes
  */
 import countriesRouter from './routes/Country.router';
+import authRouter from './routes/Auth.router';
 
 dotenv.config();
 /**
@@ -31,6 +32,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/country', countriesRouter);
+app.use('/api/auth', authRouter);
 
 app.use(notFoundHandler);
 

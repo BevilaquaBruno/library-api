@@ -29,7 +29,6 @@ export default class Country {
   /**
    * Getters
    */
-
   public get id() : number {
       return this._id;
   }
@@ -53,7 +52,6 @@ export default class Country {
   /**
    * Setters
    */
-
   public set id(v : number) {
       this._id = v;
   }
