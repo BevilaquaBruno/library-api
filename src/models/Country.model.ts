@@ -22,11 +22,10 @@ export default class CountryModel {
     [id.toString()]);
     let arrCountry: CountryData = Object.values(rows)[0];
     let country: Country;
-    if (undefined === arrCountry) {
+    if (undefined === arrCountry)
       country = new Country();
-    }else{
+    else
       country = new Country(arrCountry.name, arrCountry.fullName, arrCountry.short, arrCountry.flag, arrCountry.id);
-    }
     return country;
   }
 

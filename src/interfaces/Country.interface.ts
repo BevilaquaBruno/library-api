@@ -1,4 +1,3 @@
-import Country from "../classes/Country.class";
 /**
  * Interfaces for country
  */
