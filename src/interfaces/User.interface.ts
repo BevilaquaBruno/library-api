@@ -1,5 +1,5 @@
 /**
- * Interfaces for login
+ * Interfaces for user
  */
 export interface UserData {
   id: number;
@@ -12,7 +12,7 @@ export interface UserDataComplete extends UserData {
   password: string;
 }
 
-export interface UserLogin {
+export interface UserAuth {
   username: string;
   password: string;
 }

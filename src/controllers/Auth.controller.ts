@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import User from '../classes/User.class';
 import { ResponseData } from '../interfaces/Common.interface';
-import { UserLogin } from '../interfaces/User.interface';
+import { UserAuth } from '../interfaces/User.interface';
 import UserModel from '../models/User.model';
 import jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
@@ -9,22 +9,22 @@ import md5 from 'md5';
 
 dotenv.config();
 
-export default class LoginController {
+export default class AuthController {
   public static async login(req: Request, res: Response){
     let response: ResponseData;
 
     try {
-      let loginData: UserLogin = { username: req.body.username, password: req.body.password };
+      let authData: UserAuth = { username: req.body.username, password: req.body.password };
 
-      if ("" == loginData.username || undefined === loginData.username)
+      if ("" == authData.username || undefined === authData.username)
         throw new Error("Informe o usuário");
-      if ("" == loginData.password || undefined === loginData.password)
+      if ("" == authData.password || undefined === authData.password)
         throw new Error("Informe a senha");
 
-      let user: User = await UserModel.findByUsername(loginData.username);
+      let user: User = await UserModel.findByUsername(authData.username);
       if (0 === user.id)
         throw new Error("Usuário não encontrado");
-      if (md5(loginData.password) != user.password)
+      if (md5(authData.password) != user.password)
         throw new Error("Usuário ou senha incorreto");
 
       const secret: string | undefined = process.env.SECRET;
