@@ -1,12 +1,7 @@
 import { Request, Response, NextFunction } from "express";
+import { ResponseData } from "../interfaces/Common.interface";
 
-export const notFoundHandler = (
-  request: Request,
-  response: Response,
-  next: NextFunction
-) => {
-
-  const message = "Resource not found";
-  const error = true;
-  response.status(404).json({ status: { error: error, message: message } });
+export const notFoundHandler = ( req: Request, res: Response, next: NextFunction ) => {
+  let response: ResponseData = { data: {}, status: { error: true, message: "Resource not found" } };
+  res.status(404).json(response);
 };

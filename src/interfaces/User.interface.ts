@@ -2,17 +2,17 @@
  * Interfaces for login
  */
 export interface UserData {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
+  id: number;
+  name: string;
+  username: string;
+  email: string;
 }
 
 export interface UserDataComplete extends UserData {
-    password: string;
+  password: string;
 }
 
 export interface UserLogin {
-    username: string;
-    password: string;
+  username: string;
+  password: string;
 }

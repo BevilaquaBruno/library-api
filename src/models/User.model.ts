@@ -4,8 +4,6 @@
 import User from "../classes/User.class";
 import { UserDataComplete } from "../interfaces/User.interface";
 import DatabaseConnection from '../../db/db';
-import { resolve } from 'path/posix';
-import { ResultSetHeader } from 'mysql2';
 
 var conn = DatabaseConnection.getConnection();
 
@@ -20,6 +18,7 @@ export default class UserModel {
     }else{
       user = new User(arrUser.name, arrUser.username, arrUser.email, arrUser.password, arrUser.id);
     }
+
     return user;
   }
 }
