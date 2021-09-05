@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ed2ad466-1e4d-4a71-b9f9-31b16fea0af4",
+		"_postman_id": "f0f2e4dd-7a3f-42ab-aaf9-5bea660d5baa",
 		"name": "library-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -12,7 +12,13 @@
 					"name": "findAll",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost/api/country",
 							"host": [
@@ -30,7 +36,13 @@
 					"name": "find",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost/api/country/1",
 							"host": [
@@ -49,7 +61,13 @@
 					"name": "create",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"name\": \"\",\r\n    \"fullName\": \"\",\r\n    \"short\": \"\",\r\n    \"flag\": \"\"\r\n}",
@@ -76,7 +94,13 @@
 					"name": "update",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"name\": \"\",\r\n    \"fullName\": \"\",\r\n    \"short\": \"\",\r\n    \"flag\": \"\"\r\n}",
@@ -110,7 +134,13 @@
 					"name": "remove",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost/api/country/:id",
 							"host": [
@@ -126,6 +156,58 @@
 									"key": "id",
 									"value": null
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"bevilaqua\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/api/auth/logout",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
 							]
 						}
 					},
