@@ -14,10 +14,10 @@ const countriesRouter = express.Router();
  * Controller Definitions
  */
 // GET countries
-countriesRouter.get('/', verifyJwt, CountryController.findAll);
+countriesRouter.get('/', CountryController.findAll);
 
 // GET countries/:id
-countriesRouter.get('/:id', verifyJwt, CountryController.find);
+countriesRouter.get('/:id', CountryController.find);
 
 // POST countries
 countriesRouter.post('/', verifyJwt, CountryController.create);
