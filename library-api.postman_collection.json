@@ -12,13 +12,7 @@
 					"name": "findAll",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "localhost/api/country",
 							"host": [
@@ -36,13 +30,7 @@
 					"name": "find",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "localhost/api/country/1",
 							"host": [
