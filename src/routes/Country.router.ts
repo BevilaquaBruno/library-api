@@ -1,7 +1,7 @@
 /**
  * Required External Modules and Interfaces
  */
-import express, { Request, Response } from "express";
+import express from "express";
 import CountryController from "../controllers/Country.controller";
 import { verifyJwt } from "../middlewares/verify-jwt.middleware";
 
