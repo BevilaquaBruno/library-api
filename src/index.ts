@@ -12,6 +12,7 @@ import { notFoundHandler } from "./middlewares/not-found.middleware";
  */
 import countriesRouter from './routes/Country.router';
 import authRouter from './routes/Auth.router';
+import userRouter from './routes/User.router';
 
 dotenv.config();
 /**
@@ -33,6 +34,7 @@ app.use(express.json());
 
 app.use('/api/country', countriesRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/user', userRouter);
 
 app.use(notFoundHandler);
 

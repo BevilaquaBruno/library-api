@@ -202,6 +202,66 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImJiYmV2aWxhcXVhQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiYmV2aWxhcXVhIiwiZW1haWwiOiJiYmJldmlsYXF1YUBnbWFpbC5jb20iLCJpYXQiOjE2MzEwNDQwODQsImV4cCI6MTYzMTA0OTA4NH0.T7QV8mgsbiKUFyaD3s7KAXu63NcAv91Mg87Rx-UesoE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/api/user",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/api/user/:id",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
