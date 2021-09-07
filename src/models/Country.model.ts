@@ -9,7 +9,7 @@ import { ResultSetHeader } from 'mysql2';
 var conn = DatabaseConnection.getConnection();
 
 export default class CountryModel {
-  public static findAll = async (): Promise<Country[]> => {
+  public static async findAll(): Promise<Country[]> {
     let allCountries: Country[] = [];
     const [ rows ] = await (await conn).execute("SELECT id, name, fullName, short, flag FROM country");
     Object.values(rows).map((el: CountryData) => allCountries.push(new Country(el.name, el.fullName, el.short, el.flag, el.id)));
@@ -17,7 +17,7 @@ export default class CountryModel {
     return allCountries;
   }
 
-  public static findById = async (id: number): Promise<Country> => {
+  public static async findById(id: number): Promise<Country> {
     const [ rows ] = await (await conn).execute("SELECT id, name, fullName, short, flag FROM country WHERE id = ?",
     [id.toString()]);
     let arrCountry: CountryData = Object.values(rows)[0];
@@ -30,7 +30,7 @@ export default class CountryModel {
     return country;
   }
 
-  public static create = async (country: Country): Promise<number> => {
+  public static async create(country: Country): Promise<number>{
     const rst: ResultSetHeader | any = await (await conn).execute("INSERT INTO Country(name, fullName, short, flag) VALUES(?, ?, ?, ?)",
       [country.name, country.fullName, country.short, country.flag]);
       let id: number;
@@ -42,7 +42,7 @@ export default class CountryModel {
       return id;
   }
 
-  public static update = async (country: Country): Promise<boolean> => {
+  public static async update(country: Country): Promise<boolean> {
     const rst: ResultSetHeader | any = await (await conn).execute("UPDATE Country SET name = ?, fullName = ?, short = ?, flag = ? WHERE id = ?",
     [ country.name, country.fullName, country.short, country.flag, country.id.toString()]);
     let cr: boolean;
@@ -54,7 +54,7 @@ export default class CountryModel {
     return cr;
   }
 
-  public static remove = async (country: Country): Promise<boolean> => {
+  public static async remove(country: Country): Promise<boolean>{
     const rst: ResultSetHeader | any = await (await conn).execute("DELETE FROM Country WHERE id = ?",
     [country.id.toString()]);
     let cr: boolean;
