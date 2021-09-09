@@ -11,7 +11,7 @@ export default class CountryController {
       const countries: Country[] = await CountryModel.findAll();
       response = { data: countries.map(ct => ct.toJson()), status: { error: false, message: 'Lista de todos os países'} };
     } catch (e) {
-      response = { data:{}, status: { error: true, message: (e as Error).message } };
+      response = { data:{}, status: { error: true, message: (e as Error)?.message ?? "Erro ao buscar dados dos países" } };
     }
 
     res.json(response);
@@ -26,8 +26,8 @@ export default class CountryController {
       if (0 == country.id)
         throw new Error("País não encontrado");
       response =  { data: country.toJson(), status: { error: false, message: 'País encontrado'} };
-    } catch (e) {
-      response = { data: {}, status: { error: true, message: (e as Error).message } };
+    } catch (e: any) {
+      response = { data: {}, status: { error: true, message: (e as Error)?.message ?? "Erro ao buscar dados do país" } };
     }
 
     res.json(response);
@@ -60,7 +60,7 @@ export default class CountryController {
       }else
         throw new Error("Erro ao inserir país");
     } catch (e) {
-      response = { data: {}, status: { error: true, message: (e as Error).message } };
+      response = { data: {}, status: { error: true, message: (e as Error)?.message ?? "Erro ao criar país" } };
     }
 
     res.json(response);
@@ -99,7 +99,7 @@ export default class CountryController {
       else
         throw new Error("Erro ao atualizar país");
     } catch (e) {
-      response = { data: {}, status: { error: true, message: (e as Error).message } };
+      response = { data: {}, status: { error: true, message: (e as Error)?.message ?? "Erro alterar país" } };
     }
 
     res.json(response);
@@ -120,7 +120,7 @@ export default class CountryController {
       else
         throw new Error("Erro ao deletar país");
     } catch (e) {
-      response = { data:{}, status: { error: true, message: (e as Error).message } };
+      response = { data:{}, status: { error: true, message: (e as Error)?.message ?? "Erro ao excluir país" } };
     }
 
     res.json(response);

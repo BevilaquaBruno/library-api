@@ -34,7 +34,7 @@ export default class AuthController {
       }else
         throw new Error("Erro ao gerar token de acesso");
     } catch (e) {
-      response = { data:{}, status: { error: true, message: (e as Error).message } };
+      response = { data:{}, status: { error: true, message: (e as Error)?.message ?? "Erro ao autenticar usuário" } };
     }
 
     res.json(response);
