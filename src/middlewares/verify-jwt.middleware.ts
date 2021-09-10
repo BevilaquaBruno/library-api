@@ -19,8 +19,8 @@ export const verifyJwt = (req: Request, res: Response, next: NextFunction) => {
       });
     }else
       throw new Error("Erro ao validar token de acesso.");
-  } catch (e) {
-    let response: ResponseData = { data: {}, status: {error: true, message: (e as Error).message } };
+  } catch (e: any) {
+    let response: ResponseData = { data: {}, status: {error: true, message: (e as Error)?.message ?? "Erro ao tentar validar token de acesso" } };
     res.json(response);
   }
 }

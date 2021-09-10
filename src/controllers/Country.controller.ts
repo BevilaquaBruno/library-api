@@ -10,7 +10,7 @@ export default class CountryController {
     try {
       const countries: Country[] = await CountryModel.findAll();
       response = { data: countries.map(ct => ct.toJson()), status: { error: false, message: 'Lista de todos os países'} };
-    } catch (e) {
+    } catch (e: any) {
       response = { data:{}, status: { error: true, message: (e as Error)?.message ?? "Erro ao buscar dados dos países" } };
     }
 
@@ -59,7 +59,7 @@ export default class CountryController {
         response = { data: country.toJson(), status: { error: false, message: 'País cadastrado'} };
       }else
         throw new Error("Erro ao inserir país");
-    } catch (e) {
+    } catch (e: any) {
       response = { data: {}, status: { error: true, message: (e as Error)?.message ?? "Erro ao criar país" } };
     }
 
@@ -98,7 +98,7 @@ export default class CountryController {
         response = { data: countryUpdate.toJson(), status: { error: false, message: 'País atualizado'} };
       else
         throw new Error("Erro ao atualizar país");
-    } catch (e) {
+    } catch (e: any) {
       response = { data: {}, status: { error: true, message: (e as Error)?.message ?? "Erro alterar país" } };
     }
 
@@ -119,7 +119,7 @@ export default class CountryController {
         response = { data: {}, status: { error: false, message: 'País removido' } };
       else
         throw new Error("Erro ao deletar país");
-    } catch (e) {
+    } catch (e: any) {
       response = { data:{}, status: { error: true, message: (e as Error)?.message ?? "Erro ao excluir país" } };
     }
 

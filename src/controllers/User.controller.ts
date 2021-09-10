@@ -10,7 +10,7 @@ export default class UserController {
     try {
       const users: User[] = await UserModel.findAll();
       response = { data: users.map(u => u.toJson()), status: { error: false, message: 'Lista de todos os usuários'} };
-    } catch (e) {
+    } catch (e: any) {
       response = { data:{}, status: { error: true, message: (e as Error)?.message ?? "Erro ao buscar dados dos usuários" } };
     }
 
@@ -26,7 +26,7 @@ export default class UserController {
       if (0 == user.id)
         throw new Error("Usuário não encontrado");
       response =  { data: user.toJson(), status: { error: false, message: 'Usuário encontrado'} };
-    } catch (e) {
+    } catch (e: any) {
       response = { data: {}, status: { error: true, message: (e as Error)?.message ?? "Erro ao buscar dados do usuário" } };
     }
 
