@@ -55,10 +55,16 @@ export default class CountryController {
         req.body.flag
       );
 
-      if ("" == country.name) throw new Error("Informe o nome do país");
-      if ("" == country.fullName) throw new Error("Informe o nome completo do país");
-      if ("" == country.short) throw new Error("Informe a sigla do país");
-      if ("" == country.flag) throw new Error("Faça o upload da bandeira do país");
+      const resValidate: ResponseData = country.validate();
+      if (true === resValidate.status.error) throw new Error(resValidate.status.message);
+
+      let countryValidate: Country;
+      countryValidate = await CountryModel.findByName(country.name);
+      if (0 !== countryValidate.id) throw new Error("Já existe um país com esse nome");
+      countryValidate = await CountryModel.findByFullName(country.fullName);
+      if (0 !== countryValidate.id) throw new Error("Já existe um país com esse nome completo");
+      countryValidate = await CountryModel.findByShort(country.short);
+      if (0 !== countryValidate.id) throw new Error("Já existe um país com essa sigla");
 
       const insertId = await CountryModel.create(country);
       if (insertId > 0) {
@@ -88,15 +94,19 @@ export default class CountryController {
         id
       );
 
-      if ("" == countryUpdate.name) throw new Error("Informe o nome do país");
-      if ("" == countryUpdate.fullName) throw new Error("Informe o nome completo do país");
-      if ("" == countryUpdate.short) throw new Error("Informe a sigla do país");
-      if ("" == countryUpdate.flag) throw new Error("Faça o upload da bandeira do país");
-
       const existingCountry = await CountryModel.findById(id);
-      if (!(existingCountry.id > 0)) {
-        throw new Error("País não encontrado");
-      }
+      if (!(existingCountry.id > 0)) throw new Error("País não encontrado");
+
+      const resValidate: ResponseData = countryUpdate.validate();
+      if (true === resValidate.status.error) throw new Error(resValidate.status.message);
+
+      let countryValidate: Country;
+      countryValidate = await CountryModel.findByName(countryUpdate.name, countryUpdate.id);
+      if (0 !== countryValidate.id) throw new Error("Já existe um país com esse nome");
+      countryValidate = await CountryModel.findByFullName(countryUpdate.fullName, countryUpdate.id);
+      if (0 !== countryValidate.id) throw new Error("Já existe um país com esse nome completo");
+      countryValidate = await CountryModel.findByShort(countryUpdate.short, countryUpdate.id);
+      if (0 !== countryValidate.id) throw new Error("Já existe um país com essa sigla");
 
       const updatedCountry = await CountryModel.update(countryUpdate);
       if (true === updatedCountry)

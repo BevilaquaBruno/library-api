@@ -1,3 +1,4 @@
+import { ResponseData } from "../interfaces/Common.interface";
 import { CountryData } from "../interfaces/Country.interface";
 
 export default class Country {
@@ -90,5 +91,37 @@ export default class Country {
       flag: this._flag,
     };
     return ct;
+  }
+
+  public validate(): ResponseData{
+    let response: ResponseData;
+    try {
+      if ("" === this._name) throw new Error("Informe o nome do país");
+      if ("" === this._fullName) throw new Error("Informe o nome completo do país");
+      if ("" === this._short) throw new Error("Informe a sigla do país");
+      if ("" === this._flag) throw new Error("Faça o upload da bandeira do país");
+
+      if(50 < this._name.length) throw new Error("Tamanho máximo do nome é 50 caracteres");
+      if(100 < this._fullName.length) throw new Error("Tamanho máximo do nome completo é 100 caracteres");
+      if(3 < this._short.length) throw new Error("Tamanho máximo da sigla é 3 caracteres");
+
+      response = {
+        data: {},
+        status: {
+          error: false,
+          message: ""
+        }
+      };
+    } catch (e) {
+      response = {
+        data: {},
+        status: {
+          error: true,
+          message: (e as Error)?.message ?? "Erro grave ao validar dados do país"
+        }
+      };
+    }
+
+    return response;
   }
 }

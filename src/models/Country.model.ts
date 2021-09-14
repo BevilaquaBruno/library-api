@@ -9,6 +9,88 @@ import { ResultSetHeader } from "mysql2";
 const conn = DatabaseConnection.getConnection();
 
 export default class CountryModel {
+  public static async findByShort(short: string, currentId: number = 0): Promise<Country> {
+    let sql: string;
+    let data: string[];
+    if(0 === currentId){
+      sql = "SELECT id, name, fullName, short, flag FROM country WHERE short = ?";
+      data = [short];
+    }else{
+      sql = "SELECT id, name, fullName, short, flag FROM country WHERE short = ? AND id <> ?";
+      data = [short, currentId.toString()];
+    }
+    const [ rows ] = await (
+      await conn
+    ).execute(sql, data);
+    let arrCountry: CountryData = Object.values(rows)[0];
+    let country: Country;
+    if (undefined === arrCountry) country = new Country();
+    else
+      country = new Country(
+        arrCountry.name,
+        arrCountry.fullName,
+        arrCountry.short,
+        arrCountry.flag,
+        arrCountry.id
+      );
+
+    return country;
+  }
+
+  public static async findByFullName(fullName: string, currentId: number = 0): Promise<Country> {
+    let sql: string;
+    let data: string[];
+    if(0 === currentId){
+      sql = "SELECT id, name, fullName, short, flag FROM country WHERE fullName = ?";
+      data = [fullName];
+    }else{
+      sql = "SELECT id, name, fullName, short, flag FROM country WHERE fullName = ? and id <> ?";
+      data = [fullName, currentId.toString()];
+    }
+    const [ rows ] = await (
+      await conn
+    ).execute(sql, data);
+    let arrCountry: CountryData = Object.values(rows)[0];
+    let country: Country;
+    if (undefined === arrCountry) country = new Country();
+    else
+      country = new Country(
+        arrCountry.name,
+        arrCountry.fullName,
+        arrCountry.short,
+        arrCountry.flag,
+        arrCountry.id
+      );
+
+    return country;
+  }
+
+  public static async findByName(name: string, currentId: number = 0): Promise<Country> {
+    let sql: string;
+    let data: string[];
+    if (0 === currentId) {
+      sql = "SELECT id, name, fullName, short, flag FROM country WHERE name = ?";
+      data = [name];
+    }else{
+      sql = "SELECT id, name, fullName, short, flag FROM country WHERE name = ? AND id <> ?";
+      data = [name, currentId.toString()];
+    }
+    const [ rows ] = await ( await conn ).execute(sql, data);
+    let arrCountry: CountryData = Object.values(rows)[0];
+    let country: Country;
+    if (undefined === arrCountry) country = new Country();
+    else
+      country = new Country(
+        arrCountry.name,
+        arrCountry.fullName,
+        arrCountry.short,
+        arrCountry.flag,
+        arrCountry.id
+      );
+
+    return country;
+  }
+
   public static async findById(id: number): Promise<Country> {
     const [rows] = await (
       await conn
