@@ -1,6 +1,7 @@
 /**
  * Interfaces for country
  */
+
 export interface CountryData {
   id: number;
   name: string;

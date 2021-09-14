@@ -1,18 +1,18 @@
 /**
  * Required External Modules
  */
-import * as dotenv from 'dotenv';
-import express from 'express';
-import cors from 'cors';
-import helmet from 'helmet';
+import * as dotenv from "dotenv";
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
 import { notFoundHandler } from "./middlewares/not-found.middleware";
 
 /**
  * Required Routes
  */
-import countriesRouter from './routes/Country.router';
-import authRouter from './routes/Auth.router';
-import userRouter from './routes/User.router';
+import countriesRouter from "./routes/Country.router";
+import authRouter from "./routes/Auth.router";
+import userRouter from "./routes/User.router";
 
 dotenv.config();
 /**
@@ -32,15 +32,15 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/country', countriesRouter);
-app.use('/api/auth', authRouter);
-app.use('/api/user', userRouter);
+app.use("/api/country", countriesRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
 
 app.use(notFoundHandler);
 
 /**
  * Server Activation
  */
- app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });

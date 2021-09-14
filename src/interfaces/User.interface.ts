@@ -1,6 +1,7 @@
 /**
  * Interfaces for user
  */
+
 export interface UserData {
   id: number;
   name: string;

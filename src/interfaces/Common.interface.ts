@@ -1,18 +1,18 @@
-import { Request } from 'express';
+import { Request } from "express";
 
 export interface ResponseData {
-  data: any,
+  data: any;
   status: {
-    error: boolean,
-    message: string
-  }
+    error: boolean;
+    message: string;
+  };
 }
 
 export interface RequestWithUser extends Request {
   user: {
-    id: number,
-    name: string,
-    username: string,
-    email: string
+    id: number;
+    name: string;
+    username: string;
+    email: string;
   };
 }

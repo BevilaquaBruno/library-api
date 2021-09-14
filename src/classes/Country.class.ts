@@ -18,7 +18,13 @@ export default class Country {
    * @param short short of the country e.g.: BRA
    * @param flag flag file of the country e.g.: brasil_flag.png
    */
-  constructor(name: string = '', fullName: string = '', short: string = '', flag: string = '', id: number = 0) {
+  constructor(
+    name: string = "",
+    fullName: string = "",
+    short: string = "",
+    flag: string = "",
+    id: number = 0
+  ) {
     this._id = id;
     this._name = name;
     this._fullName = fullName;
@@ -29,47 +35,47 @@ export default class Country {
   /**
    * Getters
    */
-  public get id() : number {
-      return this._id;
+  public get id(): number {
+    return this._id;
   }
 
-  public get name() : string {
-      return this._name;
+  public get name(): string {
+    return this._name;
   }
 
-  public get fullName() : string {
-      return this._fullName;
+  public get fullName(): string {
+    return this._fullName;
   }
 
-  public get short() : string {
-      return this._short;
+  public get short(): string {
+    return this._short;
   }
 
-  public get flag() : string {
-      return this._flag;
+  public get flag(): string {
+    return this._flag;
   }
 
   /**
    * Setters
    */
-  public set id(v : number) {
-      this._id = v;
+  public set id(v: number) {
+    this._id = v;
   }
 
-  public set name(v : string) {
-      this._name = v;
+  public set name(v: string) {
+    this._name = v;
   }
 
-  public set fullName(v : string) {
-      this._fullName = v;
+  public set fullName(v: string) {
+    this._fullName = v;
   }
 
-  public set short(v : string) {
-      this._short = v;
+  public set short(v: string) {
+    this._short = v;
   }
 
-  public set flag(v : string) {
-      this._flag = v;
+  public set flag(v: string) {
+    this._flag = v;
   }
 
   /**
@@ -81,8 +87,8 @@ export default class Country {
       name: this._name,
       fullName: this._fullName,
       short: this._short,
-      flag: this._flag
-    }
+      flag: this._flag,
+    };
     return ct;
   }
 }

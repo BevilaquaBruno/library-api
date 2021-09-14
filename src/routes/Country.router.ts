@@ -14,18 +14,18 @@ const countriesRouter = express.Router();
  * Controller Definitions
  */
 // GET countries
-countriesRouter.get('/', CountryController.findAll);
+countriesRouter.get("/", CountryController.findAll);
 
 // GET countries/:id
-countriesRouter.get('/:id', CountryController.find);
+countriesRouter.get("/:id", CountryController.find);
 
 // POST countries
-countriesRouter.post('/', verifyJwt, CountryController.create);
+countriesRouter.post("/", verifyJwt, CountryController.create);
 
 // PUT countries/:id
-countriesRouter.put('/:id', verifyJwt, CountryController.update);
+countriesRouter.put("/:id", verifyJwt, CountryController.update);
 
 // DELETE countries/:id
-countriesRouter.delete('/:id', verifyJwt, CountryController.delete);
+countriesRouter.delete("/:id", verifyJwt, CountryController.delete);
 
 export default countriesRouter;

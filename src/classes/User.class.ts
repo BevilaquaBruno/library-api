@@ -18,57 +18,62 @@ export default class User {
    * @param password password of the user
    * @param id id of the user
    */
-  constructor(name: string = "", username: string = "", email: string = "", id: number = 0) {
+  constructor(
+    name: string = "",
+    username: string = "",
+    email: string = "",
+    id: number = 0
+  ) {
     this._id = id;
     this._name = name;
     this._username = username;
     this._email = email;
-    this._password = '';
+    this._password = "";
   }
 
   /**
    * Getters
    */
-  public get id() : number {
+  public get id(): number {
     return this._id;
   }
 
-  public get name() : string {
+  public get name(): string {
     return this._name;
   }
 
-  public get username() : string {
+  public get username(): string {
     return this._username;
   }
 
-  public get email() : string {
+  public get email(): string {
     return this._email;
   }
 
-  public get password() : string {
+  public get password(): string {
     return this._password;
   }
 
   /**
    * Setters
    */
-  public set id(v : number) {
+  public set id(v: number) {
     this._id = v;
   }
 
-  public set name(v : string) {
+  public set name(v: string) {
     this._name = v;
   }
 
-  public set username(v : string) {
+  public set username(v: string) {
     this._username = v;
   }
 
-  public set email(v : string) {
+  public set email(v: string) {
     this._email = v;
   }
 
-  public set password(v : string) {
+  public set password(v: string) {
     this._password = v;
   }
 
@@ -80,8 +85,8 @@ export default class User {
       id: this._id,
       name: this._email,
       username: this._username,
-      email: this._email
-    }
+      email: this._email,
+    };
     return us;
   }
 }
