@@ -93,7 +93,7 @@ export default class Country {
     return ct;
   }
 
-  public validate(): ResponseData{
+  public validate(): ResponseData {
     let response: ResponseData;
     try {
       if ("" === this._name) throw new Error("Informe o nome do país");
@@ -101,24 +101,25 @@ export default class Country {
       if ("" === this._short) throw new Error("Informe a sigla do país");
       if ("" === this._flag) throw new Error("Faça o upload da bandeira do país");
 
-      if(50 < this._name.length) throw new Error("Tamanho máximo do nome é 50 caracteres");
-      if(100 < this._fullName.length) throw new Error("Tamanho máximo do nome completo é 100 caracteres");
-      if(3 < this._short.length) throw new Error("Tamanho máximo da sigla é 3 caracteres");
+      if (50 < this._name.length) throw new Error("Tamanho máximo do nome é 50 caracteres");
+      if (100 < this._fullName.length)
+        throw new Error("Tamanho máximo do nome completo é 100 caracteres");
+      if (3 < this._short.length) throw new Error("Tamanho máximo da sigla é 3 caracteres");
 
       response = {
         data: {},
         status: {
           error: false,
-          message: ""
-        }
+          message: "",
+        },
       };
     } catch (e) {
       response = {
         data: {},
         status: {
           error: true,
-          message: (e as Error)?.message ?? "Erro grave ao validar dados do país"
-        }
+          message: (e as Error)?.message ?? "Erro grave ao validar dados do país",
+        },
       };
     }
 
