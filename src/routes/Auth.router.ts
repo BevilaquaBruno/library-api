@@ -14,6 +14,7 @@ const authRouter = express.Router();
  */
 // POST login
 authRouter.post("/login", AuthController.login);
+
 // GET logout
 authRouter.get("/logout", AuthController.logout);
 
