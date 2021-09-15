@@ -1,7 +1,8 @@
-import { ResponseData } from "../src/interfaces/Common.interface";
-import { login, logout } from "./__fetches__/auth.fetch";
+import { ResponseData } from "../../src/interfaces/Common.interface";
+import { login, logout } from "../__fetches__/auth.fetch";
 
 var responseExpected: ResponseData;
+
 describe("Testing Auth", () => {
   it("Logout", async () => {
     responseExpected = {
