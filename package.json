@@ -4,7 +4,7 @@
   "description": "Library api to manage my bookshelf",
   "scripts": {
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts",
-    "test": "jest"
+    "test": "jest --rootDir ./__tests__/__main__/"
   },
   "keywords": [
     "library",
