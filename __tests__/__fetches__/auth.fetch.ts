@@ -10,6 +10,7 @@ export const logout = async (): Promise<AxiosResponse> => {
     responseType: "json",
   });
 };
+
 export const login = async () => {
   return await axios({
     method: "POST",
