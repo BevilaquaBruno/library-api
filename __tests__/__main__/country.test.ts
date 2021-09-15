@@ -68,20 +68,8 @@ describe("Testing Country", () => {
       responseBrazil.data.id
     );
 
-    const response: ResponseData = (await find(countryTest.id)).data;
-    let test = new Country(
-      response.data.name,
-      response.data.fullName,
-      response.data.short,
-      response.data.flag,
-      response.data.id
-    );
-
     await expect(responseBrazil.status).toEqual(responseExpected.status);
     await expect(brazil).toEqual(brazilExpected);
-
-    await expect(response.status).toEqual(responseExpected.status);
-    await expect(test).toEqual(countryTest);
   });
 
   it("Find all", async () => {
@@ -107,15 +95,6 @@ describe("Testing Country", () => {
           currentCountry.id
         );
         expect(brazil).toEqual(brazilExpected);
-      } else if (countryTest.id === currentCountry.id) {
-        let test = new Country(
-          currentCountry.name,
-          currentCountry.fullName,
-          currentCountry.short,
-          currentCountry.flag,
-          currentCountry.id
-        );
-        expect(test).toEqual(countryTest);
       }
     });
   });
