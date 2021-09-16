@@ -121,7 +121,7 @@ export default class CountryModel {
   public static async create(country: Country): Promise<number> {
     const rst: ResultSetHeader | any = await (
       await conn
-    ).execute("INSERT INTO Country(name, fullName, short, flag) VALUES(?, ?, ?, ?)", [
+    ).execute("INSERT INTO country(name, fullName, short, flag) VALUES(?, ?, ?, ?)", [
       country.name,
       country.fullName,
       country.short,
@@ -137,7 +137,7 @@ export default class CountryModel {
   public static async update(country: Country): Promise<boolean> {
     const rst: ResultSetHeader | any = await (
       await conn
-    ).execute("UPDATE Country SET name = ?, fullName = ?, short = ?, flag = ? WHERE id = ?", [
+    ).execute("UPDATE country SET name = ?, fullName = ?, short = ?, flag = ? WHERE id = ?", [
       country.name,
       country.fullName,
       country.short,
@@ -154,7 +154,7 @@ export default class CountryModel {
   public static async remove(country: Country): Promise<boolean> {
     const rst: ResultSetHeader | any = await (
       await conn
-    ).execute("DELETE FROM Country WHERE id = ?", [country.id.toString()]);
+    ).execute("DELETE FROM country WHERE id = ?", [country.id.toString()]);
     let cr: boolean;
     if (undefined !== rst[0].affectedRows) cr = true;
     else cr = false;
