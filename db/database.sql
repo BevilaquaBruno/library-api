@@ -23,4 +23,4 @@ CREATE TABLE IF NOT EXISTS user (
 /* PRIMARY INSERTS*/
 INSERT INTO country(name, fullname, short, flag, id) VALUES ("Brasil", "República Federativa do Brasil", "BRA", "brasil_flag.png", 1);
 
-INSERT INTO user(name, username, email, password) VALUES("Bruno Fernando Bevilaqua", "bevilaqua", "bbbevilaqua@gmail.com", MD5("123"));
+INSERT INTO user(name, username, email, password) VALUES ("Bruno Fernando Bevilaqua", "bevilaqua", "bbbevilaqua@gmail.com", MD5("123"));
