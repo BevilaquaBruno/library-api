@@ -12,7 +12,7 @@ describe("Testing Auth", () => {
 
     const response: ResponseData = (await logout()).data;
 
-    await expect(response).toEqual(responseExpected);
+    expect(response).toEqual(responseExpected);
   });
 
   it("Login with bevilaqua:123", async () => {
@@ -23,9 +23,9 @@ describe("Testing Auth", () => {
 
     const response: ResponseData = (await login()).data;
 
-    await expect(response.status).toEqual(responseExpected.status);
-    await expect(response.data.token).not.toBe("");
-    await expect(response.data.token).not.toBe(null);
-    await expect(response.data.token).not.toBe(undefined);
+    expect(response.status).toEqual(responseExpected.status);
+    expect(response.data.token).not.toBe("");
+    expect(response.data.token).not.toBe(null);
+    expect(response.data.token).not.toBe(undefined);
   });
 });

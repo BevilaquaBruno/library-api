@@ -28,7 +28,7 @@ describe("Testing Country", () => {
     countryTest.id = response.data.id;
     responseExpected.data = countryTest.toJson();
 
-    await expect(response).toEqual(responseExpected);
+    expect(response).toEqual(responseExpected);
   });
 
   it("Update", async () => {
@@ -47,7 +47,7 @@ describe("Testing Country", () => {
     responseExpected.data = countryTest.toJson();
     const response: ResponseData = (await update(token, countryTest)).data;
 
-    await expect(response).toEqual(responseExpected);
+    expect(response).toEqual(responseExpected);
   });
 
   it("Find one", async () => {
@@ -68,8 +68,8 @@ describe("Testing Country", () => {
       responseBrazil.data.id
     );
 
-    await expect(responseBrazil.status).toEqual(responseExpected.status);
-    await expect(brazil).toEqual(brazilExpected);
+    expect(responseBrazil.status).toEqual(responseExpected.status);
+    expect(brazil).toEqual(brazilExpected);
   });
 
   it("Find all", async () => {
@@ -82,8 +82,8 @@ describe("Testing Country", () => {
     };
 
     const response: ResponseData = (await findAll()).data;
-    await expect(response.status).toEqual(responseExpected.status);
-    await expect(response.data.length).not.toEqual(0);
+    expect(response.status).toEqual(responseExpected.status);
+    expect(response.data.length).not.toEqual(0);
 
     response.data.forEach((currentCountry: any) => {
       if (1 === currentCountry?.id) {
@@ -111,6 +111,6 @@ describe("Testing Country", () => {
     const token = (await login()).data.data.token;
 
     const response: ResponseData = (await remove(token, countryTest.id)).data;
-    await expect(response).toEqual(responseExpected);
+    expect(response).toEqual(responseExpected);
   });
 });

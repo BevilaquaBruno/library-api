@@ -36,8 +36,8 @@ describe("Testing User", () => {
       responseBevilaqua.data.id,
     );
 
-    await expect(responseBevilaqua.status).toEqual(responseExpected.status);
-    await expect(bevilaqua).toEqual(bevilaquaExpected);
+    expect(responseBevilaqua.status).toEqual(responseExpected.status);
+    expect(bevilaqua).toEqual(bevilaquaExpected);
   });
 
   it("Find all", async () => {
@@ -52,8 +52,8 @@ describe("Testing User", () => {
     const token = (await login()).data.data.token;
 
     const response: ResponseData = (await findAll(token)).data;
-    await expect(response.status).toEqual(responseExpected.status);
-    await expect(response.data.length).not.toEqual(0);
+    expect(response.status).toEqual(responseExpected.status);
+    expect(response.data.length).not.toEqual(0);
 
     response.data.forEach((currentUser: any) => {
       if (1 === currentUser?.id) {
