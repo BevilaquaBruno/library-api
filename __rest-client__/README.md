@@ -8,4 +8,4 @@
 ## Important !
 #### You must first execute the `login` inside the `auth.http`, because the most part of the requests needs an authenticated user to works.
 
-#### Text with <> or the request body you need to put what you want
+#### Text with <> or the request body, you need to put what you want
