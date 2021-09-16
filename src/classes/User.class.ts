@@ -83,7 +83,7 @@ export default class User {
   public toJson(): UserData {
     const us: UserData = {
       id: this._id,
-      name: this._email,
+      name: this._name,
       username: this._username,
       email: this._email,
     };
