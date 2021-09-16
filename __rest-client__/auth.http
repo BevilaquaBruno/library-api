@@ -1,0 +1,11 @@
+# to login, must return the token that you will use for the requests
+POST http://localhost:8000/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "bevilaqua",
+    "password": "123"
+}
+
+# to logout, must return the token as null
+GET http://localhost:8000/api/auth/logout

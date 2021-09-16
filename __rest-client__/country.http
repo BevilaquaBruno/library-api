@@ -1,0 +1,33 @@
+# to get all countries, must return a list - you DON'T need the token here
+GET http://localhost:8000/api/country
+
+# to get a specific country, must return the complete data for the country with the given id - you DON'T need the token here
+GET http://localhost:8000/api/country/1
+
+# to create a new country
+POST http://localhost:8000/api/country
+Content-Type: application/json
+x-access-token: TOKEN_HERE
+
+{
+  "name": "Country Test",
+  "fullName": "Country Test full name",
+  "short": "CRT",
+  "flag": "crt_flag.png"
+}
+
+# to update the country with the given id
+PUT http://localhost:8000/api/country/2
+Content-Type: application/json
+x-access-token: TOKEN_HERE
+
+{
+  "name": "Country Test2",
+  "fullName": "Country Test full name2",
+  "short": "CR2",
+  "flag": "crt_flag2.png"
+}
+
+# to delete the country with the given id
+DELETE http://localhost:8000/api/country/2
+x-access-token: TOKEN_HERE
