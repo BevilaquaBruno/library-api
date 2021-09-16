@@ -4,7 +4,7 @@ import { login } from "../__fetches__/auth.fetch";
 import { create, update, remove, findAll, find } from "../__fetches__/country.fetch";
 
 var responseExpected: ResponseData;
-var countryTest = new Country("Country Test", "Country Test's full name", "CTT", "country.flag");
+var countryTest = new Country("Country Test", "Country Test's full name", "CTT", "country.flag", 2);
 const brazilExpected = new Country(
   "Brasil",
   "República Federativa do Brasil",
