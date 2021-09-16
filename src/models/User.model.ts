@@ -26,7 +26,7 @@ export default class UserModel {
     return user;
   }
 
-  public static async find(id: number): Promise<User> {
+  public static async findById(id: number): Promise<User> {
     const [rows] = await (
       await conn
     ).execute("SELECT id, name, username, email FROM user WHERE id = ?", [id.toString()]);

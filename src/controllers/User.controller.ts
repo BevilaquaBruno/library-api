@@ -31,7 +31,7 @@ export default class UserController {
     const id: number = parseInt(req.params.id, 10);
 
     try {
-      let user: User = await UserModel.find(id);
+      let user: User = await UserModel.findById(id);
       if (0 == user.id) throw new Error("Usuário não encontrado");
       response = { data: user.toJson(), status: { error: false, message: "Usuário encontrado" } };
     } catch (e: any) {
