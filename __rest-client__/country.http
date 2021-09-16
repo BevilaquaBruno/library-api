@@ -2,12 +2,12 @@
 GET http://localhost:8000/api/country
 
 # to get a specific country, must return the complete data for the country with the given id - you DON'T need the token here
-GET http://localhost:8000/api/country/1
+GET http://localhost:8000/api/country/<countryId>
 
 # to create a new country
 POST http://localhost:8000/api/country
 Content-Type: application/json
-x-access-token: TOKEN_HERE
+x-access-token: <token>
 
 {
   "name": "Country Test",
@@ -17,9 +17,9 @@ x-access-token: TOKEN_HERE
 }
 
 # to update the country with the given id
-PUT http://localhost:8000/api/country/2
+PUT http://localhost:8000/api/country/<countryId>
 Content-Type: application/json
-x-access-token: TOKEN_HERE
+x-access-token: <token>
 
 {
   "name": "Country Test2",
@@ -29,5 +29,5 @@ x-access-token: TOKEN_HERE
 }
 
 # to delete the country with the given id
-DELETE http://localhost:8000/api/country/2
-x-access-token: TOKEN_HERE
+DELETE http://localhost:8000/api/country/<countryId>
+x-access-token: <token>
