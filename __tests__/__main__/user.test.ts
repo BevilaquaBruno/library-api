@@ -2,11 +2,11 @@ import md5 from "md5";
 import User from "../../src/classes/User.class";
 import { ResponseData } from "../../src/interfaces/Common.interface";
 import { login } from "../__fetches__/auth.fetch";
-import { findAll, find } from "../__fetches__/user.fetch";
+import { remove, findAll, find } from "../__fetches__/user.fetch";
 
 var responseExpected: ResponseData;
 const userTestPassword = "123";
-var userTest = new User("user Test", "user_test", "user@test.com");
+var userTest = new User("user Test", "user_test", "user@test.com", 2);
 const bevilaquaExpected = new User(
   "Bruno Fernando Bevilaqua",
   "bevilaqua",
@@ -66,5 +66,20 @@ describe("Testing User", () => {
         expect(bevilaqua).toEqual(bevilaquaExpected);
       }
     });
+  });
+
+  it("Delete", async () => {
+    responseExpected = {
+      data: {},
+      status: {
+        error: false,
+        message: "Usuário removido",
+      },
+    };
+
+    const token = (await login()).data.data.token;
+
+    const response: ResponseData = (await remove(token, userTest.id)).data;
+    expect(response).toEqual(responseExpected);
   });
 });

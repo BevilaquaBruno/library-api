@@ -24,3 +24,14 @@ export const find = async (token: string, id: number): Promise<AxiosResponse> =>
     },
   });
 };
+
+export const remove = async (token: string, id: number) => {
+  return await axios({
+    method: "DELETE",
+    url: "http://localhost:" + process.env.PORT + "/api/user/" + id,
+    responseType: "json",
+    headers: {
+      "x-access-token": token,
+    },
+  });
+};

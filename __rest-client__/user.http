@@ -1,7 +1,11 @@
 # to get all users, must return a list
 GET http://localhost:8000/api/user
-x-access-token: TOKEN_HERE
+x-access-token: <token>
 
 # to get a specific user, must return the complete data for the user with the given id
-GET http://localhost:8000/api/user/1
-x-access-token: TOKEN_HERE
+GET http://localhost:8000/api/user/<userId>
+x-access-token: <token>
+
+# to delete the user with the given id
+DELETE http://localhost:8000/api/user/<userId>
+x-access-token: <token>

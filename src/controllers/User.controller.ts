@@ -46,4 +46,26 @@ export default class UserController {
 
     res.json(response);
   }
+
+  public static async delete(req: Request, res: Response) {
+    let response: ResponseData;
+
+    try {
+      const id: number = parseInt(req.params.id, 10);
+      let user: User = await UserModel.findById(id);
+      if (!(user.id > 0)) throw new Error("Usuário não encontrado");
+
+      let result = await UserModel.delete(user);
+      if (true === result)
+        response = { data: {}, status: { error: false, message: "Usuário removido" } };
+      else throw new Error("Erro ao deletar usuário");
+    } catch (e: any) {
+      response = {
+        data: {},
+        status: { error: true, message: (e as Error)?.message ?? "Erro ao excluir usuário" },
+      };
+    }
+
+    res.json(response);
+  }
 }

@@ -4,6 +4,7 @@
 import User from "../classes/User.class";
 import { UserData, UserDataComplete } from "../interfaces/User.interface";
 import DatabaseConnection from "../../db/db";
+import { ResultSetHeader } from "mysql2";
 
 const conn = DatabaseConnection.getConnection();
 
@@ -46,5 +47,16 @@ export default class UserModel {
     );
 
     return allUsers;
+  }
+
+  public static async delete(user: User): Promise<boolean> {
+    const rst: ResultSetHeader | any = await (
+      await conn
+    ).execute("DELETE FROM user WHERE id = ?", [user.id.toString()]);
+    let cr: boolean;
+    if (undefined !== rst[0].affectedRows) cr = true;
+    else cr = false;
+
+    return cr;
   }
 }
