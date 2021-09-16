@@ -133,7 +133,7 @@ export default class CountryController {
       let country: Country = await CountryModel.findById(id);
       if (!(country.id > 0)) throw new Error("País não encontrado");
 
-      let result = await CountryModel.remove(country);
+      let result = await CountryModel.delete(country);
       if (true === result)
         response = { data: {}, status: { error: false, message: "País removido" } };
       else throw new Error("Erro ao deletar país");

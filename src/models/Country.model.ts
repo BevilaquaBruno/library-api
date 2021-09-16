@@ -151,7 +151,7 @@ export default class CountryModel {
     return cr;
   }
 
-  public static async remove(country: Country): Promise<boolean> {
+  public static async delete(country: Country): Promise<boolean> {
     const rst: ResultSetHeader | any = await (
       await conn
     ).execute("DELETE FROM country WHERE id = ?", [country.id.toString()]);
