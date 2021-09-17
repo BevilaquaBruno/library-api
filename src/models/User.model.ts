@@ -89,6 +89,22 @@ export default class UserModel {
     return id;
   }
 
+  public static async update(user: User): Promise<boolean> {
+    const rst: ResultSetHeader | any = await (
+      await conn
+    ).execute("UPDATE user SET name = ?, username = ?, email = ? WHERE id = ?", [
+      user.name,
+      user.username,
+      user.email,
+      user.id.toString(),
+    ]);
+    let us: boolean;
+    if (undefined !== rst[0].affectedRows) us = true;
+    else us = false;
+
+    return us;
+  }
+
   public static async delete(user: User): Promise<boolean> {
     const rst: ResultSetHeader | any = await (
       await conn

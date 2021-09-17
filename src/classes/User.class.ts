@@ -93,7 +93,6 @@ export default class User {
       if ("" === this._name) throw new Error("Informe o nome do usuário");
       if ("" === this._username) throw new Error("Informe o username do usuário");
       if ("" === this._email) throw new Error("Informe o email do usuário");
-      if ("" === this._password) throw new Error("Informe a senha do usuário");
 
       if (50 < this._name.length) throw new Error("Tamanho máximo do nome é 50 caracteres");
       if (20 < this._username.length) throw new Error("Tamanho máximo do username é 20 caracteres");

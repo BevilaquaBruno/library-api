@@ -28,6 +28,22 @@ export default class UserFetch {
     });
   }
 
+  public static async update(token: string, user: User): Promise<AxiosResponse> {
+    return await axios({
+      method: "PUT",
+      url: "http://localhost:" + process.env.PORT + "/api/user/"+user.id,
+      responseType: "json",
+      headers: {
+        "x-access-token": token,
+      },
+      data: {
+        name: user.name,
+        username: user.username,
+        email: user.email
+      },
+    });
+  }
+
   public static async delete(token: string, id: number) {
     return await axios({
       method: "DELETE",

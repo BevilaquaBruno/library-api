@@ -21,6 +21,9 @@ userRouter.get("/:id", verifyJwt, UserController.findById);
 // POST user
 userRouter.post("/", verifyJwt, UserController.create);
 
+// PUT user/:id
+userRouter.put("/:id", verifyJwt, UserController.update);
+
 // DELETE user/:id
 userRouter.delete("/:id", verifyJwt, UserController.delete);
 

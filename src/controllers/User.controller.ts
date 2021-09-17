@@ -71,7 +71,7 @@ export default class UserController {
       userValidate = await UserModel.findByEmail(user.email);
       if (0 !== userValidate.id) throw new Error("Já existe um usuário com esse email");
 
-      const insertId = await UserModel.create(user);
+      const insertId: number = await UserModel.create(user);
       if (insertId !== 0) {
         user.id = insertId;
         response = { data: user.toJson(), status: { error: false, message: "Usuário cadastrado" } };
@@ -81,6 +81,44 @@ export default class UserController {
         data: {},
         status: { error: true, message: (e as Error)?.message ?? "Erro ao criar usuário" },
       };
+    }
+
+    res.json(response);
+  }
+
+  public static async update(req: Request, res: Response) {
+    let response: ResponseData;
+
+    try {
+      const id: number = parseInt(req.params.id);
+      const user: User = new User(
+        req.body.name,
+        req.body.username,
+        req.body.email,
+        id
+      );
+
+      const existingUser: User = await UserModel.findById(user.id);
+      if (0 === existingUser.id) throw new Error("Usuário não encontrado");
+
+      const resValidate: ResponseData = user.validate();
+      if (true === resValidate.status.error) throw new Error(resValidate.status.message);
+
+      let userValidate: User;
+      userValidate = await UserModel.findByUsername(user.username, user.id);
+      if (0 !== userValidate.id) throw new Error("Já existe um usuário com esse username");
+      userValidate = await UserModel.findByEmail(user.email, user.id);
+      if (0 !== userValidate.id) throw new Error("Já existe um usuário com esse email");
+
+      const updatedUser: boolean = await UserModel.update(user);
+      if (true === updatedUser)
+        response = {
+          data: user.toJson(),
+          status: { error: false, message: "Usuário atualizado" }
+        };
+      else throw new Error("Erro ao atualizar usuário");
+    } catch (e) {
+      response = { data: {}, status: { error: true, message: (e as Error)?.message ?? "Erro ao alterar usuário" } };
     }
 
     res.json(response);
@@ -96,7 +134,7 @@ export default class UserController {
       if (user.id === (req as RequestWithUser)?.user.id)
         throw new Error("Usuário não pode excluir o próprio cadastro");
 
-      let result = await UserModel.delete(user);
+      let result: boolean = await UserModel.delete(user);
       if (true === result)
         response = { data: {}, status: { error: false, message: "Usuário removido" } };
       else throw new Error("Erro ao deletar usuário");

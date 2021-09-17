@@ -1,3 +1,4 @@
+import { response } from "express";
 import md5 from "md5";
 import User from "../../src/classes/User.class";
 import { ResponseData } from "../../src/interfaces/Common.interface";
@@ -37,6 +38,24 @@ describe("Testing User", () => {
 
     expect(response).toEqual(responseExpected);
   });
+
+  it("Update", async () => {
+    responseExpected = {
+      data: {},
+      status: { error: false, message: "Usuário atualizado" },
+    };
+
+    const token = (await AuthFetch.login()).data.data.token;
+
+    userTest.name = "User Test 2";
+    userTest.username = "usertest2";
+    userTest.email = "usertes2@test2.com";
+
+    responseExpected.data = userTest.toJson();
+    const response: ResponseData = (await UserFetch.update(token, userTest)).data;
+
+    expect(response).toEqual(responseExpected);
+  })
 
   it("Find one", async () => {
     responseExpected = {
