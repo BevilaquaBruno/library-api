@@ -9,12 +9,36 @@ import { ResultSetHeader } from "mysql2";
 const conn = DatabaseConnection.getConnection();
 
 export default class UserModel {
-  public static async findByUsername(username: string): Promise<User> {
-    const [rows] = await (
-      await conn
-    ).execute("SELECT id, name, username, email, password FROM user WHERE username = ?", [
-      username,
-    ]);
+  public static async findByEmail(email: string, currentId: number = 0): Promise<User> {
+    let sql: string;
+    let data: string[];
+    if (0 === currentId) {
+      sql = "SELECT id, name, username, email, password FROM user WHERE email = ?";
+      data = [email];
+    } else {
+      sql = "SELECT id, name, username, email, password FROM user WHERE email = ? and id <> ?";
+      data = [email, currentId.toString()];
+    }
+    const [rows] = await (await conn).execute(sql, data);
+    let arrUser: UserData = Object.values(rows)[0];
+    let user: User;
+    if (undefined === arrUser) user = new User();
+    else user = new User(arrUser.name, arrUser.username, arrUser.email, arrUser.id);
+
+    return user;
+  }
+
+  public static async findByUsername(username: string, currentId: number = 0): Promise<User> {
+    let sql: string;
+    let data: string[];
+    if (0 === currentId) {
+      sql = "SELECT id, name, username, email, password FROM user WHERE username = ?";
+      data = [username];
+    } else {
+      sql = "SELECT id, name, username, email, password FROM user WHERE username = ? and id <> ?";
+      data = [username, currentId.toString()];
+    }
+    const [rows] = await (await conn).execute(sql, data);
     let arrUser: UserDataComplete = Object.values(rows)[0];
     let user: User;
     if (undefined === arrUser) {
@@ -30,7 +54,7 @@ export default class UserModel {
   public static async findById(id: number): Promise<User> {
     const [rows] = await (
       await conn
-    ).execute("SELECT id, name, username, email FROM user WHERE id = ?", [id.toString()]);
+    ).execute("SELECT id, name, username, email, password FROM user WHERE id = ?", [id.toString()]);
     let arrUser: UserData = Object.values(rows)[0];
     let user: User;
     if (undefined === arrUser) user = new User();
@@ -47,6 +71,22 @@ export default class UserModel {
     );
 
     return allUsers;
+  }
+
+  public static async create(user: User): Promise<number> {
+    const rst: ResultSetHeader | any = await (
+      await conn
+    ).execute("INSERT INTO user(name, username, email, password) VALUES(?, ?, ?, ?)", [
+      user.name,
+      user.username,
+      user.email,
+      user.password,
+    ]);
+    let id: number;
+    if (undefined !== rst[0].insertId) id = rst[0].insertId;
+    else id = 0;
+
+    return id;
   }
 
   public static async delete(user: User): Promise<boolean> {

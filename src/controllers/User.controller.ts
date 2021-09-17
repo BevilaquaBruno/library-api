@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import UserModel from "../models/User.model";
 import User from "../classes/User.class";
 import { RequestWithUser, ResponseData } from "../interfaces/Common.interface";
+import md5 from "md5";
 
 export default class UserController {
   public static async findAll(req: Request, res: Response) {
@@ -47,14 +48,53 @@ export default class UserController {
     res.json(response);
   }
 
+  public static async create(req: Request, res: Response) {
+    let response: ResponseData;
+
+    try {
+      const user: User = new User(req.body.name, req.body.username, req.body.email);
+
+      if ("" === (req.body?.password ?? "")) throw new Error("Informe a senha");
+      if ("" === (req.body?.passwordConfirm ?? ""))
+        throw new Error("Repita a senha na confirmação da senha");
+      if (md5(req.body.password) !== md5(req.body.passwordConfirm))
+        throw new Error("As senhas não coincidem");
+
+      user.password = md5(req.body.password);
+
+      const resValidate: ResponseData = user.validate();
+      if (true === resValidate.status.error) throw new Error(resValidate.status.message);
+
+      let userValidate: User;
+      userValidate = await UserModel.findByUsername(user.username);
+      if (0 !== userValidate.id) throw new Error("Já existe um usuário com esse username");
+      userValidate = await UserModel.findByEmail(user.email);
+      if (0 !== userValidate.id) throw new Error("Já existe um usuário com esse email");
+
+      const insertId = await UserModel.create(user);
+      if (insertId !== 0) {
+        user.id = insertId;
+        response = { data: user.toJson(), status: { error: false, message: "Usuário cadastrado" } };
+      } else throw new Error("Erro ao inserir usuário");
+    } catch (e: any) {
+      response = {
+        data: {},
+        status: { error: true, message: (e as Error)?.message ?? "Erro ao criar usuário" },
+      };
+    }
+
+    res.json(response);
+  }
+
   public static async delete(req: Request, res: Response) {
     let response: ResponseData;
 
     try {
       const id: number = parseInt(req.params.id, 10);
       let user: User = await UserModel.findById(id);
-      if (!(user.id > 0)) throw new Error("Usuário não encontrado");
-      if (user.id === (req as RequestWithUser)?.user.id) throw new Error("Usuário não pode excluir o próprio cadastro");
+      if (user.id === 0) throw new Error("Usuário não encontrado");
+      if (user.id === (req as RequestWithUser)?.user.id)
+        throw new Error("Usuário não pode excluir o próprio cadastro");
 
       let result = await UserModel.delete(user);
       if (true === result)

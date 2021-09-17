@@ -262,6 +262,39 @@
 					"response": []
 				},
 				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"username\": \"\",\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"passwordConfirm\": \"\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/user",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "remove",
 					"request": {
 						"method": "DELETE",

@@ -6,6 +6,19 @@ x-access-token: <token>
 GET http://localhost:8000/api/user/<userId>
 x-access-token: <token>
 
+# to create a new user
+POST http://localhost:8000/api/user
+Content-Type: application/json
+x-access-token: <token>
+
+{
+  "name": "User Test",
+  "username": "userteste",
+  "email": "usertest@gmailsss.com",
+  "password": "123",
+  "passwordConfirm": "123"
+}
+
 # to delete the user with the given id
 DELETE http://localhost:8000/api/user/<userId>
 x-access-token: <token>

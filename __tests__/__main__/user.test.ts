@@ -2,7 +2,7 @@ import md5 from "md5";
 import User from "../../src/classes/User.class";
 import { ResponseData } from "../../src/interfaces/Common.interface";
 import { login } from "../__fetches__/auth.fetch";
-import { remove, findAll, find } from "../__fetches__/user.fetch";
+import { create, remove, findAll, find } from "../__fetches__/user.fetch";
 
 var responseExpected: ResponseData;
 const userTestPassword = "123";
@@ -17,6 +17,25 @@ const bevilaquaExpected = new User(
 userTest.password = md5(userTestPassword);
 
 describe("Testing User", () => {
+  it("Create", async () => {
+    responseExpected = {
+      data: {},
+      status: {
+        error: false,
+        message: "Usuário cadastrado",
+      },
+    };
+    const token = (await login()).data.data.token;
+    const password = "123";
+    const passwordConfirm = "123";
+    const response: ResponseData = (await create(token, userTest, password, passwordConfirm)).data;
+
+    userTest.id = response.data.id;
+    responseExpected.data = userTest.toJson();
+
+    expect(response).toEqual(responseExpected);
+  });
+
   it("Find one", async () => {
     responseExpected = {
       data: {},
@@ -33,7 +52,7 @@ describe("Testing User", () => {
       responseBevilaqua.data.name,
       responseBevilaqua.data.username,
       responseBevilaqua.data.email,
-      responseBevilaqua.data.id,
+      responseBevilaqua.data.id
     );
 
     expect(responseBevilaqua.status).toEqual(responseExpected.status);

@@ -18,7 +18,10 @@ userRouter.get("/", verifyJwt, UserController.findAll);
 // GET user/:id
 userRouter.get("/:id", verifyJwt, UserController.findById);
 
+// POST user
+userRouter.post("/", verifyJwt, UserController.create);
+
 // DELETE user/:id
-userRouter.delete('/:id', verifyJwt, UserController.delete);
+userRouter.delete("/:id", verifyJwt, UserController.delete);
 
 export default userRouter;

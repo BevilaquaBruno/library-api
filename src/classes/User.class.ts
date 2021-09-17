@@ -1,4 +1,6 @@
+import { ResponseData } from "../interfaces/Common.interface";
 import { UserData } from "../interfaces/User.interface";
+import Validator from "validator";
 
 export default class User {
   /**
@@ -18,12 +20,7 @@ export default class User {
    * @param password password of the user
    * @param id id of the user
    */
-  constructor(
-    name: string = "",
-    username: string = "",
-    email: string = "",
-    id: number = 0
-  ) {
+  constructor(name: string = "", username: string = "", email: string = "", id: number = 0) {
     this._id = id;
     this._name = name;
     this._username = username;
@@ -88,5 +85,39 @@ export default class User {
       email: this._email,
     };
     return us;
+  }
+
+  public validate(): ResponseData {
+    let response: ResponseData;
+    try {
+      if ("" === this._name) throw new Error("Informe o nome do usuário");
+      if ("" === this._username) throw new Error("Informe o username do usuário");
+      if ("" === this._email) throw new Error("Informe o email do usuário");
+      if ("" === this._password) throw new Error("Informe a senha do usuário");
+
+      if (50 < this._name.length) throw new Error("Tamanho máximo do nome é 50 caracteres");
+      if (20 < this._username.length) throw new Error("Tamanho máximo do username é 20 caracteres");
+      if (50 < this._email.length) throw new Error("Tamanho máximo do email é 50 caracteres");
+
+      if (!Validator.isEmail(this._email)) throw new Error("Email inválido");
+
+      response = {
+        data: {},
+        status: {
+          error: false,
+          message: "",
+        },
+      };
+    } catch (e) {
+      response = {
+        data: {},
+        status: {
+          error: true,
+          message: (e as Error)?.message ?? "Erro grave ao validar dados do usuário",
+        },
+      };
+    }
+
+    return response;
   }
 }

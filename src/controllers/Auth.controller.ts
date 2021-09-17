@@ -19,14 +19,12 @@ export default class AuthController {
         password: req.body?.password ?? "",
       };
 
-      if ("" === authData.username)
-        throw new Error("Informe o usuário");
-      if ("" === authData.password)
-        throw new Error("Informe a senha");
+      if ("" === authData.username) throw new Error("Informe o usuário");
+      if ("" === authData.password) throw new Error("Informe a senha");
 
       let user: User = await UserModel.findByUsername(authData.username);
       if (0 === user.id) throw new Error("Usuário não encontrado");
-      if (md5(authData.password) != user.password) throw new Error("Usuário ou senha incorreto");
+      if (md5(authData.password) !== user.password) throw new Error("Usuário ou senha incorreto");
 
       const secret: string | undefined = process.env.SECRET;
       if ("string" === typeof secret) {
