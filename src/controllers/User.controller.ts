@@ -26,7 +26,7 @@ export default class UserController {
     res.json(response);
   }
 
-  public static async find(req: Request, res: Response) {
+  public static async findById(req: Request, res: Response) {
     let response: ResponseData;
     const id: number = parseInt(req.params.id, 10);
 

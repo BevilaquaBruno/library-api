@@ -16,7 +16,7 @@ const userRouter = express.Router();
 userRouter.get("/", verifyJwt, UserController.findAll);
 
 // GET user/:id
-userRouter.get("/:id", verifyJwt, UserController.find);
+userRouter.get("/:id", verifyJwt, UserController.findById);
 
 // DELETE user/:id
 userRouter.delete('/:id', verifyJwt, UserController.delete);
