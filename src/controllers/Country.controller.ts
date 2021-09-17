@@ -86,7 +86,7 @@ export default class CountryController {
 
     try {
       const id: number = parseInt(req.params.id);
-      const countryUpdate: Country = new Country(
+      const country: Country = new Country(
         req.body.name,
         req.body.fullName,
         req.body.short,
@@ -97,21 +97,21 @@ export default class CountryController {
       const existingCountry = await CountryModel.findById(id);
       if (0 === existingCountry.id) throw new Error("País não encontrado");
 
-      const resValidate: ResponseData = countryUpdate.validate();
+      const resValidate: ResponseData = country.validate();
       if (true === resValidate.status.error) throw new Error(resValidate.status.message);
 
       let countryValidate: Country;
-      countryValidate = await CountryModel.findByName(countryUpdate.name, countryUpdate.id);
+      countryValidate = await CountryModel.findByName(country.name, country.id);
       if (0 !== countryValidate.id) throw new Error("Já existe um país com esse nome");
-      countryValidate = await CountryModel.findByFullName(countryUpdate.fullName, countryUpdate.id);
+      countryValidate = await CountryModel.findByFullName(country.fullName, country.id);
       if (0 !== countryValidate.id) throw new Error("Já existe um país com esse nome completo");
-      countryValidate = await CountryModel.findByShort(countryUpdate.short, countryUpdate.id);
+      countryValidate = await CountryModel.findByShort(country.short, country.id);
       if (0 !== countryValidate.id) throw new Error("Já existe um país com essa sigla");
 
-      const updatedCountry = await CountryModel.update(countryUpdate);
+      const updatedCountry = await CountryModel.update(country);
       if (true === updatedCountry)
         response = {
-          data: countryUpdate.toJson(),
+          data: country.toJson(),
           status: { error: false, message: "País atualizado" },
         };
       else throw new Error("Erro ao atualizar país");
