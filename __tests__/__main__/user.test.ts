@@ -2,6 +2,7 @@ import { response } from "express";
 import md5 from "md5";
 import User from "../../src/classes/User.class";
 import { ResponseData } from "../../src/interfaces/Common.interface";
+import { PasswordList } from "../../src/interfaces/User.interface";
 import AuthFetch from "../__fetches__/auth.fetch";
 import UserFetch from "../__fetches__/user.fetch";
 
@@ -27,15 +28,33 @@ describe("Testing User", () => {
       },
     };
     const token = (await AuthFetch.login()).data.data.token;
-    const password = "123";
-    const passwordConfirm = "123";
+    const passwordList: PasswordList = {
+      password: "123",
+      passwordConfirm: "123"
+    }
     const response: ResponseData = (
-      await UserFetch.create(token, userTest, password, passwordConfirm)
+      await UserFetch.create(token, userTest, passwordList)
     ).data;
 
     userTest.id = response.data.id;
     responseExpected.data = userTest.toJson();
 
+    expect(response).toEqual(responseExpected);
+  });
+
+  it("Update Password", async () => {
+    responseExpected = {
+      data: userTest.toJson(),
+      status: { error: false, message: "Senha do usuário atualizada" },
+    };
+
+    const token = (await AuthFetch.login()).data.data.token;
+
+    const passwordList: PasswordList = {
+      password: "1234",
+      passwordConfirm: "1234"
+    }
+    const response: ResponseData = (await UserFetch.updatePassword(token, userTest.id, passwordList)).data;
     expect(response).toEqual(responseExpected);
   });
 
@@ -55,7 +74,7 @@ describe("Testing User", () => {
     const response: ResponseData = (await UserFetch.update(token, userTest)).data;
 
     expect(response).toEqual(responseExpected);
-  })
+  });
 
   it("Find one", async () => {
     responseExpected = {

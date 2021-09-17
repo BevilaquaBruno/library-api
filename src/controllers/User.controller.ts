@@ -3,6 +3,7 @@ import UserModel from "../models/User.model";
 import User from "../classes/User.class";
 import { RequestWithUser, ResponseData } from "../interfaces/Common.interface";
 import md5 from "md5";
+import { PasswordList } from "../interfaces/User.interface";
 
 export default class UserController {
   public static async findAll(req: Request, res: Response) {
@@ -53,14 +54,18 @@ export default class UserController {
 
     try {
       const user: User = new User(req.body.name, req.body.username, req.body.email);
+      const passwordList: PasswordList = {
+        password: req.body?.password ?? "",
+        passwordConfirm: req.body?.passwordConfirm ?? "",
+      }
 
-      if ("" === (req.body?.password ?? "")) throw new Error("Informe a senha");
-      if ("" === (req.body?.passwordConfirm ?? ""))
+      if ("" === passwordList.password) throw new Error("Informe a senha");
+      if ("" === passwordList.passwordConfirm)
         throw new Error("Repita a senha na confirmação da senha");
-      if (md5(req.body.password) !== md5(req.body.passwordConfirm))
+      if (md5(passwordList.password) !== md5(passwordList.passwordConfirm))
         throw new Error("As senhas não coincidem");
 
-      user.password = md5(req.body.password);
+      user.password = md5(passwordList.password);
 
       const resValidate: ResponseData = user.validate();
       if (true === resValidate.status.error) throw new Error(resValidate.status.message);
@@ -119,6 +124,41 @@ export default class UserController {
       else throw new Error("Erro ao atualizar usuário");
     } catch (e) {
       response = { data: {}, status: { error: true, message: (e as Error)?.message ?? "Erro ao alterar usuário" } };
+    }
+
+    res.json(response);
+  }
+
+  public static async updatePassword(req: Request, res: Response) {
+    let response: ResponseData;
+
+    try {
+      const id: number = parseInt(req.params.id);
+      const user: User = await UserModel.findById(id);
+      if (0 === user.id) throw new Error("Usuário não encontrado");
+
+      const passwordList: PasswordList = {
+        password: req.body?.password ?? "",
+        passwordConfirm: req.body?.passwordConfirm ?? "",
+      }
+
+      if ("" === passwordList.password) throw new Error("Informe a senha");
+      if ("" === passwordList.passwordConfirm)
+        throw new Error("Repita a senha na confirmação da senha");
+      if (md5(passwordList.password) !== md5(passwordList.passwordConfirm))
+        throw new Error("As senhas não coincidem");
+
+      user.password = md5(passwordList.password);
+
+      const updatedPassword: boolean = await UserModel.updatePassword(user);
+      if (true === updatedPassword)
+        response = {
+          data: user.toJson(),
+          status: { error: false, message: "Senha do usuário atualizada"}
+        }
+      else throw new Error("Erro ao atualizar a senha do usuário");
+    } catch (e) {
+      response = { data: {}, status: { error: true, message: (e as Error)?.message ?? "Erro ao alterar senha do usuário" } };
     }
 
     res.json(response);

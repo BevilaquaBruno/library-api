@@ -20,7 +20,7 @@ export default class UserModel {
       data = [email, currentId.toString()];
     }
     const [rows] = await (await conn).execute(sql, data);
-    let arrUser: UserData = Object.values(rows)[0];
+    let arrUser: UserDataComplete = Object.values(rows)[0];
     let user: User;
     if (undefined === arrUser) user = new User();
     else user = new User(arrUser.name, arrUser.username, arrUser.email, arrUser.id);
@@ -55,7 +55,7 @@ export default class UserModel {
     const [rows] = await (
       await conn
     ).execute("SELECT id, name, username, email, password FROM user WHERE id = ?", [id.toString()]);
-    let arrUser: UserData = Object.values(rows)[0];
+    let arrUser: UserDataComplete = Object.values(rows)[0];
     let user: User;
     if (undefined === arrUser) user = new User();
     else user = new User(arrUser.name, arrUser.username, arrUser.email, arrUser.id);
@@ -98,6 +98,17 @@ export default class UserModel {
       user.email,
       user.id.toString(),
     ]);
+    let us: boolean;
+    if (undefined !== rst[0].affectedRows) us = true;
+    else us = false;
+
+    return us;
+  }
+
+  public static async updatePassword(user: User): Promise<boolean> {
+    const rst: ResultSetHeader | any = await (
+      await conn
+    ).execute("UPDATE user SET password = ? WHERE id = ?", [user.password, user.id.toString()]);
     let us: boolean;
     if (undefined !== rst[0].affectedRows) us = true;
     else us = false;

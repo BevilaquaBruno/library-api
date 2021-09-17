@@ -17,3 +17,8 @@ export interface UserAuth {
   username: string;
   password: string;
 }
+
+export interface PasswordList {
+  password: string;
+  passwordConfirm: string;
+}

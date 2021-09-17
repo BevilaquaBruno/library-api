@@ -24,6 +24,9 @@ userRouter.post("/", verifyJwt, UserController.create);
 // PUT user/:id
 userRouter.put("/:id", verifyJwt, UserController.update);
 
+// PUT user/:id/password
+userRouter.put("/:id/password", verifyJwt, UserController.updatePassword);
+
 // DELETE user/:id
 userRouter.delete("/:id", verifyJwt, UserController.delete);
 

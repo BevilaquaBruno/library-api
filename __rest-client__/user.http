@@ -30,6 +30,16 @@ x-access-token: <token>
   "email": "user2@gmail.com"
 }
 
+# to update the user's password with the given id
+PUT http://localhost:8000/api/user/1/password
+Content-Type: application/json
+x-access-token: <token>
+
+{
+  "password": "123",
+  "passwordConfirm": "123"
+}
+
 # to delete the user with the given id
 DELETE http://localhost:8000/api/user/<userId>
 x-access-token: <token>
