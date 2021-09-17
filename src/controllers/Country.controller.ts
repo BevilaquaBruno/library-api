@@ -95,7 +95,7 @@ export default class CountryController {
       );
 
       const existingCountry = await CountryModel.findById(id);
-      if (existingCountry.id === 0) throw new Error("País não encontrado");
+      if (0 === existingCountry.id) throw new Error("País não encontrado");
 
       const resValidate: ResponseData = countryUpdate.validate();
       if (true === resValidate.status.error) throw new Error(resValidate.status.message);
