@@ -108,7 +108,7 @@ export default class CountryController {
       countryValidate = await CountryModel.findByShort(country.short, country.id);
       if (0 !== countryValidate.id) throw new Error("Já existe um país com essa sigla");
 
-      const updatedCountry = await CountryModel.update(country);
+      const updatedCountry: boolean = await CountryModel.update(country);
       if (true === updatedCountry)
         response = {
           data: country.toJson(),
