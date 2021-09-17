@@ -117,7 +117,7 @@ export default class UserController {
           status: { error: false, message: "Usuário atualizado" },
         };
       else throw new Error("Erro ao atualizar usuário");
-    } catch (e) {
+    } catch (e: any) {
       response = {
         data: {},
         status: { error: true, message: (e as Error)?.message ?? "Erro ao alterar usuário" },
@@ -155,7 +155,7 @@ export default class UserController {
           status: { error: false, message: "Senha do usuário atualizada" },
         };
       else throw new Error("Erro ao atualizar a senha do usuário");
-    } catch (e) {
+    } catch (e: any) {
       response = {
         data: {},
         status: {

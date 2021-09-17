@@ -1,13 +1,13 @@
 /**
  * Required External Modules and Interfaces
  */
-import express from "express";
+import express, { Router } from "express";
 import UserController from "../controllers/User.controller";
 import { verifyJwt } from "../middlewares/verify-jwt.middleware";
 /**
  * Router Controller
  */
-const userRouter = express.Router();
+const userRouter: Router = express.Router();
 
 /**
  * Controller definitions

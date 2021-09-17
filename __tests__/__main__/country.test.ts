@@ -5,7 +5,7 @@ import CountryFetch from "../__fetches__/country.fetch";
 
 var responseExpected: ResponseData;
 var countryTest = new Country("Country Test", "Country Test's full name", "CTT", "country.flag", 2);
-const brazilExpected = new Country(
+const brazilExpected: Country = new Country(
   "Brasil",
   "República Federativa do Brasil",
   "BRA",
@@ -22,7 +22,7 @@ describe("Testing Country", () => {
         message: "País cadastrado",
       },
     };
-    const token = (await AuthFetch.login()).data.data.token;
+    const token: string = (await AuthFetch.login()).data.data.token;
     const response: ResponseData = (await CountryFetch.create(token, countryTest)).data;
 
     countryTest.id = response.data.id;
@@ -37,7 +37,7 @@ describe("Testing Country", () => {
       status: { error: false, message: "País atualizado" },
     };
 
-    const token = (await AuthFetch.login()).data.data.token;
+    const token: string = (await AuthFetch.login()).data.data.token;
 
     countryTest.name = "Country Test name updated";
     countryTest.fullName = "Country Test fullName updated";
@@ -60,7 +60,7 @@ describe("Testing Country", () => {
     };
 
     const responseBrazil: ResponseData = (await CountryFetch.findById(brazilExpected.id)).data;
-    let brazil = new Country(
+    let brazil: Country = new Country(
       responseBrazil.data.name,
       responseBrazil.data.fullName,
       responseBrazil.data.short,
@@ -87,7 +87,7 @@ describe("Testing Country", () => {
 
     response.data.forEach((currentCountry: any) => {
       if (1 === currentCountry?.id) {
-        let brazil = new Country(
+        let brazil: Country = new Country(
           currentCountry.name,
           currentCountry.fullName,
           currentCountry.short,
@@ -108,7 +108,7 @@ describe("Testing Country", () => {
       },
     };
 
-    const token = (await AuthFetch.login()).data.data.token;
+    const token: string = (await AuthFetch.login()).data.data.token;
 
     const response: ResponseData = (await CountryFetch.delete(token, countryTest.id)).data;
     expect(response).toEqual(responseExpected);

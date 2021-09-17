@@ -28,7 +28,7 @@ export default class AuthController {
 
       const secret: string | undefined = process.env.SECRET;
       if ("string" === typeof secret) {
-        const token = jwt.sign(user.toJson(), secret, { expiresIn: 5000 });
+        const token: string = jwt.sign(user.toJson(), secret, { expiresIn: 5000 });
         response = {
           data: { token: token },
           status: { error: false, message: "Usuário logado com sucesso" },

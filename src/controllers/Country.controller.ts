@@ -66,7 +66,7 @@ export default class CountryController {
       countryValidate = await CountryModel.findByShort(country.short);
       if (0 !== countryValidate.id) throw new Error("Já existe um país com essa sigla");
 
-      const insertId = await CountryModel.create(country);
+      const insertId: number = await CountryModel.create(country);
       if (insertId !== 0) {
         country.id = insertId;
         response = { data: country.toJson(), status: { error: false, message: "País cadastrado" } };
@@ -94,7 +94,7 @@ export default class CountryController {
         id
       );
 
-      const existingCountry = await CountryModel.findById(id);
+      const existingCountry: Country = await CountryModel.findById(id);
       if (0 === existingCountry.id) throw new Error("País não encontrado");
 
       const resValidate: ResponseData = country.validate();
@@ -133,7 +133,7 @@ export default class CountryController {
       let country: Country = await CountryModel.findById(id);
       if (country.id === 0) throw new Error("País não encontrado");
 
-      let result = await CountryModel.delete(country);
+      let result: boolean = await CountryModel.delete(country);
       if (true === result)
         response = { data: {}, status: { error: false, message: "País removido" } };
       else throw new Error("Erro ao deletar país");

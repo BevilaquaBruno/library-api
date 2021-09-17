@@ -7,9 +7,9 @@ import AuthFetch from "../__fetches__/auth.fetch";
 import UserFetch from "../__fetches__/user.fetch";
 
 var responseExpected: ResponseData;
-const userTestPassword = "123";
-var userTest = new User("user Test", "user_test", "user@test.com", 2);
-const bevilaquaExpected = new User(
+const userTestPassword: string = "123";
+var userTest: User = new User("user Test", "user_test", "user@test.com", 2);
+const bevilaquaExpected: User = new User(
   "Bruno Fernando Bevilaqua",
   "bevilaqua",
   "bbbevilaqua@gmail.com",
@@ -27,7 +27,7 @@ describe("Testing User", () => {
         message: "Usuário cadastrado",
       },
     };
-    const token = (await AuthFetch.login()).data.data.token;
+    const token: string = (await AuthFetch.login()).data.data.token;
     const passwordList: PasswordList = {
       password: "123",
       passwordConfirm: "123",
@@ -46,7 +46,7 @@ describe("Testing User", () => {
       status: { error: false, message: "Senha do usuário atualizada" },
     };
 
-    const token = (await AuthFetch.login()).data.data.token;
+    const token: string = (await AuthFetch.login()).data.data.token;
 
     const passwordList: PasswordList = {
       password: "1234",
@@ -64,7 +64,7 @@ describe("Testing User", () => {
       status: { error: false, message: "Usuário atualizado" },
     };
 
-    const token = (await AuthFetch.login()).data.data.token;
+    const token: string = (await AuthFetch.login()).data.data.token;
 
     userTest.name = "User Test 2";
     userTest.username = "usertest2";
@@ -85,11 +85,11 @@ describe("Testing User", () => {
       },
     };
 
-    const token = (await AuthFetch.login()).data.data.token;
+    const token: string = (await AuthFetch.login()).data.data.token;
 
     const responseBevilaqua: ResponseData = (await UserFetch.findById(token, bevilaquaExpected.id))
       .data;
-    let bevilaqua = new User(
+    let bevilaqua: User = new User(
       responseBevilaqua.data.name,
       responseBevilaqua.data.username,
       responseBevilaqua.data.email,
@@ -109,7 +109,7 @@ describe("Testing User", () => {
       },
     };
 
-    const token = (await AuthFetch.login()).data.data.token;
+    const token: string = (await AuthFetch.login()).data.data.token;
 
     const response: ResponseData = (await UserFetch.findAll(token)).data;
     expect(response.status).toEqual(responseExpected.status);
@@ -117,7 +117,7 @@ describe("Testing User", () => {
 
     response.data.forEach((currentUser: any) => {
       if (1 === currentUser?.id) {
-        let bevilaqua = new User(
+        let bevilaqua: User = new User(
           currentUser.name,
           currentUser.username,
           currentUser.email,
@@ -137,7 +137,7 @@ describe("Testing User", () => {
       },
     };
 
-    const token = (await AuthFetch.login()).data.data.token;
+    const token: string = (await AuthFetch.login()).data.data.token;
 
     const response: ResponseData = (await UserFetch.delete(token, userTest.id)).data;
     expect(response).toEqual(responseExpected);
