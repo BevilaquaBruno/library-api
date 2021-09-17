@@ -1,8 +1,8 @@
 import md5 from "md5";
 import User from "../../src/classes/User.class";
 import { ResponseData } from "../../src/interfaces/Common.interface";
-import { login } from "../__fetches__/auth.fetch";
-import { create, remove, findAll, find } from "../__fetches__/user.fetch";
+import AuthFetch from "../__fetches__/auth.fetch";
+import UserFetch from "../__fetches__/user.fetch";
 
 var responseExpected: ResponseData;
 const userTestPassword = "123";
@@ -25,10 +25,12 @@ describe("Testing User", () => {
         message: "Usuário cadastrado",
       },
     };
-    const token = (await login()).data.data.token;
+    const token = (await AuthFetch.login()).data.data.token;
     const password = "123";
     const passwordConfirm = "123";
-    const response: ResponseData = (await create(token, userTest, password, passwordConfirm)).data;
+    const response: ResponseData = (
+      await UserFetch.create(token, userTest, password, passwordConfirm)
+    ).data;
 
     userTest.id = response.data.id;
     responseExpected.data = userTest.toJson();
@@ -45,9 +47,10 @@ describe("Testing User", () => {
       },
     };
 
-    const token = (await login()).data.data.token;
+    const token = (await AuthFetch.login()).data.data.token;
 
-    const responseBevilaqua: ResponseData = (await find(token, bevilaquaExpected.id)).data;
+    const responseBevilaqua: ResponseData = (await UserFetch.findById(token, bevilaquaExpected.id))
+      .data;
     let bevilaqua = new User(
       responseBevilaqua.data.name,
       responseBevilaqua.data.username,
@@ -68,9 +71,9 @@ describe("Testing User", () => {
       },
     };
 
-    const token = (await login()).data.data.token;
+    const token = (await AuthFetch.login()).data.data.token;
 
-    const response: ResponseData = (await findAll(token)).data;
+    const response: ResponseData = (await UserFetch.findAll(token)).data;
     expect(response.status).toEqual(responseExpected.status);
     expect(response.data.length).not.toEqual(0);
 
@@ -96,9 +99,9 @@ describe("Testing User", () => {
       },
     };
 
-    const token = (await login()).data.data.token;
+    const token = (await AuthFetch.login()).data.data.token;
 
-    const response: ResponseData = (await remove(token, userTest.id)).data;
+    const response: ResponseData = (await UserFetch.delete(token, userTest.id)).data;
     expect(response).toEqual(responseExpected);
   });
 });
