@@ -1,7 +1,7 @@
 import Country from "../../src/classes/Country.class";
 import { ResponseData } from "../../src/interfaces/Common.interface";
-import { login } from "../__fetches__/auth.fetch";
-import { create, update, remove, findAll, find } from "../__fetches__/country.fetch";
+import AuthFetch from "../__fetches__/auth.fetch";
+import CountryFetch from "../__fetches__/country.fetch";
 
 var responseExpected: ResponseData;
 var countryTest = new Country("Country Test", "Country Test's full name", "CTT", "country.flag", 2);
@@ -22,8 +22,8 @@ describe("Testing Country", () => {
         message: "País cadastrado",
       },
     };
-    const token = (await login()).data.data.token;
-    const response: ResponseData = (await create(token, countryTest)).data;
+    const token = (await AuthFetch.login()).data.data.token;
+    const response: ResponseData = (await CountryFetch.create(token, countryTest)).data;
 
     countryTest.id = response.data.id;
     responseExpected.data = countryTest.toJson();
@@ -37,7 +37,7 @@ describe("Testing Country", () => {
       status: { error: false, message: "País atualizado" },
     };
 
-    const token = (await login()).data.data.token;
+    const token = (await AuthFetch.login()).data.data.token;
 
     countryTest.name = "Country Test name updated";
     countryTest.fullName = "Country Test fullName updated";
@@ -45,7 +45,7 @@ describe("Testing Country", () => {
     countryTest.flag = "Country Test flag updated";
 
     responseExpected.data = countryTest.toJson();
-    const response: ResponseData = (await update(token, countryTest)).data;
+    const response: ResponseData = (await CountryFetch.update(token, countryTest)).data;
 
     expect(response).toEqual(responseExpected);
   });
@@ -59,7 +59,7 @@ describe("Testing Country", () => {
       },
     };
 
-    const responseBrazil: ResponseData = (await find(brazilExpected.id)).data;
+    const responseBrazil: ResponseData = (await CountryFetch.findById(brazilExpected.id)).data;
     let brazil = new Country(
       responseBrazil.data.name,
       responseBrazil.data.fullName,
@@ -81,7 +81,7 @@ describe("Testing Country", () => {
       },
     };
 
-    const response: ResponseData = (await findAll()).data;
+    const response: ResponseData = (await CountryFetch.findAll()).data;
     expect(response.status).toEqual(responseExpected.status);
     expect(response.data.length).not.toEqual(0);
 
@@ -108,9 +108,9 @@ describe("Testing Country", () => {
       },
     };
 
-    const token = (await login()).data.data.token;
+    const token = (await AuthFetch.login()).data.data.token;
 
-    const response: ResponseData = (await remove(token, countryTest.id)).data;
+    const response: ResponseData = (await CountryFetch.delete(token, countryTest.id)).data;
     expect(response).toEqual(responseExpected);
   });
 });
