@@ -57,7 +57,7 @@ export default class UserController {
       const passwordList: PasswordList = {
         password: req.body?.password ?? "",
         passwordConfirm: req.body?.passwordConfirm ?? "",
-      }
+      };
 
       if ("" === passwordList.password) throw new Error("Informe a senha");
       if ("" === passwordList.passwordConfirm)
@@ -96,12 +96,7 @@ export default class UserController {
 
     try {
       const id: number = parseInt(req.params.id);
-      const user: User = new User(
-        req.body.name,
-        req.body.username,
-        req.body.email,
-        id
-      );
+      const user: User = new User(req.body.name, req.body.username, req.body.email, id);
 
       const existingUser: User = await UserModel.findById(user.id);
       if (0 === existingUser.id) throw new Error("Usuário não encontrado");
@@ -119,11 +114,14 @@ export default class UserController {
       if (true === updatedUser)
         response = {
           data: user.toJson(),
-          status: { error: false, message: "Usuário atualizado" }
+          status: { error: false, message: "Usuário atualizado" },
         };
       else throw new Error("Erro ao atualizar usuário");
     } catch (e) {
-      response = { data: {}, status: { error: true, message: (e as Error)?.message ?? "Erro ao alterar usuário" } };
+      response = {
+        data: {},
+        status: { error: true, message: (e as Error)?.message ?? "Erro ao alterar usuário" },
+      };
     }
 
     res.json(response);
@@ -140,7 +138,7 @@ export default class UserController {
       const passwordList: PasswordList = {
         password: req.body?.password ?? "",
         passwordConfirm: req.body?.passwordConfirm ?? "",
-      }
+      };
 
       if ("" === passwordList.password) throw new Error("Informe a senha");
       if ("" === passwordList.passwordConfirm)
@@ -154,11 +152,17 @@ export default class UserController {
       if (true === updatedPassword)
         response = {
           data: user.toJson(),
-          status: { error: false, message: "Senha do usuário atualizada"}
-        }
+          status: { error: false, message: "Senha do usuário atualizada" },
+        };
       else throw new Error("Erro ao atualizar a senha do usuário");
     } catch (e) {
-      response = { data: {}, status: { error: true, message: (e as Error)?.message ?? "Erro ao alterar senha do usuário" } };
+      response = {
+        data: {},
+        status: {
+          error: true,
+          message: (e as Error)?.message ?? "Erro ao alterar senha do usuário",
+        },
+      };
     }
 
     res.json(response);

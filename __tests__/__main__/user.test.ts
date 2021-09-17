@@ -30,11 +30,9 @@ describe("Testing User", () => {
     const token = (await AuthFetch.login()).data.data.token;
     const passwordList: PasswordList = {
       password: "123",
-      passwordConfirm: "123"
-    }
-    const response: ResponseData = (
-      await UserFetch.create(token, userTest, passwordList)
-    ).data;
+      passwordConfirm: "123",
+    };
+    const response: ResponseData = (await UserFetch.create(token, userTest, passwordList)).data;
 
     userTest.id = response.data.id;
     responseExpected.data = userTest.toJson();
@@ -52,9 +50,11 @@ describe("Testing User", () => {
 
     const passwordList: PasswordList = {
       password: "1234",
-      passwordConfirm: "1234"
-    }
-    const response: ResponseData = (await UserFetch.updatePassword(token, userTest.id, passwordList)).data;
+      passwordConfirm: "1234",
+    };
+    const response: ResponseData = (
+      await UserFetch.updatePassword(token, userTest.id, passwordList)
+    ).data;
     expect(response).toEqual(responseExpected);
   });
 

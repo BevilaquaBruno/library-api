@@ -32,7 +32,7 @@ export default class UserFetch {
   public static async update(token: string, user: User): Promise<AxiosResponse> {
     return await axios({
       method: "PUT",
-      url: "http://localhost:" + process.env.PORT + "/api/user/"+user.id,
+      url: "http://localhost:" + process.env.PORT + "/api/user/" + user.id,
       responseType: "json",
       headers: {
         "x-access-token": token,
@@ -40,12 +40,16 @@ export default class UserFetch {
       data: {
         name: user.name,
         username: user.username,
-        email: user.email
+        email: user.email,
       },
     });
   }
 
-  public static async updatePassword(token: string, id: number, passwordList: PasswordList): Promise<AxiosResponse> {
+  public static async updatePassword(
+    token: string,
+    id: number,
+    passwordList: PasswordList
+  ): Promise<AxiosResponse> {
     return await axios({
       method: "PUT",
       url: "http://localhost:" + process.env.PORT + "/api/user/" + id + "/password",
@@ -53,7 +57,7 @@ export default class UserFetch {
       headers: {
         "x-access-token": token,
       },
-      data: passwordList
+      data: passwordList,
     });
   }
 

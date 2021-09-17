@@ -14,7 +14,7 @@ export const verifyJwt = (req: Request, res: Response, next: NextFunction) => {
     if ("string" === typeof secret) {
       jwt.verify(token, secret, (err: any, decoded: any) => {
         if (err) throw new Error("Usuário não autenticado.");
-        let userData: UserData = (decoded as UserData);
+        let userData: UserData = decoded as UserData;
         let user: User = new User(userData.name, userData.username, userData.email, userData.id);
         (req as RequestWithUser).user = user;
         next();
