@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { RequestWithUser, ResponseData } from "../interfaces/Common.interface";
 import jwt from "jsonwebtoken";
+import User from "../classes/User.class";
+import { UserData } from "../interfaces/User.interface";
 
 export const verifyJwt = (req: Request, res: Response, next: NextFunction) => {
   const token: string | any = req.headers["x-access-token"];
@@ -12,7 +14,9 @@ export const verifyJwt = (req: Request, res: Response, next: NextFunction) => {
     if ("string" === typeof secret) {
       jwt.verify(token, secret, (err: any, decoded: any) => {
         if (err) throw new Error("Usuário não autenticado.");
-        (req as RequestWithUser).user = decoded;
+        let userData: UserData = (decoded as UserData);
+        let user: User = new User(userData.name, userData.username, userData.email, userData.id);
+        (req as RequestWithUser).user = user;
         next();
       });
     } else throw new Error("Erro ao validar token de acesso.");

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import UserModel from "../models/User.model";
 import User from "../classes/User.class";
-import { ResponseData } from "../interfaces/Common.interface";
+import { RequestWithUser, ResponseData } from "../interfaces/Common.interface";
 
 export default class UserController {
   public static async findAll(req: Request, res: Response) {
@@ -54,6 +54,7 @@ export default class UserController {
       const id: number = parseInt(req.params.id, 10);
       let user: User = await UserModel.findById(id);
       if (!(user.id > 0)) throw new Error("Usuário não encontrado");
+      if (user.id === (req as RequestWithUser)?.user.id) throw new Error("Usuário não pode excluir o próprio cadastro");
 
       let result = await UserModel.delete(user);
       if (true === result)
