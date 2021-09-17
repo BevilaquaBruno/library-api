@@ -1,5 +1,5 @@
 import { ResponseData } from "../../src/interfaces/Common.interface";
-import { login, logout } from "../__fetches__/auth.fetch";
+import AuthFetch from "../__fetches__/auth.fetch";
 
 var responseExpected: ResponseData;
 
@@ -10,7 +10,7 @@ describe("Testing Auth", () => {
       status: { error: false, message: "Logout efetuado com sucesso" },
     };
 
-    const response: ResponseData = (await logout()).data;
+    const response: ResponseData = (await AuthFetch.logout()).data;
 
     expect(response).toEqual(responseExpected);
   });
@@ -21,7 +21,7 @@ describe("Testing Auth", () => {
       status: { error: false, message: "Usuário logado com sucesso" },
     };
 
-    const response: ResponseData = (await login()).data;
+    const response: ResponseData = (await AuthFetch.login()).data;
 
     expect(response.status).toEqual(responseExpected.status);
     expect(response.data.token).not.toBe("");
