@@ -19,9 +19,9 @@ export default class AuthController {
         password: req.body?.password ?? "",
       };
 
-      if ("" == authData.username)
+      if ("" === authData.username)
         throw new Error("Informe o usuário");
-      if ("" == authData.password)
+      if ("" === authData.password)
         throw new Error("Informe a senha");
 
       let user: User = await UserModel.findByUsername(authData.username);

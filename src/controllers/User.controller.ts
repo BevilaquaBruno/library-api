@@ -32,7 +32,7 @@ export default class UserController {
 
     try {
       let user: User = await UserModel.findById(id);
-      if (0 == user.id) throw new Error("Usuário não encontrado");
+      if (0 === user.id) throw new Error("Usuário não encontrado");
       response = { data: user.toJson(), status: { error: false, message: "Usuário encontrado" } };
     } catch (e: any) {
       response = {

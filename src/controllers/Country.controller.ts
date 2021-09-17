@@ -32,7 +32,7 @@ export default class CountryController {
 
     try {
       const country: Country = await CountryModel.findById(id);
-      if (0 == country.id) throw new Error("País não encontrado");
+      if (0 === country.id) throw new Error("País não encontrado");
       response = { data: country.toJson(), status: { error: false, message: "País encontrado" } };
     } catch (e: any) {
       response = {
