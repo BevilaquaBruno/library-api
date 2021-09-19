@@ -107,7 +107,7 @@ export default class User {
           message: "",
         },
       };
-    } catch (e) {
+    } catch (e: any) {
       response = {
         data: {},
         status: {

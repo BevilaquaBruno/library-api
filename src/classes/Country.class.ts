@@ -113,7 +113,7 @@ export default class Country {
           message: "",
         },
       };
-    } catch (e) {
+    } catch (e: any) {
       response = {
         data: {},
         status: {
