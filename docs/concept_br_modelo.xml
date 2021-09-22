@@ -2,14 +2,14 @@
 <MER>
 	<Informacoes>
 		<Posicao Left="0" Top="0"/>
-		<TotalItens Valor="275"/>
+		<TotalItens Valor="276"/>
 		<Tipo Valor="CONCEITUAL"/>
 		<Versao Valor="1.0.0"/>
 	</Informacoes>
 	<Entidades>
     <Entidade nome="Country" id="1">
-      <Left Valor="117"/>
-      <Top Valor="294"/>
+      <Left Valor="115"/>
+      <Top Valor="286"/>
       <Width Valor="102"/>
       <Height Valor="66"/>
       <Fonte default="-1"/>
@@ -30,7 +30,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="-1"/>
-          <Tipo Valor="integer"/>
+          <Tipo Valor="INT"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="2"/>
           <TamAuto Valor="-1"/>
@@ -61,7 +61,7 @@
           <MinCard Valor="0"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(100)"/>
+          <Tipo Valor="VARCHAR(100)"/>
           <Multivalorado Valor="-1"/>
           <Orientacao Valor="2"/>
           <TamAuto Valor="-1"/>
@@ -92,7 +92,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(50)"/>
+          <Tipo Valor="VARCHAR(50)"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="2"/>
           <TamAuto Valor="-1"/>
@@ -123,7 +123,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(1)"/>
+          <Tipo Valor="VARCHAR(1)"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="2"/>
           <TamAuto Valor="-1"/>
@@ -154,7 +154,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(50)"/>
+          <Tipo Valor="VARCHAR(50)"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="2"/>
           <TamAuto Valor="-1"/>
@@ -201,7 +201,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="-1"/>
-          <Tipo Valor="integer"/>
+          <Tipo Valor="INT"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -232,7 +232,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(20)"/>
+          <Tipo Valor="VARCHAR(20)"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -263,7 +263,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(50)"/>
+          <Tipo Valor="VARCHAR(50)"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -295,8 +295,8 @@
       <Fonte default="-1"/>
       <Atributos>
         <Atributo nome="id" id="37">
-          <Left Valor="41"/>
-          <Top Valor="52"/>
+          <Left Valor="42"/>
+          <Top Valor="54"/>
           <Width Valor="37"/>
           <Height Valor="16"/>
           <Fonte default="-1"/>
@@ -310,7 +310,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="-1"/>
-          <Tipo Valor="integer"/>
+          <Tipo Valor="INT"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="2"/>
           <TamAuto Valor="-1"/>
@@ -341,7 +341,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(50)"/>
+          <Tipo Valor="VARCHAR(50)"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="2"/>
           <TamAuto Valor="-1"/>
@@ -387,8 +387,8 @@
           <MaxCard Valor="1"/>
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
-          <Identificador Valor="0"/>
-          <Tipo Valor="integer"/>
+          <Identificador Valor="-1"/>
+          <Tipo Valor="INT"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -419,7 +419,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(100)"/>
+          <Tipo Valor="VARCHAR(100)"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -450,7 +450,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(20)"/>
+          <Tipo Valor="VARCHAR(20)"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -481,7 +481,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(50)"/>
+          <Tipo Valor="VARCHAR(50)"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -512,7 +512,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="date"/>
+          <Tipo Valor="DATE"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -528,8 +528,8 @@
           </Ligacoes>
         </Atributo>
         <Atributo nome="cpf" id="124">
-          <Left Valor="844"/>
-          <Top Valor="265"/>
+          <Left Valor="845"/>
+          <Top Valor="264"/>
           <Width Valor="74"/>
           <Height Valor="16"/>
           <Fonte default="-1"/>
@@ -543,7 +543,7 @@
           <MinCard Valor="0"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(14)"/>
+          <Tipo Valor="VARCHAR(14)"/>
           <Multivalorado Valor="-1"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -574,7 +574,7 @@
           <MinCard Valor="0"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(100)"/>
+          <Tipo Valor="VARCHAR(100)"/>
           <Multivalorado Valor="-1"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -605,7 +605,7 @@
           <MinCard Valor="0"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(100)"/>
+          <Tipo Valor="VARCHAR(100)"/>
           <Multivalorado Valor="-1"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -636,7 +636,7 @@
           <MinCard Valor="0"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(100)"/>
+          <Tipo Valor="VARCHAR(100)"/>
           <Multivalorado Valor="-1"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -683,7 +683,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="-1"/>
-          <Tipo Valor="integer"/>
+          <Tipo Valor="INT"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="2"/>
           <TamAuto Valor="-1"/>
@@ -700,7 +700,7 @@
         </Atributo>
         <Atributo nome="description" id="66">
           <Left Valor="4"/>
-          <Top Valor="194"/>
+          <Top Valor="193"/>
           <Width Valor="90"/>
           <Height Valor="16"/>
           <Fonte default="-1"/>
@@ -714,7 +714,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(30)"/>
+          <Tipo Valor="VARCHAR(30)"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="2"/>
           <TamAuto Valor="-1"/>
@@ -761,7 +761,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="-1"/>
-          <Tipo Valor="integer"/>
+          <Tipo Valor="INT"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="2"/>
           <TamAuto Valor="-1"/>
@@ -792,7 +792,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(100)"/>
+          <Tipo Valor="VARCHAR(100)"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -823,7 +823,7 @@
           <MinCard Valor="0"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(100)"/>
+          <Tipo Valor="VARCHAR"/>
           <Multivalorado Valor="-1"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -854,7 +854,7 @@
           <MinCard Valor="0"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="date"/>
+          <Tipo Valor="DATE"/>
           <Multivalorado Valor="-1"/>
           <Orientacao Valor="2"/>
           <TamAuto Valor="-1"/>
@@ -885,7 +885,7 @@
           <MinCard Valor="0"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="date"/>
+          <Tipo Valor="DATE"/>
           <Multivalorado Valor="-1"/>
           <Orientacao Valor="2"/>
           <TamAuto Valor="-1"/>
@@ -901,7 +901,7 @@
           </Ligacoes>
         </Atributo>
         <Atributo nome="born_place" id="204">
-          <Left Valor="1"/>
+          <Left Valor="2"/>
           <Top Valor="508"/>
           <Width Valor="90"/>
           <Height Valor="16"/>
@@ -916,7 +916,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(100)"/>
+          <Tipo Valor="VARCHAR(100)"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="2"/>
           <TamAuto Valor="-1"/>
@@ -947,7 +947,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(100)"/>
+          <Tipo Valor="VARCHAR(100)"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="2"/>
           <TamAuto Valor="-1"/>
@@ -979,7 +979,7 @@
       <Fonte default="-1"/>
       <Atributos>
         <Atributo nome="id" id="214">
-          <Left Valor="884"/>
+          <Left Valor="882"/>
           <Top Valor="519"/>
           <Width Valor="37"/>
           <Height Valor="16"/>
@@ -994,7 +994,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="-1"/>
-          <Tipo Valor="integer"/>
+          <Tipo Valor="INT"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -1025,7 +1025,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(30)"/>
+          <Tipo Valor="VARCHAR(30)"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -1072,7 +1072,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="-1"/>
-          <Tipo Valor="integer"/>
+          <Tipo Valor="INT"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -1103,7 +1103,7 @@
           <MinCard Valor="1"/>
           <Composto Valor="0"/>
           <Identificador Valor="0"/>
-          <Tipo Valor="varchar(100)"/>
+          <Tipo Valor="VARCHAR(100)"/>
           <Multivalorado Valor="0"/>
           <Orientacao Valor="3"/>
           <TamAuto Valor="-1"/>
@@ -1242,8 +1242,8 @@
           <MostraCardinalidade Valor="-1" Card_id="203"/>
           <Cardinalidades Cardinalidade="1">
             <Cardinalidade nome="" id="203">
-              <Left Valor="151"/>
-              <Top Valor="361"/>
+              <Left Valor="149"/>
+              <Top Valor="353"/>
               <Width Valor="40"/>
               <Height Valor="20"/>
               <Fonte default="-1"/>
@@ -1311,8 +1311,8 @@
           <MostraCardinalidade Valor="-1" Card_id="212"/>
           <Cardinalidades Cardinalidade="1">
             <Cardinalidade nome="" id="212">
-              <Left Valor="185"/>
-              <Top Valor="361"/>
+              <Left Valor="183"/>
+              <Top Valor="353"/>
               <Width Valor="40"/>
               <Height Valor="20"/>
               <Fonte default="-1"/>
@@ -1380,8 +1380,8 @@
           <MostraCardinalidade Valor="-1" Card_id="232"/>
           <Cardinalidades Cardinalidade="1">
             <Cardinalidade nome="" id="232">
-              <Left Valor="219"/>
-              <Top Valor="312"/>
+              <Left Valor="217"/>
+              <Top Valor="304"/>
               <Width Valor="40"/>
               <Height Valor="20"/>
               <Fonte default="-1"/>
@@ -1409,5 +1409,23 @@
 	<EntAssoss>
 	</EntAssoss>
 	<Texto>
-	</Texto>
+    <Texto nome="Obs.: Concept of a library database for my own use.
+" id="244">
+      <Left Valor="316"/>
+      <Top Valor="5"/>
+      <Width Valor="312"/>
+      <Height Valor="33"/>
+      <Fonte default="-1"/>
+      <Atributos/>
+      <AtributosOcultos/>
+      <Dicionario></Dicionario>
+      <Nula Valor="0"/>
+      <Observacao>Concept of a library database for my own use.</Observacao>
+      <Anexos/>
+      <Cor Valor="15780518"/>
+      <TamAuto Valor="-1"/>
+      <Tipo Valor="1"/>
+      <TextAlin Valor="0"/>
+    </Texto>
+  </Texto>
 </MER>
