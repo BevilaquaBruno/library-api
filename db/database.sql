@@ -62,7 +62,7 @@ INSERT INTO country(id, name, fullname, short, flag, id) VALUES (1, "Brasil", "R
 
 INSERT INTO person (id, name, phone, email, birth_date, cpf) VALUES (1, "Bruno Fernando Bevilaqua", "5549998320023", 2000-03-05, "103.411.729-79");
 
-INSERT INTO user(id, id_pessoa, username, password) VALUES (1, 1, "bevilaqua", MD5("123"));
+INSERT INTO user(id, username, password, person_id) VALUES (1, "bevilaqua", MD5("123"), 1);
 
 INSERT INTO genre(id, description) VALUES (1, "Action");
 
