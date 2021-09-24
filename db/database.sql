@@ -6,7 +6,7 @@ USE bevilaqualibrary;
 CREATE TABLE IF NOT EXISTS person (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(100) NOT NULL,
-  email VARCHAR(30) NOT NULL,
+  email VARCHAR(50) NOT NULL,
   phone VARCHAR(20),
   birth_date DATE,
   cpf VARCHAR(14) UNIQUE,
@@ -17,9 +17,10 @@ CREATE TABLE IF NOT EXISTS person (
 
 CREATE TABLE IF NOT EXISTS user (
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  username varchar(20) NOT NULL UNIQUE,
-  password varchar(100),
-  person_id INT NOT NULL
+  name VARCHAR(100) NOT NULL,
+  username VARCHAR(20) NOT NULL UNIQUE,
+  email VARCHAR(50) NOT NULL,
+  password VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS country (
@@ -53,19 +54,19 @@ CREATE TABLE IF NOT EXISTS publisher (
 );
 
 /* Foreign Keys */
-ALTER TABLE user ADD CONSTRAINT fk_user_person_id FOREIGN KEY (person_id) REFERENCES person(id);
-
 ALTER TABLE publisher ADD CONSTRAINT fk_publisher_country_id FOREIGN KEY (country_id ) REFERENCES country(id);
 
 /* PRIMARY INSERTS*/
-INSERT INTO country(id, name, fullname, short, flag, id) VALUES (1, "Brasil", "República Federativa do Brasil", "BRA", "brasil_flag.png", 1);
+INSERT INTO country(id, name, fullname, short, flag) VALUES (1, "Brasil", "República Federativa do Brasil", "BRA", "brasil_flag.png");
 
-INSERT INTO person (id, name, phone, email, birth_date, cpf) VALUES (1, "Bruno Fernando Bevilaqua", "5549998320023", 2000-03-05, "103.411.729-79");
+INSERT INTO person(id, name, email, phone, birth_date, cpf) VALUES (1, "Bruno Fernando Bevilaqua", "bbbevilaqua@gmail.com", "5549998320023", "2000-03-05", "103.411.729-79");
 
-INSERT INTO user(id, username, password, person_id) VALUES (1, "bevilaqua", MD5("123"), 1);
+INSERT INTO user(id, name, username, email, password) VALUES (1, "Bruno Fernando Bevilaqua", "bevilaqua", "bbbevilaqua@gmail.com", MD5("123"));
 
 INSERT INTO genre(id, description) VALUES (1, "Action");
 
 INSERT INTO style(id, description) VALUES (1, "Book");
+
+INSERT INTO idiom(id, description) VALUES (1, "Português Brasileiro");
 
 INSERT INTO publisher (id, name, country_id) VALUES (1, "Companhia das Letras", 1);
