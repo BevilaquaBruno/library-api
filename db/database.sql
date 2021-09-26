@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS person (
   email VARCHAR(50) NOT NULL,
   phone VARCHAR(20),
   birth_date DATE,
-  cpf VARCHAR(14) UNIQUE,
+  cpf VARCHAR(14),
   address VARCHAR(100),
   city VARCHAR(100),
   state VARCHAR(100)
@@ -53,15 +53,59 @@ CREATE TABLE IF NOT EXISTS publisher (
   country_id INT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS author (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(100) NOT NULL,
+  fullName VARCHAR(150),
+  birth_date DATE,
+  death_date DATE,
+  born_place VARCHAR(100),
+  death_place VARCHAR(100),
+  born_country_id INT,
+  death_country_id INT
+);
+
+CREATE TABLE IF NOT EXISTS book (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(100) NOT NULL,
+  volumn INT,
+  number_pages INT,
+  edition INT,
+  release_year INT,
+  author_obs VARCHAR(200),
+  obs VARCHAR(200),
+  isbn VARCHAR(13),
+  publisher_id INT
+);
+
+CREATE TABLE IF NOT EXISTS book_copy (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  description VARCHAR(200) NOT NULL,
+  buy_or_gift CHAR(1) NOT NULL DEFAULT "B",
+  buy_or_gift_date DATE,
+  obs VARCHAR(200),
+  receiver_person_id INT NOT NULL,
+  book_id INT NOT NULL,
+  photo VARCHAR(30)
+);
+
 /* Foreign Keys */
 ALTER TABLE publisher ADD CONSTRAINT fk_publisher_country_id FOREIGN KEY (country_id ) REFERENCES country(id);
 
-/* PRIMARY INSERTS*/
-INSERT INTO country(id, name, fullname, short, flag) VALUES (1, "Brasil", "República Federativa do Brasil", "BRA", "brasil_flag.png");
+ALTER TABLE author ADD CONSTRAINT fk_author_born_country_id FOREIGN KEY (born_country_id) REFERENCES country(id);
+ALTER TABLE author ADD CONSTRAINT fk_author_death_country_id FOREIGN KEY (death_country_id) REFERENCES country(id);
 
+ALTER TABLE book ADD CONSTRAINT fk_book_publisher_id FOREIGN KEY (publisher_id) REFERENCES publisher(id);
+
+ALTER TABLE book_copy ADD CONSTRAINT fk_book_copy_receiver_person_id FOREIGN KEY (receiver_person_id) REFERENCES person(id);
+ALTER TABLE book_copy ADD CONSTRAINT fk_book_copy_book_id FOREIGN KEY (book_id) REFERENCES person(id);
+
+/* PRIMARY INSERTS*/
 INSERT INTO person(id, name, email, phone, birth_date, cpf) VALUES (1, "Bruno Fernando Bevilaqua", "bbbevilaqua@gmail.com", "5549998320023", "2000-03-05", "103.411.729-79");
 
 INSERT INTO user(id, name, username, email, password) VALUES (1, "Bruno Fernando Bevilaqua", "bevilaqua", "bbbevilaqua@gmail.com", MD5("123"));
+
+INSERT INTO country(id, name, fullname, short, flag) VALUES (1, "Brasil", "República Federativa do Brasil", "BRA", "brasil_flag.png");
 
 INSERT INTO genre(id, description) VALUES (1, "Action");
 
@@ -70,3 +114,14 @@ INSERT INTO style(id, description) VALUES (1, "Book");
 INSERT INTO idiom(id, description) VALUES (1, "Português Brasileiro");
 
 INSERT INTO publisher (id, name, country_id) VALUES (1, "Companhia das Letras", 1);
+
+INSERT INTO author (id, name, fullName, birth_date, death_date, born_place, death_place, born_country_id, death_country_id)
+VALUES (1, "Machado de Assis", "Joaquim Maria Machado de Assis", "1839-06-21", "1908-09-29", "Rio de Janeiro, Rio de Janeiro",
+  "Rio de Janeiro, Rio de Janeiro", 1, 1);
+
+INSERT INTO book(id, name, volumn, number_pages, edition, release_year, author_obs, obs, isbn, publisher_id) VALUES (
+  1, "Dom Casmurro", 1, 213, 7, 2000, "", "Parte da Coleção A obra prima de cada autor - Nº 200", "8572322647", 1);
+
+INSERT INTO book_copy (id, description, buy_or_gift, buy_or_gift_date, obs, photo, receiver_person_id, book_id) VALUES (
+  1, "Dom Casmurro - Machado de Assis - A obra prima de cada autor", "G", "2010-07-14",
+  "Presente da Salete Bevilaqua com dedicatória na contra capa", "", 1, 1);
