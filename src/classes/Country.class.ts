@@ -82,7 +82,7 @@ export default class Country {
   /**
    * Methods
    */
-  public toJson() {
+  public toJson(): CountryData {
     const ct: CountryData = {
       id: this._id,
       name: this._name,
