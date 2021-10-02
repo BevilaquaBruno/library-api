@@ -1,0 +1,2 @@
+# to get all countries, must return a list - you DON'T need the token here
+GET http://localhost:8000/api/person
