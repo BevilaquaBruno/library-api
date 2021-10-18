@@ -24,7 +24,7 @@ export default class Person {
     cpf: string = "",
     address: string = "",
     city: string = "",
-    state: string,
+    state: string = "",
     id: number = 0
   ) {
     this._name = name;
