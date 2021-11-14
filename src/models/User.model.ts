@@ -5,6 +5,7 @@ import User from "../classes/User.class";
 import { UserData, UserDataComplete } from "../interfaces/User.interface";
 import DatabaseConnection from "../../db/db";
 import { ResultSetHeader } from "mysql2";
+import Helper from "../classes/Helper.class";
 
 const conn = DatabaseConnection.getConnection();
 
@@ -80,7 +81,7 @@ export default class UserModel {
       user.name,
       user.username,
       user.email,
-      user.password,
+      Helper.nullForEmpty(user.password),
     ]);
     let id: number;
     if (undefined !== rst[0].insertId) id = rst[0].insertId;
@@ -108,7 +109,7 @@ export default class UserModel {
   public static async updatePassword(user: User): Promise<boolean> {
     const rst: ResultSetHeader | any = await (
       await conn
-    ).execute("UPDATE user SET password = ? WHERE id = ?", [user.password, user.id.toString()]);
+    ).execute("UPDATE user SET password = ? WHERE id = ?", [Helper.nullForEmpty(user.password), user.id.toString()]);
     let us: boolean;
     if (undefined !== rst[0].affectedRows) us = true;
     else us = false;

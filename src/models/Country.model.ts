@@ -5,6 +5,7 @@ import Country from "../classes/Country.class";
 import { CountryData } from "../interfaces/Country.interface";
 import DatabaseConnection from "../../db/db";
 import { ResultSetHeader } from "mysql2";
+import Helper from "../classes/Helper.class";
 
 const conn = DatabaseConnection.getConnection();
 
@@ -123,9 +124,9 @@ export default class CountryModel {
       await conn
     ).execute("INSERT INTO country(name, fullName, short, flag) VALUES(?, ?, ?, ?)", [
       country.name,
-      country.fullName,
+      Helper.nullForEmpty(country.fullName),
       country.short,
-      country.flag,
+      Helper.nullForEmpty(country.flag),
     ]);
     let id: number;
     if (undefined !== rst[0].insertId) id = rst[0].insertId;
@@ -139,9 +140,9 @@ export default class CountryModel {
       await conn
     ).execute("UPDATE country SET name = ?, fullName = ?, short = ?, flag = ? WHERE id = ?", [
       country.name,
-      country.fullName,
+      Helper.nullForEmpty(country.fullName),
       country.short,
-      country.flag,
+      Helper.nullForEmpty(country.flag),
       country.id.toString(),
     ]);
     let cr: boolean;
