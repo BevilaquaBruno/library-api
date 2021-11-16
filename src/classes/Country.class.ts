@@ -1,5 +1,6 @@
 import { ResponseData } from "../interfaces/Common.interface";
 import { CountryData } from "../interfaces/Country.interface";
+import Helper from "./Helper.class";
 
 export default class Country {
   /**
@@ -87,8 +88,8 @@ export default class Country {
       id: this._id,
       name: this._name,
       fullName: this._fullName,
-      short: this._short,
-      flag: this._flag,
+      short: Helper.nullForEmpty(this._short),
+      flag: Helper.nullForEmpty(this._flag),
     };
     return ct;
   }
@@ -99,7 +100,6 @@ export default class Country {
       if ("" === this._name) throw new Error("Informe o nome do país");
       if ("" === this._fullName) throw new Error("Informe o nome completo do país");
       if ("" === this._short) throw new Error("Informe a sigla do país");
-      if ("" === this._flag) throw new Error("Faça o upload da bandeira do país");
 
       if (50 < this._name.length) throw new Error("Tamanho máximo do nome é 50 caracteres");
       if (100 < this._fullName.length)
