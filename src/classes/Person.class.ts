@@ -1,12 +1,13 @@
 import { ResponseData } from "../interfaces/Common.interface";
 import { PersonData } from "../interfaces/Person.interface";
 import validator from "validator";
+import Helper from "./Helper.class";
 
 export default class Person {
   /**
    * Attributtes
    */
-  private _id: number;
+  private _id_person: number;
   private _name: string;
   private _email: string;
   private _phone: string;
@@ -35,14 +36,14 @@ export default class Person {
     this._address = address;
     this._city = city;
     this._state = state;
-    this._id = id;
+    this._id_person = id;
   }
 
   /**
    * Getters
    */
-  public get id(): number {
-    return this._id;
+  public get id_person(): number {
+    return this._id_person;
   }
 
   public get name(): string {
@@ -81,8 +82,8 @@ export default class Person {
    * Setters
    */
 
-  public set id(v: number) {
-    this._id = v;
+  public set id_person(v: number) {
+    this._id_person = v;
   }
 
   public set name(v: string) {
@@ -122,15 +123,15 @@ export default class Person {
    */
   public toJson(): PersonData {
     const ps: PersonData = {
-      id: this.id,
+      id_person: this.id_person,
       name: this.name,
       email: this.email,
       phone: this.phone,
-      birth_date: this.birth_date,
-      cpf: this.cpf,
-      address: this.address,
-      city: this.city,
-      state: this.state,
+      birth_date: Helper.nullForEmpty(this.birth_date),
+      cpf: Helper.nullForEmpty(this.cpf),
+      address: Helper.nullForEmpty(this.address),
+      city: Helper.nullForEmpty(this.city),
+      state: Helper.nullForEmpty(this.state),
     };
 
     return ps;
@@ -151,9 +152,11 @@ export default class Person {
         throw new Error("Tamanho máximo do endereço é 100 caracteres");
       if (100 < this._city.length) throw new Error("Tamanho máximo do cidade é 100 caracteres");
       if (100 < this._state.length) throw new Error("Tamanho máximo do estado é 100 caracteres");
-      let b_date: Date = new Date(this._birth_date);
-      if (validator.isAfter(b_date.toString()))
-        throw new Error("Data de nascimento não pode ser maior que hoje");
+      if("" != this._birth_date){
+        let b_date: Date = new Date(this._birth_date);
+        if (validator.isAfter(b_date.toString()))
+          throw new Error("Data de nascimento não pode ser maior que hoje");
+      }
 
       response = {
         data: {},

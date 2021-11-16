@@ -2,7 +2,7 @@
  * Interfaces for Person
  */
 export interface PersonData {
-  id: number;
+  id_person: number;
   name: string;
   email: string;
   phone: string;
