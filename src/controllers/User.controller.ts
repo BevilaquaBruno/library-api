@@ -4,6 +4,7 @@ import User from "../classes/User.class";
 import { RequestWithUser, ResponseData } from "../interfaces/Common.interface";
 import md5 from "md5";
 import { PasswordList } from "../interfaces/User.interface";
+import Helper from "../classes/Helper.class";
 
 export default class UserController {
   public static async findAll(req: Request, res: Response) {
@@ -53,7 +54,7 @@ export default class UserController {
     let response: ResponseData;
 
     try {
-      const user: User = new User(req.body.name, req.body.username, req.body.email);
+      const user: User = new User(Helper.emptyforNull(req.body.name), Helper.emptyforNull(req.body.username), Helper.emptyforNull(req.body.email));
       const passwordList: PasswordList = {
         password: req.body?.password ?? "",
         passwordConfirm: req.body?.passwordConfirm ?? "",
@@ -96,7 +97,7 @@ export default class UserController {
 
     try {
       const id: number = parseInt(req.params.id);
-      const user: User = new User(req.body.name, req.body.username, req.body.email, id);
+      const user: User = new User(Helper.emptyforNull(req.body.name), Helper.emptyforNull(req.body.username), Helper.emptyforNull(req.body.email), id);
 
       const existingUser: User = await UserModel.findById(user.id);
       if (0 === existingUser.id) throw new Error("Usuário não encontrado");

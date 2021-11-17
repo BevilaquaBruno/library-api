@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import CountryModel from "../models/Country.model";
 import Country from "../classes/Country.class";
 import { ResponseData } from "../interfaces/Common.interface";
+import Helper from "../classes/Helper.class";
 
 export default class CountryController {
   public static async findAll(req: Request, res: Response) {
@@ -49,10 +50,10 @@ export default class CountryController {
 
     try {
       const country: Country = new Country(
-        req.body.name,
-        req.body.fullName,
-        req.body.short,
-        req.body.flag
+        Helper.emptyforNull(req.body.name),
+        Helper.emptyforNull(req.body.fullName),
+        Helper.emptyforNull(req.body.short),
+        Helper.emptyforNull(req.body.flag)
       );
 
       const resValidate: ResponseData = country.validate();
@@ -87,10 +88,10 @@ export default class CountryController {
     try {
       const id: number = parseInt(req.params.id);
       const country: Country = new Country(
-        req.body.name,
-        req.body.fullName,
-        req.body.short,
-        req.body.flag,
+        Helper.emptyforNull(req.body.name),
+        Helper.emptyforNull(req.body.fullName),
+        Helper.emptyforNull(req.body.short),
+        Helper.emptyforNull(req.body.flag),
         id
       );
 

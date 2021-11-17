@@ -20,7 +20,7 @@ x-access-token: <token>
 }
 
 # to update the user with the given id
-PUT http://localhost:8000/api/user/2
+PUT http://localhost:8000/api/user/<userId>
 Content-Type: application/json
 x-access-token: <token>
 

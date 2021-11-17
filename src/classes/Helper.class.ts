@@ -4,4 +4,10 @@ export default class Helper {
       return null;
     return v;
   }
+
+  public static emptyforNull(v: any): string | any {
+    if(null === v)
+      return "";
+    return v;
+  }
 }

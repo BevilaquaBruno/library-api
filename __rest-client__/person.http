@@ -2,12 +2,12 @@
 GET http://localhost:8000/api/person
 
 # to get a specific country, must return the complete data for the country with the given id - you DON'T need the token here
-GET http://localhost:8000/api/person/1
+GET http://localhost:8000/api/person/<personId>
 
 # to create a new person
 POST http://localhost:8000/api/person
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkJydW5vIEZlcm5hbmRvIEJldmlsYXF1YSIsInVzZXJuYW1lIjoiYmV2aWxhcXVhIiwiZW1haWwiOiJiYmJldmlsYXF1YUBnbWFpbC5jb20iLCJpYXQiOjE2MzcxMDQ1ODQsImV4cCI6MTYzNzEwOTU4NH0.Una1g98BRMQc49mXsZAhrEYwu0l-XuJi0GXoc9oPGvg
+x-access-token: <token>
 
 {
   "name": "Fabrício Certezas",
@@ -21,9 +21,9 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkJydW5
 }
 
 # to update the person with the given id
-PUT http://localhost:8000/api/person/1
+PUT http://localhost:8000/api/person/<personId>
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkJydW5vIEZlcm5hbmRvIEJldmlsYXF1YSIsInVzZXJuYW1lIjoiYmV2aWxhcXVhIiwiZW1haWwiOiJiYmJldmlsYXF1YUBnbWFpbC5jb20iLCJpYXQiOjE2MzcxMDQ1ODQsImV4cCI6MTYzNzEwOTU4NH0.Una1g98BRMQc49mXsZAhrEYwu0l-XuJi0GXoc9oPGvg
+x-access-token: <token>
 
 {
   "name": "Bruno Fernando Bevilaqua",
@@ -37,5 +37,5 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkJydW5
 }
 
 # to delete the person with the given id
-DELETE http://localhost:8000/api/person/4
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkJydW5vIEZlcm5hbmRvIEJldmlsYXF1YSIsInVzZXJuYW1lIjoiYmV2aWxhcXVhIiwiZW1haWwiOiJiYmJldmlsYXF1YUBnbWFpbC5jb20iLCJpYXQiOjE2MzY4NTg0MjMsImV4cCI6MTYzNjg2MzQyM30.fikvW5AJgm0nWTN8l2RLkAhFZSscVcCjfou8hwOZ5mo
+DELETE http://localhost:8000/api/person/<personId>
+x-access-token: <token>
