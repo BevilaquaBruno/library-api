@@ -28,7 +28,6 @@ const bevilaquaExpected: Person = new Person(
 );
 
 describe("Testing Person", () => {
-
   it("Create", async () => {
     responseExpected = {
       data: {},
@@ -72,7 +71,9 @@ describe("Testing Person", () => {
       },
     };
 
-    const responseBevilaqua: ResponseData = (await PersonFetch.findById(bevilaquaExpected.id_person)).data;
+    const responseBevilaqua: ResponseData = (
+      await PersonFetch.findById(bevilaquaExpected.id_person)
+    ).data;
     let bevilaqua: Person = new Person(
       responseBevilaqua.data.name,
       responseBevilaqua.data.email,

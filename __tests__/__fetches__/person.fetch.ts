@@ -41,14 +41,14 @@ export default class PersonFetch {
         "x-access-token": token,
       },
       data: {
-        "name": person.name,
-        "email": person.email,
-        "phone": person.phone,
-        "birth_date": person.birth_date,
-        "cpf": person.cpf,
-        "address": person.address,
-        "city": person.city,
-        "state": person.state
+        name: person.name,
+        email: person.email,
+        phone: person.phone,
+        birth_date: person.birth_date,
+        cpf: person.cpf,
+        address: person.address,
+        city: person.city,
+        state: person.state,
       },
     });
   }
@@ -62,14 +62,14 @@ export default class PersonFetch {
         "x-access-token": token,
       },
       data: {
-        "name": person.name,
-        "email": person.email,
-        "phone": person.phone,
-        "birth_date": person.birth_date,
-        "cpf": person.cpf,
-        "address": person.address,
-        "city": person.city,
-        "state": person.state
+        name: person.name,
+        email: person.email,
+        phone: person.phone,
+        birth_date: person.birth_date,
+        cpf: person.cpf,
+        address: person.address,
+        city: person.city,
+        state: person.state,
       },
     });
   }
