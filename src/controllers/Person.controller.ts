@@ -34,7 +34,7 @@ export default class PersonController {
     try {
       const person: Person = await PersonModel.findById(id);
       if (0 === person.id_person) throw new Error("Pessoa não encontrada");
-      response = { data: person.toJson(), status: { error: false, message: "Pessoa encontrado" } };
+      response = { data: person.toJson(), status: { error: false, message: "Pessoa encontrada" } };
     } catch (e: any) {
       response = {
         data: {},
@@ -110,6 +110,10 @@ export default class PersonController {
       if (true === resValidate.status.error) throw new Error(resValidate.status.message);
 
       let personValidate: Person;
+      //need to valid if person_id exists
+      personValidate = await PersonModel.findById(person.id_person);
+      if(0 === personValidate.id_person) throw new Error("Pessoa não encontrada");
+
       if("" != person.cpf){
         personValidate = await PersonModel.findByCpf(person.cpf, person.id_person);
         if (0 !== personValidate.id_person) throw new Error("Já existe uma pessoa com esse CPF");

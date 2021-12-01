@@ -1,5 +1,6 @@
 import Person from "../../src/classes/Person.class";
 import { ResponseData } from "../../src/interfaces/Common.interface";
+import AuthFetch from "../__fetches__/auth.fetch";
 import PersonFetch from "../__fetches__/person.fetch";
 
 var responseExpected: ResponseData;
@@ -8,7 +9,7 @@ var personTest = new Person(
   "perseon@test.com",
   "49998320023",
   "2000-03-05",
-  "103.411.729-79",
+  "072.043.129-88",
   "adddress",
   "city",
   "state",
@@ -16,7 +17,7 @@ var personTest = new Person(
 );
 const bevilaquaExpected: Person = new Person(
   "Bruno Fernando Bevilaqua",
-  "bbbevilaqua@gmail.com",
+  "bbbevilaqua2@gmail.com",
   "5549998320023",
   "2000-03-05",
   "103.411.729-79",
@@ -27,6 +28,67 @@ const bevilaquaExpected: Person = new Person(
 );
 
 describe("Testing Person", () => {
+
+  it("Create", async () => {
+    responseExpected = {
+      data: {},
+      status: {
+        error: false,
+        message: "Pessoa cadastrada",
+      },
+    };
+    const token: string = (await AuthFetch.login()).data.data.token;
+    const response: ResponseData = (await PersonFetch.create(token, personTest)).data;
+
+    personTest.id_person = response.data.id_person;
+    responseExpected.data = personTest.toJson();
+
+    expect(response).toEqual(responseExpected);
+  });
+
+  it("Update", async () => {
+    responseExpected = {
+      data: {},
+      status: { error: false, message: "Pessoa atualizada" },
+    };
+
+    const token: string = (await AuthFetch.login()).data.data.token;
+
+    personTest.name = "Person updated";
+    personTest.email = "personbbbevilaqua@gmail.com";
+
+    responseExpected.data = personTest.toJson();
+    const response: ResponseData = (await PersonFetch.update(token, personTest)).data;
+
+    expect(response).toEqual(responseExpected);
+  });
+
+  it("Find one", async () => {
+    responseExpected = {
+      data: {},
+      status: {
+        error: false,
+        message: "Pessoa encontrada",
+      },
+    };
+
+    const responseBevilaqua: ResponseData = (await PersonFetch.findById(bevilaquaExpected.id_person)).data;
+    let bevilaqua: Person = new Person(
+      responseBevilaqua.data.name,
+      responseBevilaqua.data.email,
+      responseBevilaqua.data.phone,
+      responseBevilaqua.data.birth_date,
+      responseBevilaqua.data.cpf,
+      responseBevilaqua.data.address,
+      responseBevilaqua.data.city,
+      responseBevilaqua.data.state,
+      responseBevilaqua.data.id_person
+    );
+
+    expect(responseBevilaqua.status).toEqual(responseExpected.status);
+    expect(bevilaqua.toJson()).toEqual(bevilaquaExpected.toJson());
+  });
+
   it("Find all", async () => {
     responseExpected = {
       data: {},
@@ -51,10 +113,25 @@ describe("Testing Person", () => {
           currentPerson.adddress,
           currentPerson.city,
           currentPerson.state,
-          currentPerson.id
+          currentPerson.id_person
         );
         expect(bevilaqua.toJson()).toEqual(bevilaquaExpected.toJson());
       }
     });
+  });
+
+  it("Delete", async () => {
+    responseExpected = {
+      data: {},
+      status: {
+        error: false,
+        message: "Pessoa removida",
+      },
+    };
+
+    const token: string = (await AuthFetch.login()).data.data.token;
+
+    const response: ResponseData = (await PersonFetch.delete(token, personTest.id_person)).data;
+    expect(response).toEqual(responseExpected);
   });
 });
