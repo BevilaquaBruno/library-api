@@ -81,7 +81,8 @@ export default class Country {
   }
 
   /**
-   * Methods
+   * return the correct array format, this is usefull to avoid '_' before propertie names
+   * @returns ct: @CountryData
    */
   public toJson(): CountryData {
     const ct: CountryData = {
@@ -94,6 +95,10 @@ export default class Country {
     return ct;
   }
 
+  /**
+   * Validate data for country
+   * @returns response: @ResponseData
+   */
   public validate(): ResponseData {
     let response: ResponseData;
     try {

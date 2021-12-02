@@ -119,7 +119,8 @@ export default class Person {
   }
 
   /**
-   * Methods
+   * return the correct array format, this is usefull to avoid '_' before propertie names
+   * @returns ps: @PersonData
    */
   public toJson(): PersonData {
     const ps: PersonData = {
@@ -137,6 +138,10 @@ export default class Person {
     return ps;
   }
 
+  /**
+   * Validate data for person
+   * @returns response: @ResponseData
+   */
   public validate(): ResponseData {
     let response: ResponseData;
     try {
@@ -152,7 +157,7 @@ export default class Person {
         throw new Error("Tamanho máximo do endereço é 100 caracteres");
       if (100 < this._city.length) throw new Error("Tamanho máximo do cidade é 100 caracteres");
       if (100 < this._state.length) throw new Error("Tamanho máximo do estado é 100 caracteres");
-      if("" != this._birth_date){
+      if ("" != this._birth_date) {
         let b_date: Date = new Date(this._birth_date);
         if (validator.isAfter(b_date.toString()))
           throw new Error("Data de nascimento não pode ser maior que hoje");

@@ -75,7 +75,8 @@ export default class User {
   }
 
   /**
-   * Methods
+   * return the correct array format, this is usefull to avoid '_' before propertie names
+   * @returns us: @UserData
    */
   public toJson(): UserData {
     const us: UserData = {
@@ -87,6 +88,10 @@ export default class User {
     return us;
   }
 
+  /**
+   * Validate data for user
+   * @returns response: @ResponseData
+   */
   public validate(): ResponseData {
     let response: ResponseData;
     try {
