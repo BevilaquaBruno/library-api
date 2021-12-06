@@ -3,6 +3,10 @@ import axios, { AxiosResponse } from "axios";
 
 dotenv.config();
 
+/**
+ * Fetches for auth routes using axios - https://www.npmjs.com/package/axios
+ */
+
 export default class AuthFetch {
   public static async logout(): Promise<AxiosResponse> {
     return await axios({

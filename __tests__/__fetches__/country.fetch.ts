@@ -4,6 +4,10 @@ import Country from "../../src/classes/Country.class";
 
 dotenv.config();
 
+/**
+ * Fetches for country routes using axios - https://www.npmjs.com/package/axios
+ */
+
 export default class CountryFetch {
   public static async create(token: string, country: Country): Promise<AxiosResponse> {
     return await axios({

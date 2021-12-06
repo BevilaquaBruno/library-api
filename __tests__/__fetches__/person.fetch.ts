@@ -4,6 +4,10 @@ import Person from "../../src/classes/Person.class";
 
 dotenv.config();
 
+/**
+ * Fetches for person routes using axios - https://www.npmjs.com/package/axios
+ */
+
 export default class PersonFetch {
   public static async findAll(): Promise<AxiosResponse> {
     return await axios({

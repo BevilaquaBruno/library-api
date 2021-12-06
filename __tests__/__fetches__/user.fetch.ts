@@ -2,9 +2,12 @@ import * as dotenv from "dotenv";
 import axios, { AxiosResponse } from "axios";
 import User from "../../src/classes/User.class";
 import { PasswordList } from "../../src/interfaces/User.interface";
-import userRouter from "../../src/routes/User.router";
 
 dotenv.config();
+
+/**
+ * Fetches for user routes using axios - https://www.npmjs.com/package/axios
+ */
 
 export default class UserFetch {
   public static async create(
