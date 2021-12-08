@@ -7,9 +7,17 @@ import Helper from "../classes/Helper.class";
 import Person from "../classes/Person.class";
 import { PersonData } from "../interfaces/Person.interface";
 
+// get connection
 const conn = DatabaseConnection.getConnection();
 
+/**
+ * model class for person
+ */
 export default class PersonModel {
+  /**
+   * Find all people
+   * @return Promise<Person[]> a list of @Person instances
+   */
   public static async findAll(): Promise<Person[]> {
     let allPeople: Person[] = [];
     const [rows] = await (
@@ -34,6 +42,11 @@ export default class PersonModel {
     return allPeople;
   }
 
+  /**
+   * Find a person with the given id
+   * @param id - person id - 1
+   * @return Promise<Person> a @Person instance, if id is 0 the person does not exists
+   */
   public static async findById(id: number): Promise<Person> {
     const [rows] = await (
       await conn
@@ -57,6 +70,12 @@ export default class PersonModel {
     return person;
   }
 
+  /**
+   * Find a person with the given cpf
+   * @param cpf - person cpf - 103.411.729-79
+   * @param currentId - the id to avoid in search - 1
+   * @return Promise<Person> a @Person instance, if id is 0 the person does not exists
+   */
   public static async findByCpf(cpf: string, currentId: number = 0): Promise<Person> {
     let sql: string;
     let data: string[];
@@ -87,6 +106,13 @@ export default class PersonModel {
     return person;
   }
 
+  /**
+   * Find a person with the given birth date and name
+   * @param birth_date - person birth date - 2000-03-05
+   * @param name - person name - Bruno Fernando Bevilaqua
+   * @param currentId - the id to avoid in search - 1
+   * @return Promise<Person> a @Person instance, if id is 0 the person does not exists
+   */
   public static async findByBirthDateAndName(birth_date: string, name: string, currentId: number = 0): Promise<Person> {
     let sql: string;
     let data: string[];
@@ -117,6 +143,11 @@ export default class PersonModel {
     return person;
   }
 
+  /**
+   * Create a person
+   * @param person - the person to insert
+   * @return Promise<number> the id of the inserted person, if id is 0 the person does not exists
+   */
   public static async create(person: Person): Promise<number> {
     const rst: ResultSetHeader | any = await (
       await conn
@@ -137,6 +168,11 @@ export default class PersonModel {
     return id;
   }
 
+  /**
+   * update a person
+   * @param person - the person to update
+   * @return Promise<boolean> true or false, updated or not
+   */
   public static async update(person: Person): Promise<boolean> {
     const rst: ResultSetHeader | any = await (
       await conn
@@ -158,6 +194,11 @@ export default class PersonModel {
     return cr;
   }
 
+  /**
+   * delete a person
+   * @param person - the person to delete
+   * @return Promise<boolean> true or false, deleted or not
+   */
   public static async delete(person: Person): Promise<boolean> {
     const rst: ResultSetHeader | any = await (
       await conn

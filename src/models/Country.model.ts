@@ -7,9 +7,20 @@ import DatabaseConnection from "../../db/db";
 import { ResultSetHeader } from "mysql2";
 import Helper from "../classes/Helper.class";
 
+// get connection
 const conn = DatabaseConnection.getConnection();
 
+/**
+ * model class for country
+ */
 export default class CountryModel {
+
+  /**
+   * Find a country with the given short
+   * @param short - country's short - BRA
+   * @param currentId - the id who you don't know to consider - 1
+   * @return Promise<Country> a @Country instance, if id is 0 the country does not exists
+   */
   public static async findByShort(short: string, currentId: number = 0): Promise<Country> {
     let sql: string;
     let data: string[];
@@ -36,6 +47,12 @@ export default class CountryModel {
     return country;
   }
 
+  /**
+   * Find a country with the given full name
+   * @param fullName - country's full name - República Federativa do Brasil
+   * @param currentId - the id who you don't know to consider - 1
+   * @return Promise<Country> a @Country instance, if id is 0 the country does not exists
+   */
   public static async findByFullName(fullName: string, currentId: number = 0): Promise<Country> {
     let sql: string;
     let data: string[];
@@ -62,6 +79,12 @@ export default class CountryModel {
     return country;
   }
 
+  /**
+   * Find a country with the given name
+   * @param name - country's name - Brasil
+   * @param currentId - the id who you don't know to consider - 1
+   * @return Promise<Country> a @Country instance, if id is 0 the country does not exists
+   */
   public static async findByName(name: string, currentId: number = 0): Promise<Country> {
     let sql: string;
     let data: string[];
@@ -88,6 +111,11 @@ export default class CountryModel {
     return country;
   }
 
+  /**
+   * Find a country with the given id
+   * @param id - country's id - 1
+   * @return Promise<Country> a @Country instance, if id is 0 the country does not exists
+   */
   public static async findById(id: number): Promise<Country> {
     const [rows] = await (
       await conn
@@ -107,6 +135,10 @@ export default class CountryModel {
     return country;
   }
 
+  /**
+   * Find all the countries
+   * @return Promise<Country[]> a list of @Country instances
+   */
   public static async findAll(): Promise<Country[]> {
     let allCountries: Country[] = [];
     const [rows] = await (
@@ -119,6 +151,11 @@ export default class CountryModel {
     return allCountries;
   }
 
+  /**
+   * Create a country
+   * @param country - the country to insert
+   * @return Promise<number> the id of the inserted country, if id is 0 the country does not exists
+   */
   public static async create(country: Country): Promise<number> {
     const rst: ResultSetHeader | any = await (
       await conn
@@ -135,6 +172,11 @@ export default class CountryModel {
     return id;
   }
 
+  /**
+   * update a country
+   * @param country - the country to update
+   * @return Promise<boolean> true or false, updated or not
+   */
   public static async update(country: Country): Promise<boolean> {
     const rst: ResultSetHeader | any = await (
       await conn
@@ -152,6 +194,11 @@ export default class CountryModel {
     return cr;
   }
 
+  /**
+   * delete a country
+   * @param country - the country to delete
+   * @return Promise<boolean> true or false, deleted or not
+   */
   public static async delete(country: Country): Promise<boolean> {
     const rst: ResultSetHeader | any = await (
       await conn
