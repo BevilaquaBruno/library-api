@@ -100,7 +100,7 @@ export default class Publisher {
         data: {},
         status: {
           error: true,
-          message: (e as Error)?.message ?? "Erro grave ao validar dados da pessoa",
+          message: (e as Error)?.message ?? "Erro grave ao validar dados da editora",
         },
       };
     }
