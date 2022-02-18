@@ -12,5 +12,5 @@ export interface PublisherData {
   id: number;
   name: string;
   cnpj: string;
-  country: CountryData
+  country: CountryData;
 }

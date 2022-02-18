@@ -1,4 +1,3 @@
-import { timeStamp } from "console";
 import { ResponseData } from "../interfaces/Common.interface";
 import { PublisherData } from "../interfaces/Publisher.interface";
 import Country from "./Country.class";
@@ -17,7 +16,7 @@ export default class Publisher {
     cnpj: string = "",
     country: Country = new Country(),
     id: number = 0
-  ){
+  ) {
     this._id = id;
     this._name = name;
     this._cnpj = cnpj;
@@ -66,7 +65,7 @@ export default class Publisher {
    * return the correct array format, this is usefull to avoid '_' before propertie names
    * @returns ps: @PublisherData
    */
-   public toJson(): PublisherData {
+  public toJson(): PublisherData {
     const ps: PublisherData = {
       id: this.id,
       name: this.name,
@@ -84,7 +83,7 @@ export default class Publisher {
   public validate(): ResponseData {
     let response: ResponseData;
     try {
-      if("" === this._name) throw new Error("Informe o nome da Editora");
+      if ("" === this._name) throw new Error("Informe o nome da Editora");
 
       if (100 < this._name.length) throw new Error("Tamanho máximo do nome é 100 caracteres");
       if (18 != this._cnpj.length) throw new Error("CNPJ Inválido");
