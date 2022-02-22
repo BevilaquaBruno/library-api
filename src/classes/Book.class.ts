@@ -8,25 +8,25 @@ export default class Book {
    */
   private _id: number;
   private _name: string;
-  private _volumn: number;
-  private _number_pages: number;
-  private _edition: number;
-  private _release_year: number;
-  private _author_obs: string;
-  private _obs: string;
-  private _isbn: string;
-  private _publisher: Publisher;
+  private _volumn: number | null;
+  private _number_pages: number | null;
+  private _edition: number | null;
+  private _release_year: number | null;
+  private _author_obs: string | null;
+  private _obs: string | null;
+  private _isbn: string | null;
+  private _publisher: Publisher | null;
 
   constructor(
     name: string = "",
-    volumn: number = 0,
-    number_pages: number = 0,
-    edition: number = 0,
-    release_year: number = 0,
-    author_obs: string = "",
-    obs: string = "",
-    isbn: string = "",
-    publisher: Publisher = new Publisher(),
+    volumn: number | null = null,
+    number_pages: number | null = null,
+    edition: number | null = null,
+    release_year: number | null = null,
+    author_obs: string | null = null,
+    obs: string | null = null,
+    isbn: string | null = null,
+    publisher: Publisher | null = null,
     id: number = 0
   ) {
     this._id = id;
@@ -52,35 +52,35 @@ export default class Book {
     return this._name;
   }
 
-  public get volumn(): number {
+  public get volumn(): number | null {
     return this._volumn;
   }
 
-  public get number_pages(): number {
+  public get number_pages(): number | null {
     return this._number_pages;
   }
 
-  public get edition(): number {
+  public get edition(): number | null {
     return this._edition;
   }
 
-  public get release_year(): number {
+  public get release_year(): number | null {
     return this._release_year;
   }
 
-  public get author_obs(): string {
+  public get author_obs(): string | null {
     return this._author_obs;
   }
 
-  public get obs(): string {
+  public get obs(): string | null {
     return this._obs;
   }
 
-  public get isbn(): string {
+  public get isbn(): string | null {
     return this._isbn;
   }
 
-  public get publisher(): Publisher {
+  public get publisher(): Publisher | null {
     return this._publisher;
   }
 
@@ -95,35 +95,35 @@ export default class Book {
     this._name = v;
   }
 
-  public set volumn(v: number) {
+  public set volumn(v: number | null) {
     this._volumn = v;
   }
 
-  public set number_pages(v: number) {
+  public set number_pages(v: number | null) {
     this._number_pages = v;
   }
 
-  public set edition(v: number) {
+  public set edition(v: number | null) {
     this._edition = v;
   }
 
-  public set release_year(v: number) {
+  public set release_year(v: number | null) {
     this._release_year = v;
   }
 
-  public set author_obs(v: string) {
+  public set author_obs(v: string | null) {
     this._author_obs = v;
   }
 
-  public set obs(v: string) {
+  public set obs(v: string | null) {
     this._obs = v;
   }
 
-  public set isbn(v: string) {
+  public set isbn(v: string | null) {
     this._isbn = v;
   }
 
-  public set publisher(v: Publisher) {
+  public set publisher(v: Publisher | null) {
     this._publisher = v;
   }
 
@@ -157,14 +157,25 @@ export default class Book {
 
     try {
       if (this.name === "") throw new Error("Informe o nome do livro");
-      if (this.name.length > 100) throw new Error("Tamanho máximo do nome do livro é 100 caracteres");
+      if (this.name.length > 100)
+        throw new Error("Tamanho máximo do nome do livro é 100 caracteres");
 
       const currentDate: Date = new Date(Date.now());
-      if(this.release_year > currentDate.getFullYear()) throw new Error("Ano de lançamento não pode ser maior que o ano atual");
+      if (null != this.release_year) {
+        if (this.release_year > currentDate.getFullYear())
+          throw new Error("Ano de lançamento não pode ser maior que o ano atual");
+      }
 
-      if (this.author_obs.length > 200) throw new Error("Tamanho máximo da obs do autor é 200 caracteres");
-      if (this.obs.length > 200) throw new Error("Tamanho máximo da observação é 200 caracteres");
-      if (this.isbn.length > 13) throw new Error("Tamanho máximo do ISBN é 13 caracteres");
+      if (null != this.author_obs) {
+        if (this.author_obs.length > 200)
+          throw new Error("Tamanho máximo da observação do autor é 200 caracteres");
+      }
+      if (null != this.obs) {
+        if (this.obs.length > 200) throw new Error("Tamanho máximo da observação é 200 caracteres");
+      }
+      if (null != this.isbn) {
+        if (this.isbn.length > 13) throw new Error("Tamanho máximo do ISBN é 13 caracteres");
+      }
 
       response = {
         data: {},
@@ -178,7 +189,7 @@ export default class Book {
         data: {},
         status: {
           error: true,
-          message: (e as Error)?.message ?? "Erro grave ao validar dados do autor",
+          message: (e as Error)?.message ?? "Erro grave ao validar dados do livro",
         },
       };
     }

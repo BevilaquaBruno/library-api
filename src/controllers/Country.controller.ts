@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import CountryModel from "../models/Country.model";
 import Country from "../classes/Country.class";
 import { ResponseData } from "../interfaces/Common.interface";
-import Helper from "../classes/Helper.class";
 
 /**
  * CountryController class is used for /api/country route.
@@ -83,10 +82,10 @@ export default class CountryController {
     try {
       //1. get and create a country with the given data
       const country: Country = new Country(
-        Helper.emptyforNull(req.body.name),
-        Helper.emptyforNull(req.body.fullName),
-        Helper.emptyforNull(req.body.short),
-        Helper.emptyforNull(req.body.flag)
+        req.body.name,
+        req.body.fullName,
+        req.body.short,
+        req.body.flag
       );
 
       //2. validate country data
@@ -98,8 +97,10 @@ export default class CountryController {
       countryValidate = await CountryModel.findByName(country.name);
       if (0 !== countryValidate.id) throw new Error("Já existe um país com esse nome");
       //4. validate fullName of the country
-      countryValidate = await CountryModel.findByFullName(country.fullName);
-      if (0 !== countryValidate.id) throw new Error("Já existe um país com esse nome completo");
+      if (null != country.fullName) {
+        countryValidate = await CountryModel.findByFullName(country.fullName);
+        if (0 !== countryValidate.id) throw new Error("Já existe um país com esse nome completo");
+      }
       //5. validate short of the country
       countryValidate = await CountryModel.findByShort(country.short);
       if (0 !== countryValidate.id) throw new Error("Já existe um país com essa sigla");
@@ -139,10 +140,10 @@ export default class CountryController {
 
       //2. get and create a country with the given data
       const country: Country = new Country(
-        Helper.emptyforNull(req.body.name),
-        Helper.emptyforNull(req.body.fullName),
-        Helper.emptyforNull(req.body.short),
-        Helper.emptyforNull(req.body.flag),
+        req.body.name,
+        req.body.fullName,
+        req.body.short,
+        req.body.flag,
         id
       );
 
@@ -159,8 +160,10 @@ export default class CountryController {
       countryValidate = await CountryModel.findByName(country.name, country.id);
       if (0 !== countryValidate.id) throw new Error("Já existe um país com esse nome");
       //6. validate fullName of the country
-      countryValidate = await CountryModel.findByFullName(country.fullName, country.id);
-      if (0 !== countryValidate.id) throw new Error("Já existe um país com esse nome completo");
+      if (null != country.fullName) {
+        countryValidate = await CountryModel.findByFullName(country.fullName, country.id);
+        if (0 !== countryValidate.id) throw new Error("Já existe um país com esse nome completo");
+      }
       //7. validate short of the country
       countryValidate = await CountryModel.findByShort(country.short, country.id);
       if (0 !== countryValidate.id) throw new Error("Já existe um país com essa sigla");

@@ -56,9 +56,9 @@ export default class Idiom {
     let response: ResponseData;
 
     try {
-      if ("" === this._description) throw new Error("Informe o nome do idioma");
+      if ("" === this.description) throw new Error("Informe o nome do idioma");
 
-      if (30 < this._description.length)
+      if (30 < this.description.length)
         throw new Error("Tamanho máximo do idioma é 30 caracteres");
 
       response = {

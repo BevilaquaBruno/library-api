@@ -1,6 +1,5 @@
 import { ResponseData } from "../interfaces/Common.interface";
 import { CountryData } from "../interfaces/Country.interface";
-import Helper from "./Helper.class";
 
 export default class Country {
   /**
@@ -8,9 +7,9 @@ export default class Country {
    */
   private _id: number;
   private _name: string;
-  private _fullName: string;
+  private _fullName: string | null;
   private _short: string;
-  private _flag: string;
+  private _flag: string | null;
 
   /**
    *
@@ -22,9 +21,9 @@ export default class Country {
    */
   constructor(
     name: string = "",
-    fullName: string = "",
+    fullName: string | null = null,
     short: string = "",
-    flag: string = "",
+    flag: string | null = null,
     id: number = 0
   ) {
     this._id = id;
@@ -45,7 +44,7 @@ export default class Country {
     return this._name;
   }
 
-  public get fullName(): string {
+  public get fullName(): string | null {
     return this._fullName;
   }
 
@@ -53,7 +52,7 @@ export default class Country {
     return this._short;
   }
 
-  public get flag(): string {
+  public get flag(): string | null {
     return this._flag;
   }
 
@@ -68,7 +67,7 @@ export default class Country {
     this._name = v;
   }
 
-  public set fullName(v: string) {
+  public set fullName(v: string | null) {
     this._fullName = v;
   }
 
@@ -76,7 +75,7 @@ export default class Country {
     this._short = v;
   }
 
-  public set flag(v: string) {
+  public set flag(v: string | null) {
     this._flag = v;
   }
 
@@ -89,8 +88,8 @@ export default class Country {
       id: this._id,
       name: this._name,
       fullName: this._fullName,
-      short: Helper.nullForEmpty(this._short),
-      flag: Helper.nullForEmpty(this._flag),
+      short: this._short,
+      flag: this._flag,
     };
     return ct;
   }
@@ -102,14 +101,16 @@ export default class Country {
   public validate(): ResponseData {
     let response: ResponseData;
     try {
-      if ("" === this._name) throw new Error("Informe o nome do país");
-      if ("" === this._fullName) throw new Error("Informe o nome completo do país");
-      if ("" === this._short) throw new Error("Informe a sigla do país");
+      if ("" === this.name) throw new Error("Informe o nome do país");
+      if ("" === this.fullName) throw new Error("Informe o nome completo do país");
+      if ("" === this.short) throw new Error("Informe a sigla do país");
 
-      if (50 < this._name.length) throw new Error("Tamanho máximo do nome é 50 caracteres");
-      if (100 < this._fullName.length)
-        throw new Error("Tamanho máximo do nome completo é 100 caracteres");
-      if (3 < this._short.length) throw new Error("Tamanho máximo da sigla é 3 caracteres");
+      if (50 < this.name.length) throw new Error("Tamanho máximo do nome é 50 caracteres");
+      if (null != this.fullName) {
+        if (100 < this.fullName.length)
+          throw new Error("Tamanho máximo do nome completo é 100 caracteres");
+      }
+      if (3 < this.short.length) throw new Error("Tamanho máximo da sigla é 3 caracteres");
 
       response = {
         data: {},

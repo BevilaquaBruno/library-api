@@ -83,10 +83,10 @@ export default class Publisher {
   public validate(): ResponseData {
     let response: ResponseData;
     try {
-      if ("" === this._name) throw new Error("Informe o nome da Editora");
+      if ("" === this.name) throw new Error("Informe o nome da Editora");
 
-      if (100 < this._name.length) throw new Error("Tamanho máximo do nome é 100 caracteres");
-      if (18 != this._cnpj.length) throw new Error("CNPJ Inválido");
+      if (100 < this.name.length) throw new Error("Tamanho máximo do nome é 100 caracteres");
+      if (18 != this.cnpj.length) throw new Error("CNPJ Inválido");
 
       response = {
         data: {},

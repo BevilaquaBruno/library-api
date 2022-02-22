@@ -56,9 +56,9 @@ export default class Style {
     let response: ResponseData;
 
     try {
-      if ("" === this._description) throw new Error("Informe o nome do tipo");
+      if ("" === this.description) throw new Error("Informe o nome do tipo");
 
-      if (100 < this._description.length)
+      if (100 < this.description.length)
         throw new Error("Tamanho máximo do tipo é 100 caracteres");
 
       response = {

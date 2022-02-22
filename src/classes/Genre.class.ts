@@ -56,9 +56,9 @@ export default class Genre {
     let response: ResponseData;
 
     try {
-      if ("" === this._description) throw new Error("Informe o nome do gênero");
+      if ("" === this.description) throw new Error("Informe o nome do gênero");
 
-      if (50 < this._description.length)
+      if (50 < this.description.length)
         throw new Error("Tamanho máximo do gênero é 50 caracteres");
 
       response = {

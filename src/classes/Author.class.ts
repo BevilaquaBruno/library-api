@@ -9,25 +9,25 @@ export default class Author {
    */
   private _id: number;
   private _name: string;
-  private _fullName: string;
-  private _birth_date: string;
-  private _death_date: string;
-  private _born_date: string;
-  private _born_place: string;
-  private _death_place: string;
-  private _born_country: Country;
-  private _death_country: Country;
+  private _fullName: string | null;
+  private _birth_date: string | null;
+  private _death_date: string | null;
+  private _born_date: string | null;
+  private _born_place: string | null;
+  private _death_place: string | null;
+  private _born_country: Country | null;
+  private _death_country: Country | null;
 
   constructor(
     name: string = "",
-    fullName: string = "",
-    birth_date: string = "",
-    death_date: string = "",
-    born_date: string = "",
-    born_place: string = "",
-    death_place: string = "",
-    born_country: Country = new Country(),
-    death_country: Country = new Country(),
+    fullName: string | null = null,
+    birth_date: string | null = null,
+    death_date: string | null = null,
+    born_date: string | null = null,
+    born_place: string | null = null,
+    death_place: string | null = null,
+    born_country: Country | null = null,
+    death_country: Country | null = null,
     id: number
   ) {
     this._id = id;
@@ -53,35 +53,35 @@ export default class Author {
     return this._name;
   }
 
-  public get fullName(): string {
+  public get fullName(): string | null {
     return this._fullName;
   }
 
-  public get death_date(): string {
+  public get death_date(): string | null {
     return this._death_date;
   }
 
-  public get birth_date(): string {
+  public get birth_date(): string | null {
     return this._birth_date;
   }
 
-  public get born_date(): string {
+  public get born_date(): string | null {
     return this._born_date;
   }
 
-  public get born_place(): string {
+  public get born_place(): string | null {
     return this._born_place;
   }
 
-  public get death_place(): string {
+  public get death_place(): string | null {
     return this._death_place;
   }
 
-  public get born_country(): Country {
+  public get born_country(): Country | null {
     return this._born_country;
   }
 
-  public get death_country(): Country {
+  public get death_country(): Country | null {
     return this._death_country;
   }
 
@@ -96,35 +96,35 @@ export default class Author {
     this._name = v;
   }
 
-  public set fullName(v: string) {
+  public set fullName(v: string | null) {
     this._fullName = v;
   }
 
-  public set death_date(v: string) {
+  public set death_date(v: string | null) {
     this._death_date = v;
   }
 
-  public set birth_date(v: string) {
+  public set birth_date(v: string | null) {
     this._birth_date = v;
   }
 
-  public set born_date(v: string) {
+  public set born_date(v: string | null) {
     this._born_date = v;
   }
 
-  public set born_place(v: string) {
+  public set born_place(v: string | null) {
     this._born_place = v;
   }
 
-  public set death_place(v: string) {
+  public set death_place(v: string | null) {
     this._death_place = v;
   }
 
-  public set born_country(v: Country) {
+  public set born_country(v: Country | null) {
     this._born_country = v;
   }
 
-  public set death_country(v: Country) {
+  public set death_country(v: Country | null) {
     this._death_country = v;
   }
 
@@ -160,23 +160,28 @@ export default class Author {
       if (this.name === "") throw new Error("Informe o nome do autor");
 
       if (this.name.length > 100) throw new Error("Tamanho máximo do nome é 100 caracteres");
-      if (this.fullName.length > 150)
-        throw new Error("Tamanho máximo do nome completo é 150 caracteres");
-      if (this.born_place.length > 100)
-        throw new Error("Tamanho máximo do local de nascimento é 100 caracteres");
-      if (this.born_place.length > 100)
-        throw new Error("Tamanho máximo do local da morte é 100 caracteres");
-
-      if ("" != this._birth_date) {
+      if (null != this.fullName) {
+        if (this.fullName.length > 150)
+          throw new Error("Tamanho máximo do nome completo é 150 caracteres");
+      }
+      if (null != this.born_place) {
+        if (this.born_place.length > 100)
+          throw new Error("Tamanho máximo do local de nascimento é 100 caracteres");
+      }
+      if (null != this.death_place) {
+        if (this.death_place.length > 100)
+          throw new Error("Tamanho máximo do local da morte é 100 caracteres");
+      }
+      if (null != this._birth_date) {
         let b_date: Date = new Date(this._birth_date);
         if (validator.isAfter(b_date.toString()))
           throw new Error("Data de nascimento não pode ser maior que hoje");
       }
 
-      if ("" != this._death_date) {
+      if (null != this._death_date) {
         let b_date: Date = new Date(this._death_date);
         if (validator.isAfter(b_date.toString()))
-          throw new Error("Data de nascimento não pode ser maior que hoje");
+          throw new Error("Data de morte não pode ser maior que hoje");
       }
 
       response = {

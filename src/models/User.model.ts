@@ -5,7 +5,6 @@ import User from "../classes/User.class";
 import { UserData, UserDataComplete } from "../interfaces/User.interface";
 import DatabaseConnection from "../../db/db";
 import { ResultSetHeader } from "mysql2";
-import Helper from "../classes/Helper.class";
 
 // get connection
 const conn = DatabaseConnection.getConnection();
@@ -125,7 +124,7 @@ export default class UserModel {
       user.name,
       user.username,
       user.email,
-      Helper.nullForEmpty(user.password),
+      user.password,
     ]);
     let id: number;
     //2. if returned id is undefined returns 0 for function else returns the id
@@ -167,10 +166,7 @@ export default class UserModel {
     //1. execute sql
     const rst: ResultSetHeader | any = await (
       await conn
-    ).execute("UPDATE user SET password = ? WHERE id = ?", [
-      Helper.nullForEmpty(user.password),
-      user.id.toString(),
-    ]);
+    ).execute("UPDATE user SET password = ? WHERE id = ?", [user.password, user.id.toString()]);
     let us: boolean;
     //2. if return id is undefined returns 0 for function, else returns the id
     if (undefined !== rst[0].affectedRows) us = true;

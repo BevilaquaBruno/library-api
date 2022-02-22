@@ -9,12 +9,12 @@ import Publisher from "../classes/Publisher.class";
 export interface BookData {
   id: number;
   name: string;
-  volumn: number;
-  number_pages: number;
-  edition: number;
-  release_year: number;
-  author_obs: string;
-  obs: string;
-  isbn: string;
-  publisher: Publisher;
+  volumn: number | null;
+  number_pages: number | null;
+  edition: number | null;
+  release_year: number | null;
+  author_obs: string | null;
+  obs: string | null;
+  isbn: string | null;
+  publisher: Publisher | null;
 }

@@ -3,7 +3,6 @@
  */
 import { ResultSetHeader } from "mysql2";
 import DatabaseConnection from "../../db/db";
-import Helper from "../classes/Helper.class";
 import Person from "../classes/Person.class";
 import { PersonData } from "../interfaces/Person.interface";
 
@@ -184,11 +183,11 @@ export default class PersonModel {
         person.name,
         person.email,
         person.phone,
-        Helper.nullForEmpty(person.birth_date),
-        Helper.nullForEmpty(person.cpf),
-        Helper.nullForEmpty(person.address),
-        Helper.nullForEmpty(person.city),
-        Helper.nullForEmpty(person.state),
+        person.birth_date,
+        person.cpf,
+        person.address,
+        person.city,
+        person.state,
       ]
     );
     let id: number;
@@ -214,11 +213,11 @@ export default class PersonModel {
         person.name,
         person.email,
         person.phone,
-        Helper.nullForEmpty(person.birth_date),
-        Helper.nullForEmpty(person.cpf),
-        Helper.nullForEmpty(person.address),
-        Helper.nullForEmpty(person.city),
-        Helper.nullForEmpty(person.state),
+        person.birth_date,
+        person.cpf,
+        person.address,
+        person.city,
+        person.state,
         person.id_person.toString(),
       ]
     );
