@@ -86,7 +86,7 @@ export default class Author {
   }
 
   /**
-   * Getters
+   * Setters
    */
   public set id(v: number) {
     this._id = v;
