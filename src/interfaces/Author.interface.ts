@@ -4,7 +4,7 @@ import Country from "../classes/Country.class";
  * Interfaces for author
  *
  * @AuthorData
- * Interface for genre pattern data
+ * Interface for book pattern data
  */
 export interface AuthorData {
   id: number;
