@@ -191,7 +191,7 @@ export default class Author {
         data: {},
         status: {
           error: true,
-          message: (e as Error)?.message ?? "Erro grave ao validar dados do gênero",
+          message: (e as Error)?.message ?? "Erro grave ao validar dados do autor",
         },
       };
     }
