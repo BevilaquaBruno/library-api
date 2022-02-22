@@ -4,7 +4,7 @@
  * @GenreData
  * Interface for genre pattern data
  */
- export interface GenreData {
+export interface GenreData {
   id: number;
   description: string;
 }
