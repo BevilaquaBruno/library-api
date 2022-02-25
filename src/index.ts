@@ -10,6 +10,8 @@ import countriesRouter from "./routes/Country.router";
 import authRouter from "./routes/Auth.router";
 import userRouter from "./routes/User.router";
 import personRouter from './routes/Person.router';
+import uploadRouter from './routes/Upload.router';
+import fileUpload from "express-fileupload";
 
 // config env variables
 dotenv.config();
@@ -29,6 +31,7 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use(fileUpload());
 
 /**
  * country route @CountryController
@@ -46,6 +49,10 @@ app.use("/api/user", userRouter);
  * person route @PersonController
  */
 app.use("/api/person", personRouter);
+/**
+ * upload route @UploadController
+ */
+ app.use("/api/upload", uploadRouter);
 
 /**
  * If any route match, call not found handler

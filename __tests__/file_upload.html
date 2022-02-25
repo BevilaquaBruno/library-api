@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>Test to upload a file</title>
+</head>
+<body>
+  <form id="uploadForm" enctype="multipart/form-data" v-on:change="uploadFile">
+    <label for="fileToSave">Arquivo</label>
+    <input type="file" id="fileToSave" name="fileToSave">
+  </form>
+  <button onclick="uploadFile()">Upload</button>
+  <script type="text/javascript">
+    function uploadFile(){
+      var formData = new FormData();
+      var imagefile = document.querySelector('#fileToSave');
+      formData.append("fileToSave", imagefile.files[0]);
+      axios.post('http://localhost:8000/api/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+      })
+    }
+  </script>
+</body>
+</html>

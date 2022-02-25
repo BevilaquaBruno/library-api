@@ -1,4 +1,5 @@
 import { Request } from "express";
+import { UploadedFile } from "express-fileupload";
 
 /**
  * Interfaces for general use
@@ -28,4 +29,10 @@ export interface RequestWithUser extends Request {
     username: string;
     email: string;
   };
+}
+
+export interface RequestWithFile extends Request {
+  files: {
+    fileToSave: UploadedFile
+  }
 }
