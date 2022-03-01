@@ -27,9 +27,9 @@ const bevilaquaExpected: Person = new Person(
   "5549998320023",
   "2000-03-05",
   "103.411.729-79",
-  "",
-  "",
-  "",
+  null,
+  null,
+  null,
   1
 );
 
