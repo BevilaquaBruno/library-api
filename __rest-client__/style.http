@@ -1,0 +1,27 @@
+# to get all styles, must return a list - you DON'T need the token here
+GET http://localhost:8000/api/style
+
+# to get a specific style, must return the complete data for the style with the given id - you DON'T need the token here
+GET http://localhost:8000/api/style/1
+
+# to create a new style
+POST http://localhost:8000/api/style
+Content-Type: application/json
+x-access-token: <token>
+
+{
+  "description": "Style Test"
+}
+
+# to update the style with the given id
+PUT http://localhost:8000/api/style/<styleId>
+Content-Type: application/json
+x-access-token: <token>
+
+{
+  "description": "Style Test update"
+}
+
+# to delete the style with the given id
+DELETE http://localhost:8000/api/style/<styleId>
+x-access-token: <token>

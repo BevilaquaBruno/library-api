@@ -4,14 +4,15 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import { notFoundHandler } from "./middlewares/not-found.middleware";
+import fileUpload from "express-fileupload";
 
 // Required Routes
 import countriesRouter from "./routes/Country.router";
 import authRouter from "./routes/Auth.router";
 import userRouter from "./routes/User.router";
-import personRouter from './routes/Person.router';
-import uploadRouter from './routes/Upload.router';
-import fileUpload from "express-fileupload";
+import personRouter from "./routes/Person.router";
+import uploadRouter from "./routes/Upload.router";
+import styleRouter from "./routes/Style.router";
 
 // config env variables
 dotenv.config();
@@ -52,7 +53,11 @@ app.use("/api/person", personRouter);
 /**
  * upload route @UploadController
  */
- app.use("/api/upload", uploadRouter);
+app.use("/api/upload", uploadRouter);
+/**
+ * style route @StyleController
+ */
+app.use("/api/style", styleRouter);
 
 /**
  * If any route match, call not found handler
