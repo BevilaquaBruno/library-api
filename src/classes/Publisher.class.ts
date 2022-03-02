@@ -8,18 +8,15 @@ export default class Publisher {
    */
   private _id: number;
   private _name: string;
-  private _cnpj: string;
   private _country: Country;
 
   constructor(
     name: string = "",
-    cnpj: string = "",
     country: Country = new Country(),
     id: number = 0
   ) {
     this._id = id;
     this._name = name;
-    this._cnpj = cnpj;
     this._country = country;
   }
 
@@ -32,10 +29,6 @@ export default class Publisher {
 
   public get name(): string {
     return this._name;
-  }
-
-  public get cnpj(): string {
-    return this._cnpj;
   }
 
   public get country(): Country {
@@ -53,10 +46,6 @@ export default class Publisher {
     this._name = v;
   }
 
-  public set cnpj(v: string) {
-    this._cnpj = v;
-  }
-
   public set country(v: Country) {
     this._country = v;
   }
@@ -69,7 +58,6 @@ export default class Publisher {
     const ps: PublisherData = {
       id: this.id,
       name: this.name,
-      cnpj: this.cnpj,
       country: this.country,
     };
 
@@ -86,7 +74,6 @@ export default class Publisher {
       if ("" === this.name) throw new Error("Informe o nome da Editora");
 
       if (100 < this.name.length) throw new Error("Tamanho máximo do nome é 100 caracteres");
-      if (18 != this.cnpj.length) throw new Error("CNPJ Inválido");
 
       response = {
         data: {},

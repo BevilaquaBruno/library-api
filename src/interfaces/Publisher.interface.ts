@@ -2,7 +2,7 @@
  * Interfaces for publisher
  */
 
-import { CountryData } from "./Country.interface";
+import Country from "../classes/Country.class";
 
 /**
  * @PublisherData
@@ -11,6 +11,5 @@ import { CountryData } from "./Country.interface";
 export interface PublisherData {
   id: number;
   name: string;
-  cnpj: string;
-  country: CountryData;
+  country: Country;
 }
