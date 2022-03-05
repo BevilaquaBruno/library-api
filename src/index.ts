@@ -13,6 +13,7 @@ import userRouter from "./routes/User.router";
 import personRouter from "./routes/Person.router";
 import uploadRouter from "./routes/Upload.router";
 import styleRouter from "./routes/Style.router";
+import publisherRouter from "./routes/Publisher.router";
 
 // config env variables
 dotenv.config();
@@ -58,6 +59,10 @@ app.use("/api/upload", uploadRouter);
  * style route @StyleController
  */
 app.use("/api/style", styleRouter);
+/**
+ * publisher route @PublisherController
+ */
+app.use("/api/publisher", publisherRouter);
 
 /**
  * If any route match, call not found handler

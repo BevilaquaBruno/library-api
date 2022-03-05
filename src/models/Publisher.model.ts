@@ -71,26 +71,28 @@ export default class PublisherModel {
         "SELECT p.id, p.name, p.country_id, c.name AS country_name, c.fullName as country_fullName, c.short as country_short, c.flag as country_flag " +
         "FROM publisher p " +
         "LEFT JOIN country c ON c.id = p.country_id " +
-        "WHERE p.id = ? AND p.id <> ?";
+        "WHERE p.name = ? AND p.id <> ?";
       data = [name, currentId.toString()];
     }
     //2. execute the sql and get the data
     const [rows] = await (await conn).execute(sql, data);
-    let arrPublisher: PublisherData = {
-      id: Object.values(rows)[0].id,
-      name: Object.values(rows)[0].name,
-      country: new Country(
-        Object.values(rows)[0].country_name,
-        Object.values(rows)[0].country_fullName,
-        Object.values(rows)[0].country_short,
-        Object.values(rows)[0].country_flag,
-        Object.values(rows)[0].country_id
-      ),
-    };
     let publisher: Publisher;
-    //3. if publisher list is undefined returns a publisher with id  = 0 else returns the publisher
-    if (undefined === arrPublisher) publisher = new Publisher();
-    else publisher = new Publisher(arrPublisher.name, arrPublisher.country, arrPublisher.id);
+
+    if (undefined !== Object.values(rows)[0]) {
+      let arrPublisher: PublisherData = {
+        id: Object.values(rows)[0].id,
+        name: Object.values(rows)[0].name,
+        country: new Country(
+          Object.values(rows)[0].country_name,
+          Object.values(rows)[0].country_fullName,
+          Object.values(rows)[0].country_short,
+          Object.values(rows)[0].country_flag,
+          Object.values(rows)[0].country_id
+        ),
+      };
+
+      publisher = new Publisher(arrPublisher.name, arrPublisher.country, arrPublisher.id);
+    } else publisher = new Publisher();
 
     return publisher;
   }

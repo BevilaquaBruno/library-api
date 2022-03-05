@@ -1,5 +1,5 @@
 import { ResponseData } from "../interfaces/Common.interface";
-import { PublisherData } from "../interfaces/Publisher.interface";
+import { PublisherDataInterfaces } from "../interfaces/Publisher.interface";
 import Country from "./Country.class";
 
 export default class Publisher {
@@ -54,11 +54,11 @@ export default class Publisher {
    * return the correct array format, this is usefull to avoid '_' before propertie names
    * @returns ps: @PublisherData
    */
-  public toJson(): PublisherData {
-    const ps: PublisherData = {
+  public toJson(): PublisherDataInterfaces {
+    const ps: PublisherDataInterfaces = {
       id: this.id,
       name: this.name,
-      country: this.country,
+      country: this.country.toJson(),
     };
 
     return ps;

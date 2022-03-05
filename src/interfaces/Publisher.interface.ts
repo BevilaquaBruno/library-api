@@ -3,6 +3,7 @@
  */
 
 import Country from "../classes/Country.class";
+import { CountryData } from "./Country.interface";
 
 /**
  * @PublisherData
@@ -12,6 +13,16 @@ export interface PublisherData {
   id: number;
   name: string;
   country: Country;
+}
+
+/**
+ * @PublisherDataInterfaces
+ * Interface for final json
+ */
+export interface PublisherDataInterfaces {
+  id: number;
+  name: string;
+  country: CountryData;
 }
 
 /**
