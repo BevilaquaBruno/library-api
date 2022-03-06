@@ -1,0 +1,27 @@
+# to get all idioms, must return a list - you DON'T need the token here
+GET http://localhost:8000/api/idiom
+
+# to get a specific idiom, must return the complete data for the idiom with the given id - you DON'T need the token here
+GET http://localhost:8000/api/idiom/1
+
+# to create a new idiom
+POST http://localhost:8000/api/idiom
+Content-Type: application/json
+x-access-token: <token>
+
+{
+  "description": "Idiom Test"
+}
+
+# to update the idiom with the given id
+PUT http://localhost:8000/api/idiom/<idiomId>
+Content-Type: application/json
+x-access-token: <token>
+
+{
+  "description": "Idiom Test update"
+}
+
+# to delete the idiom with the given id
+DELETE http://localhost:8000/api/idiom/<idiomId>
+x-access-token: <token>
