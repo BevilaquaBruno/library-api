@@ -1,0 +1,27 @@
+# to get all genres, must return a list - you DON'T need the token here
+GET http://localhost:8000/api/genre
+
+# to get a specific genre, must return the complete data for the genre with the given id - you DON'T need the token here
+GET http://localhost:8000/api/genre/1
+
+# to create a new genre
+POST http://localhost:8000/api/genre
+Content-Type: application/json
+x-access-token: <token>
+
+{
+  "description": "Genre Test"
+}
+
+# to update the genre with the given id
+PUT http://localhost:8000/api/genre/<genreId>
+Content-Type: application/json
+x-access-token: <token>
+
+{
+  "description": "Genre Test update"
+}
+
+# to delete the genre with the given id
+DELETE http://localhost:8000/api/genre/<genreId>
+x-access-token: <token>
