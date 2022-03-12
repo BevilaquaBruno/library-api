@@ -1,0 +1,41 @@
+# to get all author's, must return a list - you DON'T need the token here
+GET http://localhost:8000/api/author
+
+# to get a specific author, must return the complete data for the author with the given id - you DON'T need the token here
+GET http://localhost:8000/api/author/<authorId>
+
+# to create a new author
+POST http://localhost:8000/api/author
+Content-Type: application/json
+x-access-token: <token>
+
+{
+  "name": "Author Test",
+  "fullName": "",
+  "birth_date": "",
+  "death_date": "",
+  "born_place": "",
+  "death_place": "",
+  "born_country_id": "",
+  "death_country_id": 1
+}
+
+# to update the author with the given id
+PUT http://localhost:8000/api/author/<authorId>
+Content-Type: application/json
+x-access-token: <token>
+
+{
+  "name": "Author Test updated",
+  "fullName": "Author Test fullName updated",
+  "birth_date": "2000-03-05",
+  "death_date": "2021-07-06",
+  "born_place": "Ibirubá, RS",
+  "death_place": "Seul, KR",
+  "born_country_id": 1,
+  "death_country_id": 1
+}
+
+# to delete the author with the given id
+DELETE http://localhost:8000/api/author/<authorId>
+x-access-token: <token>

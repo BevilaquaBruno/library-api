@@ -1,5 +1,5 @@
 import Country from "./Country.class";
-import { AuthorData } from "../interfaces/Author.interface";
+import { AuthorData, AuthorDataInterfaces } from "../interfaces/Author.interface";
 import { ResponseData } from "../interfaces/Common.interface";
 import validator from "validator";
 
@@ -12,7 +12,6 @@ export default class Author {
   private _fullName: string | null;
   private _birth_date: string | null;
   private _death_date: string | null;
-  private _born_date: string | null;
   private _born_place: string | null;
   private _death_place: string | null;
   private _born_country: Country | null;
@@ -23,21 +22,19 @@ export default class Author {
     fullName: string | null = null,
     birth_date: string | null = null,
     death_date: string | null = null,
-    born_date: string | null = null,
     born_place: string | null = null,
     death_place: string | null = null,
     born_country: Country | null = null,
     death_country: Country | null = null,
-    id: number
+    id: number = 0
   ) {
     this._id = id;
     this._name = name;
-    this._fullName = fullName;
-    this._birth_date = birth_date;
-    this._death_date = death_date;
-    this._born_date = born_date;
-    this._born_place = born_place;
-    this._death_place = death_place;
+    this._fullName = "" === fullName ? null : fullName;
+    this._birth_date = "" === birth_date ? null : birth_date;
+    this._death_date = "" === death_date ? null : death_date;
+    this._born_place = "" === born_place ? null : born_place;
+    this._death_place = "" === death_place ? null : death_place;
     this._born_country = born_country;
     this._death_country = death_country;
   }
@@ -63,10 +60,6 @@ export default class Author {
 
   public get birth_date(): string | null {
     return this._birth_date;
-  }
-
-  public get born_date(): string | null {
-    return this._born_date;
   }
 
   public get born_place(): string | null {
@@ -97,27 +90,23 @@ export default class Author {
   }
 
   public set fullName(v: string | null) {
-    this._fullName = v;
+    this._fullName = '' === v ? null : v;
   }
 
   public set death_date(v: string | null) {
-    this._death_date = v;
+    this._death_date = '' === v ? null : v;
   }
 
   public set birth_date(v: string | null) {
-    this._birth_date = v;
-  }
-
-  public set born_date(v: string | null) {
-    this._born_date = v;
+    this._birth_date = '' === v ? null : v;
   }
 
   public set born_place(v: string | null) {
-    this._born_place = v;
+    this._born_place = '' === v ? null : v;
   }
 
   public set death_place(v: string | null) {
-    this._death_place = v;
+    this._death_place = '' === v ? null : v;
   }
 
   public set born_country(v: Country | null) {
@@ -130,20 +119,19 @@ export default class Author {
 
   /**
    * return the correct array format, this is usefull to avoid '_' before propertie names
-   * @returns st: @AuthorData
+   * @returns st: @AuthorDataInterfaces
    */
-  public toJson(): AuthorData {
-    const st: AuthorData = {
+  public toJson(): AuthorDataInterfaces {
+    const st: AuthorDataInterfaces = {
       id: this.id,
       name: this.name,
       fullName: this.fullName,
       birth_date: this.birth_date,
       death_date: this.death_date,
-      born_date: this.born_date,
       born_place: this.born_place,
       death_place: this.death_place,
-      born_country: this.born_country,
-      death_country: this.death_country,
+      born_country: null === this.born_country ? null : this.born_country.toJson(),
+      death_country: null === this.death_country ? null : this.death_country.toJson(),
     };
 
     return st;

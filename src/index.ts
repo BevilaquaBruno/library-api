@@ -16,6 +16,7 @@ import styleRouter from "./routes/Style.router";
 import publisherRouter from "./routes/Publisher.router";
 import idiomRouter from "./routes/Idiom.router";
 import genreRouter from "./routes/Genre.router";
+import authorRouter from "./routes/Author.router";
 
 // config env variables
 dotenv.config();
@@ -73,6 +74,10 @@ app.use("/api/idiom", idiomRouter);
  * genre route @GenreController
  */
 app.use("/api/genre", genreRouter);
+/**
+ * author route @AuthorController
+ */
+ app.use("/api/author", authorRouter);
 
 /**
  * If any route match, call not found handler
