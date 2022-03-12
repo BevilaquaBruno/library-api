@@ -28,9 +28,9 @@ export default class Country {
   ) {
     this._id = id;
     this._name = name;
-    this._fullName = fullName;
+    this._fullName = "" === fullName ? null : fullName;
     this._short = short;
-    this._flag = flag;
+    this._flag = "" === flag ? null : flag;
   }
 
   /**
@@ -68,7 +68,7 @@ export default class Country {
   }
 
   public set fullName(v: string | null) {
-    this._fullName = v;
+    this._fullName = "" === v ? null : v;
   }
 
   public set short(v: string) {
@@ -76,7 +76,7 @@ export default class Country {
   }
 
   public set flag(v: string | null) {
-    this._flag = v;
+    this._flag = "" === v ? null : v;
   }
 
   /**

@@ -30,11 +30,11 @@ export default class Person {
     this._name = name;
     this._email = email;
     this._phone = phone;
-    this._birth_date = birth_date;
-    this._cpf = cpf;
-    this._address = address;
-    this._city = city;
-    this._state = state;
+    this._birth_date = "" === birth_date ? null : birth_date;
+    this._cpf = "" === cpf ? null : cpf;
+    this._address = "" === address ? null : address;
+    this._city = "" === city ? null : city;
+    this._state = "" === state ? null : state;
     this._id_person = id;
   }
 
@@ -98,23 +98,23 @@ export default class Person {
   }
 
   public set birth_date(v: string | null) {
-    this._birth_date = v;
+    this._birth_date = "" === v ? null : v;
   }
 
   public set cpf(v: string | null) {
-    this._cpf = v;
+    this._cpf = "" === v ? null : v;
   }
 
   public set address(v: string | null) {
-    this._address = v;
+    this._address = "" === v ? null : v;
   }
 
   public set city(v: string | null) {
-    this._city = v;
+    this._city = "" === v ? null : v;
   }
 
   public set state(v: string | null) {
-    this._state = v;
+    this._state = "" === v ? null : v;
   }
 
   /**
