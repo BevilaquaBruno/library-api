@@ -1,6 +1,8 @@
 import Publisher from "./Publisher.class";
-import { BookData } from "../interfaces/Book.interface";
+import { BookData, BookDataInterfaces } from "../interfaces/Book.interface";
 import { ResponseData } from "../interfaces/Common.interface";
+import Author from "./Author.class";
+import { AuthorDataInterfaces } from "../interfaces/Author.interface";
 
 export default class Book {
   /**
@@ -16,6 +18,7 @@ export default class Book {
   private _obs: string | null;
   private _isbn: string | null;
   private _publisher: Publisher | null;
+  private _authors: Author[] | null;
 
   constructor(
     name: string = "",
@@ -31,14 +34,15 @@ export default class Book {
   ) {
     this._id = id;
     this._name = name;
-    this._volumn = volumn;
-    this._number_pages = number_pages;
-    this._edition = edition;
-    this._release_year = release_year;
-    this._author_obs = author_obs;
-    this._obs = obs;
-    this._isbn = isbn;
+    this._volumn = 0 === volumn ? null : volumn;
+    this._number_pages = 0 === number_pages ? null : number_pages;
+    this._edition = 0 === edition ? null : edition;
+    this._release_year = 0 === release_year ? null : release_year;
+    this._author_obs = "" === author_obs ? null : author_obs;
+    this._obs = "" === obs ? null : obs;
+    this._isbn = "" === isbn ? null : isbn;
     this._publisher = publisher;
+    this._authors = null;
   }
 
   /**
@@ -84,6 +88,10 @@ export default class Book {
     return this._publisher;
   }
 
+  public get authors(): Author[] | null {
+    return this._authors;
+  }
+
   /**
    * Setters
    */
@@ -96,43 +104,54 @@ export default class Book {
   }
 
   public set volumn(v: number | null) {
-    this._volumn = v;
+    this._volumn = 0 === v ? null : v;
   }
 
   public set number_pages(v: number | null) {
-    this._number_pages = v;
+    this._number_pages = 0 === v ? null : v;
   }
 
   public set edition(v: number | null) {
-    this._edition = v;
+    this._edition = 0 === v ? null : v;
   }
 
   public set release_year(v: number | null) {
-    this._release_year = v;
+    this._release_year = 0 === v ? null : v;
   }
 
   public set author_obs(v: string | null) {
-    this._author_obs = v;
+    this._author_obs = "" === v ? null : v;
   }
 
   public set obs(v: string | null) {
-    this._obs = v;
+    this._obs = "" === v ? null : v;
   }
 
   public set isbn(v: string | null) {
-    this._isbn = v;
+    this._isbn = "" === v ? null : v;
   }
 
   public set publisher(v: Publisher | null) {
     this._publisher = v;
   }
 
+  public set authors(v: Author[] | null) {
+    v = null !== v && 0 === v.length ? null : v;
+    this._authors = v;
+  }
+
   /**
    * return the correct array format, this is usefull to avoid '_' before propertie names
    * @returns st: @BookData
    */
-  public toJson(): BookData {
-    const st: BookData = {
+  public toJson(): BookDataInterfaces {
+    let authorList: AuthorDataInterfaces[] | null =
+      null === this.authors
+        ? null
+        : this.authors.map((v: Author) => {
+            return v.toJson();
+          });
+    const st: BookDataInterfaces = {
       id: this.id,
       name: this.name,
       volumn: this.volumn,
@@ -143,6 +162,7 @@ export default class Book {
       obs: this.obs,
       isbn: this.isbn,
       publisher: this.publisher,
+      authors: authorList,
     };
 
     return st;
