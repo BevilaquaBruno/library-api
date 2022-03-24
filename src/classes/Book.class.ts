@@ -161,7 +161,7 @@ export default class Book {
       author_obs: this.author_obs,
       obs: this.obs,
       isbn: this.isbn,
-      publisher: this.publisher,
+      publisher: null === this.publisher ? null : this.publisher?.toJson(),
       authors: authorList,
     };
 

@@ -1,6 +1,7 @@
 import Author from "../classes/Author.class";
 import Publisher from "../classes/Publisher.class";
 import { AuthorData, AuthorDataInterfaces } from "./Author.interface";
+import { PublisherDataInterfaces } from "./Publisher.interface";
 
 /**
  * Interfaces for book
@@ -36,7 +37,7 @@ export interface BookDataInterfaces {
   author_obs: string | null;
   obs: string | null;
   isbn: string | null;
-  publisher: Publisher | null;
+  publisher: PublisherDataInterfaces | null;
   authors: AuthorDataInterfaces[] | null;
 }
 
