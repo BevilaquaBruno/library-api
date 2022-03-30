@@ -10,8 +10,8 @@ import GenreFetch from "../__fetches__/genre.fetch";
 var responseExpected: ResponseData;
 // creating a temp genre
 var genreTest = new Genre("Genre test", 2);
-// the expected from Action genre
-const actionExpected: Genre = new Genre("Action", 1);
+// the expected from Romance genre
+const romanceExpected: Genre = new Genre("Romance", 1);
 
 describe("Testing Genre", () => {
   /**
@@ -71,12 +71,12 @@ describe("Testing Genre", () => {
       },
     };
     //1. executes url and create a new genre
-    const responsePortugues: ResponseData = (await GenreFetch.findById(actionExpected.id)).data;
-    let actionBrasileiro: Genre = new Genre(responsePortugues.data.description, responsePortugues.data.id);
+    const responsePortugues: ResponseData = (await GenreFetch.findById(romanceExpected.id)).data;
+    let romanceBrasileiro: Genre = new Genre(responsePortugues.data.description, responsePortugues.data.id);
 
     //2. validate the expected Portugues
     expect(responsePortugues.status).toEqual(responseExpected.status);
-    expect(actionBrasileiro).toEqual(actionExpected);
+    expect(romanceBrasileiro).toEqual(romanceExpected);
   });
 
   /**
@@ -99,8 +99,8 @@ describe("Testing Genre", () => {
     //3. find Brasil in list and validate him
     response.data.forEach((currentGenre: any) => {
       if (1 === currentGenre?.id) {
-        let actionBrasileiro: Genre = new Genre(currentGenre.description, currentGenre.id);
-        expect(actionBrasileiro).toEqual(actionExpected);
+        let romanceBrasileiro: Genre = new Genre(currentGenre.description, currentGenre.id);
+        expect(romanceBrasileiro).toEqual(romanceExpected);
       }
     });
   });

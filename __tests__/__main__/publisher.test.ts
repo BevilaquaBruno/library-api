@@ -17,7 +17,7 @@ var publisherTest = new Publisher(
 );
 // the expected from companhia das letras publisher
 const ciaDasLetrasExpected: Publisher = new Publisher(
-  "Companhia das letras",
+  "Companhia das Letras",
   new Country("Brasil", "República Federativa do Brasil", "BRA", "brasil_flag.png", 1),
   1
 );
