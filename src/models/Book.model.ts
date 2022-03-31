@@ -56,8 +56,8 @@ export default class BookModel {
       await conn
     ).execute(
       "SELECT b.id, b.name, b.volumn, b.number_pages, b.edition, b.release_year, b.author_obs, b.obs, b.isbn, " +
-        "b.publisher_id, p.name as publisher_name, p.country_id as publisher_country_id, c.name as publisher_country_name, c.fullName as publisher_country_fullName, c.short as publisher_country_short, " +
-        "c.flag as publisher_country_flag" +
+        "b.publisher_id, p.name as publisher_name, p.country_id as publisher_country_id, c.name as publisher_country_name, " +
+        "c.fullName as publisher_country_fullName, c.short as publisher_country_short, c.flag as publisher_country_flag " +
         "FROM book b " +
         "LEFT JOIN publisher p ON p.id = b.publisher_id " +
         "LEFT JOIN country c ON c.id = p.country_id " +
