@@ -93,5 +93,5 @@ app.use(notFoundHandler);
  * Server Activation
  */
 app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
+  
 });
