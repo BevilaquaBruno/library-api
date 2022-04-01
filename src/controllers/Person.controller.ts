@@ -102,12 +102,12 @@ export default class PersonController {
 
       let personValidate: Person;
       //3. if cpf is not empty, then validate them, if it is then validate birth_date + name if is unique
-      if (null != person.cpf) {
+      if (null !== person.cpf) {
         //3.1. validate if cpf is unique
         personValidate = await PersonModel.findByCpf(person.cpf);
         if (0 !== personValidate.id_person) throw new Error("Já existe uma pessoa com esse CPF");
       } else {
-        if (null != person.birth_date) {
+        if (null !== person.birth_date) {
           //3.1. validate if birth_date + name is unique
           personValidate = await PersonModel.findByBirthDateAndName(person.birth_date, person.name);
           if (0 !== personValidate.id_person)
@@ -177,7 +177,7 @@ export default class PersonController {
       if (0 === personValidate.id_person) throw new Error("Pessoa não encontrada");
 
       //5. validate if cpf is unique
-      if (null != person.cpf) {
+      if (null !== person.cpf) {
         personValidate = await PersonModel.findByCpf(person.cpf, person.id_person);
         if (0 !== personValidate.id_person) throw new Error("Já existe uma pessoa com esse CPF");
       }

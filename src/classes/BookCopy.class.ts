@@ -142,12 +142,12 @@ export default class BookCopy {
     if (this.buy_or_gift.length > 1 || !this.buy_or_gift.match(/(?:^|\W)(G|B)(?:$|\W)/gm))
       throw new Error("Origem(comprado ou presente) inválida");
 
-    if (this.buy_or_gift_date != null) {
+    if (this.buy_or_gift_date !== null) {
       if (!validator.isDate(this.buy_or_gift_date))
         throw new Error("Data da origem(Comprado ou Presente) é inválida");
     }
 
-    if (this.obs != null) {
+    if (this.obs !== null) {
       if (this.obs.length > 200)
         throw new Error("Tamanho máximo da observação da edição é de 200 caracteres");
     }
@@ -155,7 +155,7 @@ export default class BookCopy {
     if (this.receiver_person.id_person === 0)
       throw new Error("É obrigatório vincular um dono ao livro.");
 
-    if (this.photo != null) {
+    if (this.photo !== null) {
       if (this.photo.length > 30) throw new Error("Ocorreu um erro ao registrar a foto no livro");
     }
 

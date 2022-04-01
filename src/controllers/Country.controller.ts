@@ -97,7 +97,7 @@ export default class CountryController {
       countryValidate = await CountryModel.findByName(country.name);
       if (0 !== countryValidate.id) throw new Error("Já existe um país com esse nome");
       //4. validate fullName of the country
-      if (null != country.fullName) {
+      if (null !== country.fullName) {
         countryValidate = await CountryModel.findByFullName(country.fullName);
         if (0 !== countryValidate.id) throw new Error("Já existe um país com esse nome completo");
       }
@@ -160,7 +160,7 @@ export default class CountryController {
       countryValidate = await CountryModel.findByName(country.name, country.id);
       if (0 !== countryValidate.id) throw new Error("Já existe um país com esse nome");
       //6. validate fullName of the country
-      if (null != country.fullName) {
+      if (null !== country.fullName) {
         countryValidate = await CountryModel.findByFullName(country.fullName, country.id);
         if (0 !== countryValidate.id) throw new Error("Já existe um país com esse nome completo");
       }

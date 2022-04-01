@@ -151,20 +151,20 @@ export default class Person {
       if (100 < this.name.length) throw new Error("Tamanho máximo do nome é 100 caracteres");
       if (50 < this.email.length) throw new Error("Tamanho máximo do emmail é 50 caracteres");
       if (20 < this.phone.length) throw new Error("Tamanho máximo do telefone é 20 caracteres");
-      if (null != this.cpf) {
+      if (null !== this.cpf) {
         if (14 < this.cpf.length) throw new Error("Tamanho máximo do cpf é 14 caracteres");
       }
-      if (null != this.address) {
+      if (null !== this.address) {
         if (100 < this.address.length)
           throw new Error("Tamanho máximo do endereço é 100 caracteres");
       }
-      if (null != this.city) {
+      if (null !== this.city) {
         if (100 < this.city.length) throw new Error("Tamanho máximo do cidade é 100 caracteres");
       }
-      if (null != this.state) {
+      if (null !== this.state) {
         if (100 < this.state.length) throw new Error("Tamanho máximo do estado é 100 caracteres");
       }
-      if (null != this.birth_date) {
+      if (null !== this.birth_date) {
         let b_date: Date = new Date(this.birth_date);
         if (validator.isAfter(b_date.toString()))
           throw new Error("Data de nascimento não pode ser maior que hoje");
