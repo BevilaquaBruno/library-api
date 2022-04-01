@@ -19,7 +19,7 @@ export default class CountryModel {
    * @param currentId - the id who you don't know to consider - 1
    * @return Promise<Country> a @Country instance, if id is 0 the country does not exists
    */
-  public static async findByShort(short: string, currentId: number = 0): Promise<Country> {
+  public static async findByShort(short: string, currentId = 0): Promise<Country> {
     let sql: string;
     let data: string[];
     //1. if currentId in different from 0 so the sql desconsider the id in select
@@ -54,7 +54,7 @@ export default class CountryModel {
    * @param currentId - the id who you don't know to consider - 1
    * @return Promise<Country> a @Country instance, if id is 0 the country does not exists
    */
-  public static async findByFullName(fullName: string, currentId: number = 0): Promise<Country> {
+  public static async findByFullName(fullName: string, currentId = 0): Promise<Country> {
     let sql: string;
     let data: string[];
     //1. if currentId in different from 0 so the sql desconsider the id in select
@@ -89,7 +89,7 @@ export default class CountryModel {
    * @param currentId - the id who you don't know to consider - 1
    * @return Promise<Country> a @Country instance, if id is 0 the country does not exists
    */
-  public static async findByName(name: string, currentId: number = 0): Promise<Country> {
+  public static async findByName(name: string, currentId = 0): Promise<Country> {
     let sql: string;
     let data: string[];
     //1. if currentId in different from 0 so the sql desconsider the id in select

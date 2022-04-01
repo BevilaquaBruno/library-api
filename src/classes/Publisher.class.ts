@@ -11,9 +11,9 @@ export default class Publisher {
   private _country: Country;
 
   constructor(
-    name: string = "",
+    name = "",
     country: Country = new Country(),
-    id: number = 0
+    id = 0
   ) {
     this._id = id;
     this._name = name;

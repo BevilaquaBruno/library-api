@@ -21,7 +21,7 @@ export default class Book {
   private _authors: Author[] | null;
 
   constructor(
-    name: string = "",
+    name = "",
     volumn: number | null = null,
     number_pages: number | null = null,
     edition: number | null = null,
@@ -30,7 +30,7 @@ export default class Book {
     obs: string | null = null,
     isbn: string | null = null,
     publisher: Publisher | null = null,
-    id: number = 0
+    id = 0
   ) {
     this._id = id;
     this._name = name;

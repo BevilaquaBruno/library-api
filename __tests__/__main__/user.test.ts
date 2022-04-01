@@ -12,7 +12,7 @@ import UserFetch from "../__fetches__/user.fetch";
 
 var responseExpected: ResponseData;
 // user test password
-const userTestPassword: string = "123";
+const userTestPassword = "123";
 // user test
 var userTest: User = new User("user Test", "user_test", "user@test.com", 2);
 // my user

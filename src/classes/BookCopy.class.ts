@@ -18,14 +18,14 @@ export default class BookCopy {
   private _photo: string | null;
 
   constructor(
-    description: string = "",
-    buy_or_gift: string = "",
+    description = "",
+    buy_or_gift = "",
     buy_or_gift_date: string | null = null,
     obs: string | null = null,
     receiver_person: Person = new Person(),
     book: Book = new Book(),
     photo: string | null = null,
-    id: number = 0
+    id = 0
   ) {
     this._id = id;
     this._description = description;

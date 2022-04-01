@@ -40,7 +40,7 @@ export default class StyleModel {
    */
   public static async findByDescription(
     description: string,
-    currentId: number = 0
+    currentId = 0
   ): Promise<Style> {
     let sql: string;
     let data: string[];
