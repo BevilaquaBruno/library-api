@@ -181,19 +181,19 @@ export default class Book {
         throw new Error("Tamanho máximo do nome do livro é 100 caracteres");
 
       const currentDate: Date = new Date(Date.now());
-      if (null != this.release_year) {
+      if (null !== this.release_year) {
         if (this.release_year > currentDate.getFullYear())
           throw new Error("Ano de lançamento não pode ser maior que o ano atual");
       }
 
-      if (null != this.author_obs) {
+      if (null !== this.author_obs) {
         if (this.author_obs.length > 200)
           throw new Error("Tamanho máximo da observação do autor é 200 caracteres");
       }
-      if (null != this.obs) {
+      if (null !== this.obs) {
         if (this.obs.length > 200) throw new Error("Tamanho máximo da observação é 200 caracteres");
       }
-      if (null != this.isbn) {
+      if (null !== this.isbn) {
         if (this.isbn.length > 13) throw new Error("Tamanho máximo do ISBN é 13 caracteres");
       }
 

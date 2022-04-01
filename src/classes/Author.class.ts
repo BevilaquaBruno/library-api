@@ -148,25 +148,25 @@ export default class Author {
       if (this.name === "") throw new Error("Informe o nome do autor");
 
       if (this.name.length > 100) throw new Error("Tamanho máximo do nome é 100 caracteres");
-      if (null != this.fullName) {
+      if (null !== this.fullName) {
         if (this.fullName.length > 150)
           throw new Error("Tamanho máximo do nome completo é 150 caracteres");
       }
-      if (null != this.born_place) {
+      if (null !== this.born_place) {
         if (this.born_place.length > 100)
           throw new Error("Tamanho máximo do local de nascimento é 100 caracteres");
       }
-      if (null != this.death_place) {
+      if (null !== this.death_place) {
         if (this.death_place.length > 100)
           throw new Error("Tamanho máximo do local da morte é 100 caracteres");
       }
-      if (null != this._birth_date) {
+      if (null !== this._birth_date) {
         let b_date: Date = new Date(this._birth_date);
         if (validator.isAfter(b_date.toString()))
           throw new Error("Data de nascimento não pode ser maior que hoje");
       }
 
-      if (null != this._death_date) {
+      if (null !== this._death_date) {
         let b_date: Date = new Date(this._death_date);
         if (validator.isAfter(b_date.toString()))
           throw new Error("Data de morte não pode ser maior que hoje");

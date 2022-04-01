@@ -106,7 +106,7 @@ export default class Country {
       if ("" === this.short) throw new Error("Informe a sigla do país");
 
       if (50 < this.name.length) throw new Error("Tamanho máximo do nome é 50 caracteres");
-      if (null != this.fullName) {
+      if (null !== this.fullName) {
         if (100 < this.fullName.length)
           throw new Error("Tamanho máximo do nome completo é 100 caracteres");
       }
