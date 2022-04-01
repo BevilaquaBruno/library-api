@@ -20,7 +20,7 @@ export default class UserModel {
    * @param currentId - the id to avoid in search - 1
    * @return Promise<User> a @User instance, if id is 0 the user does not exists
    */
-  public static async findByEmail(email: string, currentId: number = 0): Promise<User> {
+  public static async findByEmail(email: string, currentId = 0): Promise<User> {
     let sql: string;
     let data: string[];
     //1. if currentId in different from 0 so the sql desconsider the id in select
@@ -48,7 +48,7 @@ export default class UserModel {
    * @param currentId - the id to avoid in search - 1
    * @return Promise<User> a @User instance, if id is 0 the user does not exists
    */
-  public static async findByUsername(username: string, currentId: number = 0): Promise<User> {
+  public static async findByUsername(username: string, currentId = 0): Promise<User> {
     let sql: string;
     let data: string[];
     //1. if currentId in different from 0 so the sql desconsider the id in select

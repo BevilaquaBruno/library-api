@@ -18,15 +18,15 @@ export default class Person {
   private _state: string;
 
   constructor(
-    name: string = "",
-    email: string = "",
-    phone: string = "",
-    birth_date: string = "",
-    cpf: string = "",
-    address: string = "",
-    city: string = "",
-    state: string = "",
-    id: number = 0
+    name = "",
+    email = "",
+    phone = "",
+    birth_date = "",
+    cpf = "",
+    address = "",
+    city = "",
+    state = "",
+    id = 0
   ) {
     this._name = name;
     this._email = email;

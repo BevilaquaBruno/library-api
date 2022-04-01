@@ -88,7 +88,7 @@ export default class PersonModel {
    * @param currentId - the id to avoid in search - 1
    * @return Promise<Person> a @Person instance, if id is 0 the person does not exists
    */
-  public static async findByCpf(cpf: string, currentId: number = 0): Promise<Person> {
+  public static async findByCpf(cpf: string, currentId = 0): Promise<Person> {
     let sql: string;
     let data: string[];
     //1. if currentId in different from 0 so the sql desconsider the id in select
@@ -133,7 +133,7 @@ export default class PersonModel {
   public static async findByBirthDateAndName(
     birth_date: string,
     name: string,
-    currentId: number = 0
+    currentId = 0
   ): Promise<Person> {
     let sql: string;
     let data: string[];
