@@ -319,7 +319,7 @@ export default class AuthorModel {
    */
   public static async create(author: Author): Promise<number> {
     //1. execute sql
-    console.log(author);
+    
 
     const rst: ResultSetHeader | any = await (
       await conn
