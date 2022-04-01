@@ -10,7 +10,7 @@ import { UserData } from "../interfaces/User.interface";
  * @param res @Response from ExpressJs - https://expressjs.com/en/4x/api.html#res
  * @param next @NextFuncion from ExpressJs - https://expressjs.com/en/api.html#router.param
  */
-export const verifyJwt = (req: Request, res: Response, next: NextFunction) => {
+export const verifyJwt = (req: Request, res: Response, next: NextFunction): void  => {
   //1. get token from header
   const token: string | any = req.headers["x-access-token"];
 
