@@ -78,11 +78,11 @@ app.use("/api/genre", genreRouter);
 /**
  * author route @AuthorController
  */
- app.use("/api/author", authorRouter);
+app.use("/api/author", authorRouter);
 /**
  * book route @BookController
  */
- app.use("/api/book", bookRouter);
+app.use("/api/book", bookRouter);
 
 /**
  * If any route match, call not found handler
@@ -92,6 +92,4 @@ app.use(notFoundHandler);
 /**
  * Server Activation
  */
-app.listen(PORT, () => {
-  
-});
+app.listen(PORT, () => {});
