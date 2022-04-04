@@ -40,7 +40,7 @@ export default class GenreModel {
    */
   public static async findByDescription(
     description: string,
-    currentId: number = 0
+    currentId = 0
   ): Promise<Genre> {
     let sql: string;
     let data: string[];

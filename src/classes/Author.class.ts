@@ -18,7 +18,7 @@ export default class Author {
   private _death_country: Country | null;
 
   constructor(
-    name: string = "",
+    name = "",
     fullName: string | null = null,
     birth_date: string | null = null,
     death_date: string | null = null,
@@ -26,7 +26,7 @@ export default class Author {
     death_place: string | null = null,
     born_country: Country | null = null,
     death_country: Country | null = null,
-    id: number = 0
+    id = 0
   ) {
     this._id = id;
     this._name = name;

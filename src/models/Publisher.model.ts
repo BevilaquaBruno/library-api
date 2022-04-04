@@ -55,7 +55,7 @@ export default class PublisherModel {
    * @param id - publisher's id - 1
    * @return Promise<Publisher> a @Publisher instance, if id is 0 the publisher does not exists
    */
-  public static async findByName(name: string, currentId: number = 0): Promise<Publisher> {
+  public static async findByName(name: string, currentId = 0): Promise<Publisher> {
     let sql: string;
     let data: string[];
     //1. if currentId in different from 0 so the sql desconsider the id in select

@@ -20,7 +20,7 @@ export default class User {
    * @param password password of the user
    * @param id id of the user
    */
-  constructor(name: string = "", username: string = "", email: string = "", id: number = 0) {
+  constructor(name = "", username = "", email = "", id = 0) {
     this._id = id;
     this._name = name;
     this._username = username;

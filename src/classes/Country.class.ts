@@ -20,11 +20,11 @@ export default class Country {
    * @param flag flag file of the country e.g.: brasil_flag.png
    */
   constructor(
-    name: string = "",
+    name = "",
     fullName: string | null = null,
-    short: string = "",
+    short = "",
     flag: string | null = null,
-    id: number = 0
+    id = 0
   ) {
     this._id = id;
     this._name = name;

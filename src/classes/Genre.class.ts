@@ -8,7 +8,7 @@ export default class Genre {
   private _id: number;
   private _description: string;
 
-  constructor(description: string = "", id: number = 0) {
+  constructor(description = "", id = 0) {
     this._id = id;
     this._description = description;
   }

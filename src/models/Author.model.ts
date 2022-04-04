@@ -98,7 +98,7 @@ export default class AuthorModel {
    * @param name - author's name - Machado de Assis
    * @return Promise<Author> a @Author instance, if id is 0 the author does not exists
    */
-  public static async findByName(name: string, currentId: number = 0): Promise<Author> {
+  public static async findByName(name: string, currentId = 0): Promise<Author> {
     let sql: string;
     let data: string[];
     //1. if currentId in different from 0 so the sql desconsider the id in select
@@ -152,7 +152,7 @@ export default class AuthorModel {
    * @param fullName - author's fullName - José Maria Machado de Assis
    * @return Promise<Author> a @Author instance, if id is 0 the author does not exists
    */
-  public static async findByFullName(fullName: string, currentId: number = 0): Promise<Author> {
+  public static async findByFullName(fullName: string, currentId = 0): Promise<Author> {
     let sql: string;
     let data: string[];
     //1. if currentId in different from 0 so the sql desconsider the id in select
