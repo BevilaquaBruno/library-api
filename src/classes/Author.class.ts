@@ -1,5 +1,5 @@
 import Country from "./Country.class";
-import { AuthorData, AuthorDataInterfaces } from "../interfaces/Author.interface";
+import { AuthorDataInterfaces } from "../interfaces/Author.interface";
 import { ResponseData } from "../interfaces/Common.interface";
 import validator from "validator";
 
