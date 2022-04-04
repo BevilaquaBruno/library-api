@@ -8,7 +8,7 @@ import { ResponseData } from "../interfaces/Common.interface";
  * @param next @NextFuncion from ExpressJs - https://expressjs.com/en/api.html#router.param
  * Used to call next function
  */
-export const notFoundHandler = (req: Request, res: Response, next: NextFunction) => {
+export const notFoundHandler = (req: Request, res: Response, next: NextFunction): void  => {
   let response: ResponseData = { data: {}, status: { error: true, message: "Resource not found" } };
   res.status(404).json(response);
 };
