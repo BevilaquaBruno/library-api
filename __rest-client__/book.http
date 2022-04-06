@@ -1,0 +1,22 @@
+# to get a specific book, must return the complete data for the book with the given id - you DON'T need the token here
+GET http://localhost:8000/api/book/<bookId>
+
+# to create a new book
+POST http://localhost:8000/api/book
+Content-Type: application/json
+
+{
+  "name": "Livro 1",
+  "volumn": 1,
+  "number_pages": 269,
+  "edition": 1,
+  "release_year": 2000,
+  "author_obs": "Observação do autor",
+  "obs": "Observação do livro",
+  "isbn": "1234567891011",
+  "publisher_id": 1,
+  "style_id": 1,
+  "genre_id": 1,
+  "idiom_id": 1,
+  "authors": [1, 2]
+}

@@ -3,6 +3,9 @@ import { BookData, BookDataInterfaces } from "../interfaces/Book.interface";
 import { ResponseData } from "../interfaces/Common.interface";
 import Author from "./Author.class";
 import { AuthorDataInterfaces } from "../interfaces/Author.interface";
+import Style from "./Style.class";
+import Genre from "./Genre.class";
+import Idiom from "./Idiom.class";
 
 export default class Book {
   /**
@@ -18,6 +21,9 @@ export default class Book {
   private _obs: string | null;
   private _isbn: string | null;
   private _publisher: Publisher | null;
+  private _style: Style | null;
+  private _genre: Genre | null;
+  private _idiom: Idiom | null;
   private _authors: Author[] | null;
 
   constructor(
@@ -29,7 +35,6 @@ export default class Book {
     author_obs: string | null = null,
     obs: string | null = null,
     isbn: string | null = null,
-    publisher: Publisher | null = null,
     id = 0
   ) {
     this._id = id;
@@ -41,7 +46,10 @@ export default class Book {
     this._author_obs = "" === author_obs ? null : author_obs;
     this._obs = "" === obs ? null : obs;
     this._isbn = "" === isbn ? null : isbn;
-    this._publisher = publisher;
+    this._publisher = null;
+    this._style = null;
+    this._genre = null;
+    this._idiom = null;
     this._authors = null;
   }
 
@@ -86,6 +94,18 @@ export default class Book {
 
   public get publisher(): Publisher | null {
     return this._publisher;
+  }
+
+  public get style(): Style | null {
+    return this._style;
+  }
+
+  public get genre(): Genre | null {
+    return this._genre;
+  }
+
+  public get idiom(): Idiom | null {
+    return this._idiom;
   }
 
   public get authors(): Author[] | null {
@@ -135,6 +155,18 @@ export default class Book {
     this._publisher = v;
   }
 
+  public set style(v: Style | null) {
+    this._style = v;
+  }
+
+  public set genre(v: Genre | null) {
+    this._genre = v;
+  }
+
+  public set idiom(v: Idiom | null) {
+    this._idiom = v;
+  }
+
   public set authors(v: Author[] | null) {
     v = null !== v && 0 === v.length ? null : v;
     this._authors = v;
@@ -162,6 +194,9 @@ export default class Book {
       obs: this.obs,
       isbn: this.isbn,
       publisher: null === this.publisher ? null : this.publisher?.toJson(),
+      style: null === this.style ? null : this.style?.toJson(),
+      genre: null === this.genre ? null : this.genre?.toJson(),
+      idiom: null === this.idiom ? null : this.idiom?.toJson(),
       authors: authorList,
     };
 

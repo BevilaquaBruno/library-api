@@ -20,7 +20,7 @@ const bookRouter: Router = express.Router();
 bookRouter.get("/:id", BookController.findById);
 
 // POST book
-//bookRouter.post("/", verifyJwt, BookController.create);
+bookRouter.post("/", verifyJwt, BookController.create);
 
 // PUT book/:id
 //bookRouter.put("/:id", verifyJwt, BookController.update);

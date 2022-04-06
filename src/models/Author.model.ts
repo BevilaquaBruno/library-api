@@ -201,6 +201,64 @@ export default class AuthorModel {
   }
 
   /**
+   * Find all the author's from the given id list
+   * @return Promise<Author[]> a list of @Author instances
+   */
+  public static async findAllAuthorsFromIdList(authors_id: number[]): Promise<Author[]> {
+    let allAuthors: Author[] = [];
+    let author_id_SQL = authors_id.join(", ");
+
+    //1. execute sql
+    const [rows] = await (
+      await conn
+    ).execute(
+      "SELECT a.id, a.name, a.fullName, a.birth_date, a.death_date, a.born_place, a.death_place, " +
+        "a.born_country_id, cb.name AS born_country_name, cb.fullName AS born_country_fullName, cb.short AS born_country_short, cb.flag AS born_country_flag, " +
+        "a.death_country_id, cd.name AS death_country_name, cd.fullName AS death_country_fullName, cd.short AS death_country_short, cd.flag AS death_country_flag " +
+        "FROM author a " +
+        "LEFT JOIN country cb ON cb.id = a.born_country_id " +
+        "LEFT JOIN country cd ON cd.id = a.death_country_id " +
+        "WHERE a.id in ("+author_id_SQL+")"
+    );
+    /**
+     * 2. for each author create a @Author instance
+     */
+    Object.values(rows).map((el: AuthorDataSQL) =>
+      allAuthors.push(
+        new Author(
+          el.name,
+          el.fullName,
+          el.birth_date,
+          el.death_date,
+          el.born_place,
+          el.death_place,
+          null === el.born_country_id
+            ? null
+            : new Country(
+                el.born_country_name || "",
+                el.born_country_fullName,
+                el.born_country_short || "",
+                el.born_country_flag,
+                el.born_country_id
+              ),
+          null === el.death_country_id
+            ? null
+            : new Country(
+                el.death_country_name || "",
+                el.death_country_fullName,
+                el.death_country_short || "",
+                el.death_country_flag,
+                el.death_country_id
+              ),
+          el.id
+        )
+      )
+    );
+
+    return allAuthors;
+  }
+
+  /**
    * Find all the author's from the given book
    * @return Promise<Author[]> a list of @Author instances
    */
@@ -319,7 +377,6 @@ export default class AuthorModel {
    */
   public static async create(author: Author): Promise<number> {
     //1. execute sql
-    
 
     const rst: ResultSetHeader | any = await (
       await conn
