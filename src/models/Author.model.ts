@@ -274,7 +274,8 @@ export default class AuthorModel {
         "FROM author a " +
         "LEFT JOIN country cb ON cb.id = a.born_country_id " +
         "LEFT JOIN country cd ON cd.id = a.death_country_id " +
-        "LEFT JOIN book_author ba on ba.author_id = a.id AND ba.book_id = ?",
+        "LEFT JOIN book_author ba on ba.author_id = a.id " +
+        "WHERE ba.book_id = ?",
       [bookId]
     );
     /**

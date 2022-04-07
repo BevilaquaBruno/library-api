@@ -14,7 +14,7 @@ const bookRouter: Router = express.Router();
  * Controller Definitions
  */
 // GET book
-//bookRouter.get("/", BookController.findAll);
+bookRouter.get("/", BookController.findAll);
 
 // GET book/:id
 bookRouter.get("/:id", BookController.findById);
@@ -23,7 +23,7 @@ bookRouter.get("/:id", BookController.findById);
 bookRouter.post("/", verifyJwt, BookController.create);
 
 // PUT book/:id
-//bookRouter.put("/:id", verifyJwt, BookController.update);
+bookRouter.put("/:id", verifyJwt, BookController.update);
 
 // DELETE book/:id
 //bookRouter.delete("/:id", verifyJwt, BookController.delete);
