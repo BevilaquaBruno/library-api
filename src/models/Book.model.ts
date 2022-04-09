@@ -413,18 +413,41 @@ export default class BookModel {
    * @param number[] - book_author I=id list - 1,2,3,4
    * @return Promise<boolean> true or false if the created
    */
-  public static async deleteVinculationBooksAndAuthors(authors: Author[],
-    bookId: number): Promise<boolean> {
+  public static async deleteVinculationBooksAndAuthors(
+    authors: Author[],
+    bookId: number
+  ): Promise<boolean> {
     let success = true;
     await Promise.all(
       authors.map(async (author: Author) => {
         const rst: ResultSetHeader | any = await (
           await conn
-        ).execute("DELETE FROM book_author WHERE author_id = ? AND book_id = ?", [author.id, bookId]);
+        ).execute("DELETE FROM book_author WHERE author_id = ? AND book_id = ?", [
+          author.id,
+          bookId,
+        ]);
         if (undefined === rst[0].insertId) success = false;
       })
     );
 
     return success;
+  }
+
+  /**
+   * delete a book
+   * @param book - the book to delete
+   * @return Promise<boolean> true or false, deleted or not
+   */
+  public static async delete(book: Book): Promise<boolean> {
+    //1. execute sql
+    const rst: ResultSetHeader | any = await (
+      await conn
+    ).execute("DELETE FROM book WHERE id = ?", [book.id]);
+    let cr: boolean;
+    //2. returns true or false based in sql result
+    if (undefined !== rst[0].affectedRows) cr = true;
+    else cr = false;
+
+    return cr;
   }
 }

@@ -293,4 +293,35 @@ export default class BookController {
 
     res.json(response);
   }
+
+  /**
+   * delete a book
+   * id: id of the book
+   */
+  public static async delete(req: Request, res: Response) {
+    let response: ResponseData;
+
+    try {
+      //1. get and parse the given id
+      const id: number = parseInt(req.params.id, 10);
+      //2. validate if exists a book with the given id
+      let book: Book = await BookModel.findById(id);
+      if (book.id === 0) throw new Error("Livro não encontrado");
+
+      //3. delete book
+      let result: boolean = await BookModel.delete(book);
+
+      //4. validate deletion
+      if (true === result)
+        response = { data: {}, status: { error: false, message: "Livro removido" } };
+      else throw new Error("Erro ao deletar livro");
+    } catch (e: any) {
+      response = {
+        data: {},
+        status: { error: true, message: (e as Error)?.message ?? "Erro ao excluir livro" },
+      };
+    }
+
+    res.json(response);
+  }
 }

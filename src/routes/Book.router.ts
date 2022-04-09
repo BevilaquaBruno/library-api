@@ -26,6 +26,6 @@ bookRouter.post("/", verifyJwt, BookController.create);
 bookRouter.put("/:id", verifyJwt, BookController.update);
 
 // DELETE book/:id
-//bookRouter.delete("/:id", verifyJwt, BookController.delete);
+bookRouter.delete("/:id", verifyJwt, BookController.delete);
 
 export default bookRouter;
