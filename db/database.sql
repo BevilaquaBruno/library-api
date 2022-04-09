@@ -110,10 +110,10 @@ ALTER TABLE book ADD CONSTRAINT fk_book_genre_id FOREIGN KEY (genre_id) REFERENC
 ALTER TABLE book ADD CONSTRAINT fk_book_idiom_id FOREIGN KEY (idiom_id) REFERENCES idiom(id);
 
 ALTER TABLE book_copy ADD CONSTRAINT fk_book_copy_receiver_person_id FOREIGN KEY (receiver_person_id) REFERENCES person(id);
-ALTER TABLE book_copy ADD CONSTRAINT fk_book_copy_book_id FOREIGN KEY (book_id) REFERENCES person(id);
+ALTER TABLE book_copy ADD CONSTRAINT fk_book_copy_book_id FOREIGN KEY (book_id) REFERENCES person(id) ON DELETE CASCADE;
 
 ALTER TABLE book_author ADD CONSTRAINT fk_book_author_author FOREIGN KEY (author_id) REFERENCES author(id);
-ALTER TABLE book_author ADD CONSTRAINT fk_book_author_book FOREIGN KEY (book_id) REFERENCES book(id);
+ALTER TABLE book_author ADD CONSTRAINT fk_book_author_book FOREIGN KEY (book_id) REFERENCES book(id) ON DELETE CASCADE;
 
 /* PRIMARY INSERTS*/
 INSERT INTO person(id, name, email, phone, birth_date, cpf) VALUES (1, "Bruno Fernando Bevilaqua", "bbbevilaqua2@gmail.com", "5549998320023", "2000-03-05", "103.411.729-79");
