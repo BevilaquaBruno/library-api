@@ -11,9 +11,9 @@ export interface PersonData {
   name: string;
   email: string;
   phone: string;
-  birth_date: string;
-  cpf: string;
-  address: string;
-  city: string;
-  state: string;
+  birth_date: string | null;
+  cpf: string | null;
+  address: string | null;
+  city: string | null;
+  state: string | null;
 }

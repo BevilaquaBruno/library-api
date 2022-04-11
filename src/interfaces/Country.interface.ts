@@ -9,7 +9,7 @@
 export interface CountryData {
   id: number;
   name: string;
-  fullName: string;
+  fullName: string | null;
   short: string;
-  flag: string;
+  flag: string | null;
 }

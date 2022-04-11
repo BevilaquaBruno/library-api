@@ -4,7 +4,6 @@ import User from "../classes/User.class";
 import { RequestWithUser, ResponseData } from "../interfaces/Common.interface";
 import md5 from "md5";
 import { PasswordList } from "../interfaces/User.interface";
-import Helper from "../classes/Helper.class";
 
 /**
  * UserController class is used for /api/user route.
@@ -88,9 +87,9 @@ export default class UserController {
     try {
       //1. get and create the user
       const user: User = new User(
-        Helper.emptyforNull(req.body.name),
-        Helper.emptyforNull(req.body.username),
-        Helper.emptyforNull(req.body.email)
+        req.body.name,
+        req.body.username,
+        req.body.email
       );
 
       /**
@@ -157,9 +156,9 @@ export default class UserController {
       const id: number = parseInt(req.params.id);
       //2. get and create user with the given ata
       const user: User = new User(
-        Helper.emptyforNull(req.body.name),
-        Helper.emptyforNull(req.body.username),
-        Helper.emptyforNull(req.body.email),
+        req.body.name,
+        req.body.username,
+        req.body.email,
         id
       );
 

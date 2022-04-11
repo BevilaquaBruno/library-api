@@ -10,7 +10,7 @@ export default class User {
   private _name: string;
   private _username: string;
   private _email: string;
-  private _password: string;
+  private _password: string | null;
 
   /**
    *
@@ -20,12 +20,12 @@ export default class User {
    * @param password password of the user
    * @param id id of the user
    */
-  constructor(name: string = "", username: string = "", email: string = "", id: number = 0) {
+  constructor(name = "", username = "", email = "", id = 0) {
     this._id = id;
     this._name = name;
     this._username = username;
     this._email = email;
-    this._password = "";
+    this._password = null;
   }
 
   /**
@@ -47,7 +47,7 @@ export default class User {
     return this._email;
   }
 
-  public get password(): string {
+  public get password(): string | null {
     return this._password;
   }
 
@@ -70,7 +70,7 @@ export default class User {
     this._email = v;
   }
 
-  public set password(v: string) {
+  public set password(v: string | null) {
     this._password = v;
   }
 
@@ -95,15 +95,15 @@ export default class User {
   public validate(): ResponseData {
     let response: ResponseData;
     try {
-      if ("" === this._name) throw new Error("Informe o nome do usuário");
-      if ("" === this._username) throw new Error("Informe o username do usuário");
-      if ("" === this._email) throw new Error("Informe o email do usuário");
+      if ("" === this.name) throw new Error("Informe o nome do usuário");
+      if ("" === this.username) throw new Error("Informe o username do usuário");
+      if ("" === this.email) throw new Error("Informe o email do usuário");
 
-      if (50 < this._name.length) throw new Error("Tamanho máximo do nome é 50 caracteres");
-      if (20 < this._username.length) throw new Error("Tamanho máximo do username é 20 caracteres");
-      if (50 < this._email.length) throw new Error("Tamanho máximo do email é 50 caracteres");
+      if (50 < this.name.length) throw new Error("Tamanho máximo do nome é 50 caracteres");
+      if (20 < this.username.length) throw new Error("Tamanho máximo do username é 20 caracteres");
+      if (50 < this.email.length) throw new Error("Tamanho máximo do email é 50 caracteres");
 
-      if (!Validator.isEmail(this._email)) throw new Error("Email inválido");
+      if (!Validator.isEmail(this.email)) throw new Error("Email inválido");
 
       response = {
         data: {},

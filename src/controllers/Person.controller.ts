@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import PersonModel from "../models/Person.model";
 import Person from "../classes/Person.class";
 import { ResponseData } from "../interfaces/Common.interface";
-import Helper from "../classes/Helper.class";
 
 /**
  * PersonController class is used for /api/person route.
@@ -87,14 +86,14 @@ export default class PersonController {
     try {
       //1. get and create a person with the given data
       const person: Person = new Person(
-        Helper.emptyforNull(req.body.name),
-        Helper.emptyforNull(req.body.email),
-        Helper.emptyforNull(req.body.phone),
-        Helper.emptyforNull(req.body.birth_date),
-        Helper.emptyforNull(req.body.cpf),
-        Helper.emptyforNull(req.body.address),
-        Helper.emptyforNull(req.body.city),
-        Helper.emptyforNull(req.body.state)
+        req.body.name,
+        req.body.email,
+        req.body.phone,
+        req.body.birth_date,
+        req.body.cpf,
+        req.body.address,
+        req.body.city,
+        req.body.state
       );
 
       //2. validate person data
@@ -103,12 +102,12 @@ export default class PersonController {
 
       let personValidate: Person;
       //3. if cpf is not empty, then validate them, if it is then validate birth_date + name if is unique
-      if ("" != person.cpf) {
+      if (null !== person.cpf) {
         //3.1. validate if cpf is unique
         personValidate = await PersonModel.findByCpf(person.cpf);
         if (0 !== personValidate.id_person) throw new Error("Já existe uma pessoa com esse CPF");
       } else {
-        if ("" != person.birth_date) {
+        if (null !== person.birth_date) {
           //3.1. validate if birth_date + name is unique
           personValidate = await PersonModel.findByBirthDateAndName(person.birth_date, person.name);
           if (0 !== personValidate.id_person)
@@ -157,14 +156,14 @@ export default class PersonController {
       const id: number = parseInt(req.params.id);
       //2. get and create person with the given data
       const person: Person = new Person(
-        Helper.emptyforNull(req.body.name),
-        Helper.emptyforNull(req.body.email),
-        Helper.emptyforNull(req.body.phone),
-        Helper.emptyforNull(req.body.birth_date),
-        Helper.emptyforNull(req.body.cpf),
-        Helper.emptyforNull(req.body.address),
-        Helper.emptyforNull(req.body.city),
-        Helper.emptyforNull(req.body.state),
+        req.body.name,
+        req.body.email,
+        req.body.phone,
+        req.body.birth_date,
+        req.body.cpf,
+        req.body.address,
+        req.body.city,
+        req.body.state,
         id
       );
 
@@ -178,7 +177,7 @@ export default class PersonController {
       if (0 === personValidate.id_person) throw new Error("Pessoa não encontrada");
 
       //5. validate if cpf is unique
-      if ("" != person.cpf) {
+      if (null !== person.cpf) {
         personValidate = await PersonModel.findByCpf(person.cpf, person.id_person);
         if (0 !== personValidate.id_person) throw new Error("Já existe uma pessoa com esse CPF");
       }

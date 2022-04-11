@@ -5,7 +5,6 @@ import Country from "../classes/Country.class";
 import { CountryData } from "../interfaces/Country.interface";
 import DatabaseConnection from "../../db/db";
 import { ResultSetHeader } from "mysql2";
-import Helper from "../classes/Helper.class";
 
 // get connection
 const conn = DatabaseConnection.getConnection();
@@ -20,7 +19,7 @@ export default class CountryModel {
    * @param currentId - the id who you don't know to consider - 1
    * @return Promise<Country> a @Country instance, if id is 0 the country does not exists
    */
-  public static async findByShort(short: string, currentId: number = 0): Promise<Country> {
+  public static async findByShort(short: string, currentId = 0): Promise<Country> {
     let sql: string;
     let data: string[];
     //1. if currentId in different from 0 so the sql desconsider the id in select
@@ -55,7 +54,7 @@ export default class CountryModel {
    * @param currentId - the id who you don't know to consider - 1
    * @return Promise<Country> a @Country instance, if id is 0 the country does not exists
    */
-  public static async findByFullName(fullName: string, currentId: number = 0): Promise<Country> {
+  public static async findByFullName(fullName: string, currentId = 0): Promise<Country> {
     let sql: string;
     let data: string[];
     //1. if currentId in different from 0 so the sql desconsider the id in select
@@ -90,7 +89,7 @@ export default class CountryModel {
    * @param currentId - the id who you don't know to consider - 1
    * @return Promise<Country> a @Country instance, if id is 0 the country does not exists
    */
-  public static async findByName(name: string, currentId: number = 0): Promise<Country> {
+  public static async findByName(name: string, currentId = 0): Promise<Country> {
     let sql: string;
     let data: string[];
     //1. if currentId in different from 0 so the sql desconsider the id in select
@@ -177,9 +176,9 @@ export default class CountryModel {
       await conn
     ).execute("INSERT INTO country(name, fullName, short, flag) VALUES(?, ?, ?, ?)", [
       country.name,
-      Helper.nullForEmpty(country.fullName),
+      country.fullName,
       country.short,
-      Helper.nullForEmpty(country.flag),
+      country.flag,
     ]);
     let id: number;
     //2. if returned id is undefined returns 0 for function else returns the id
@@ -200,9 +199,9 @@ export default class CountryModel {
       await conn
     ).execute("UPDATE country SET name = ?, fullName = ?, short = ?, flag = ? WHERE id = ?", [
       country.name,
-      Helper.nullForEmpty(country.fullName),
+      country.fullName,
       country.short,
-      Helper.nullForEmpty(country.flag),
+      country.flag,
       country.id.toString(),
     ]);
     let cr: boolean;

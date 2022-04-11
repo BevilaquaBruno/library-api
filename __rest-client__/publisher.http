@@ -1,0 +1,29 @@
+# to get all publisher's, must return a list - you DON'T need the token here
+GET http://localhost:8000/api/publisher
+
+# to get a specific publisher, must return the complete data for the publisher with the given id - you DON'T need the token here
+GET http://localhost:8000/api/publisher/<publisherId>
+
+# to create a new publisher
+POST http://localhost:8000/api/publisher
+Content-Type: application/json
+x-access-token: <token>
+
+{
+  "name": "Publisher Test",
+  "country_id": 1
+}
+
+# to update the publisher with the given id
+PUT http://localhost:8000/api/publisher/<publisherId>
+Content-Type: application/json
+x-access-token: <token>
+
+{
+  "name": "Publisher Test update",
+  "country_id": 1
+}
+
+# to delete the publisher with the given id
+DELETE http://localhost:8000/api/publisher/<publisherId>
+x-access-token: <token>

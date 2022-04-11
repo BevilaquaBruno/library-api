@@ -1,7 +1,7 @@
 /**
  * Required External Modules and Interfaces
  */
-import express, { Request, Response, Router } from "express";
+import express, { Router } from "express";
 import AuthController from "../controllers/Auth.controller";
 
 /**
