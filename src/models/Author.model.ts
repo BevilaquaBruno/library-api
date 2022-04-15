@@ -62,7 +62,7 @@ export default class AuthorModel {
     const [rows] = await (
       await conn
     ).execute(
-      "SELECT a.id, a.name, a.fullName, a.birth_date, a.death_date, a.born_place, a.death_place, " +
+      "SELECT a.id, a.name, a.fullName, DATE_FORMAT(a.birth_date, '%Y-%m-%d') as birth_date, DATE_FORMAT(a.death_date, '%Y-%m-%d') as death_date, a.born_place, a.death_place, " +
         "a.born_country_id, cb.name AS born_country_name, cb.fullName AS born_country_fullName, cb.short AS born_country_short, cb.flag AS born_country_flag, " +
         "a.death_country_id, cd.name AS death_country_name, cd.fullName AS death_country_fullName, cd.short AS death_country_short, cd.flag AS death_country_flag " +
         "FROM author a " +
@@ -104,7 +104,7 @@ export default class AuthorModel {
     //1. if currentId in different from 0 so the sql desconsider the id in select
     if (0 === currentId) {
       sql =
-        "SELECT a.id, a.name, a.fullName, a.birth_date, a.death_date, a.born_place, a.death_place, " +
+        "SELECT a.id, a.name, a.fullName, DATE_FORMAT(a.birth_date, '%Y-%m-%d') as birth_date, DATE_FORMAT(a.death_date, '%Y-%m-%d') as death_date, a.born_place, a.death_place, " +
         "a.born_country_id, cb.name AS born_country_name, cb.fullName AS born_country_fullName, cb.short AS born_country_short, cb.flag AS born_country_flag, " +
         "a.death_country_id, cd.name AS death_country_name, cd.fullName AS death_country_fullName, cd.short AS death_country_short, cd.flag AS death_country_flag " +
         "FROM author a " +
@@ -114,7 +114,7 @@ export default class AuthorModel {
       data = [name];
     } else {
       sql =
-        "SELECT a.id, a.name, a.fullName, a.birth_date, a.death_date, a.born_place, a.death_place, " +
+        "SELECT a.id, a.name, a.fullName, DATE_FORMAT(a.birth_date, '%Y-%m-%d') as birth_date, DATE_FORMAT(a.death_date, '%Y-%m-%d') as death_date, a.born_place, a.death_place, " +
         "a.born_country_id, cb.name AS born_country_name, cb.fullName AS born_country_fullName, cb.short AS born_country_short, cb.flag AS born_country_flag, " +
         "a.death_country_id, cd.name AS death_country_name, cd.fullName AS death_country_fullName, cd.short AS death_country_short, cd.flag AS death_country_flag " +
         "FROM author a " +
@@ -158,7 +158,7 @@ export default class AuthorModel {
     //1. if currentId in different from 0 so the sql desconsider the id in select
     if (0 === currentId) {
       sql =
-        "SELECT a.id, a.name, a.fullName, a.birth_date, a.death_date, a.born_place, a.death_place, " +
+        "SELECT a.id, a.name, a.fullName, DATE_FORMAT(a.birth_date, '%Y-%m-%d') as birth_date, DATE_FORMAT(a.death_date, '%Y-%m-%d') as death_date, a.born_place, a.death_place, " +
         "a.born_country_id, cb.name AS born_country_name, cb.fullName AS born_country_fullName, cb.short AS born_country_short, cb.flag AS born_country_flag, " +
         "a.death_country_id, cd.name AS death_country_name, cd.fullName AS death_country_fullName, cd.short AS death_country_short, cd.flag AS death_country_flag " +
         "FROM author a " +
@@ -168,7 +168,7 @@ export default class AuthorModel {
       data = [fullName];
     } else {
       sql =
-        "SELECT a.id, a.name, a.fullName, a.birth_date, a.death_date, a.born_place, a.death_place, " +
+        "SELECT a.id, a.name, a.fullName, DATE_FORMAT(a.birth_date, '%Y-%m-%d') as birth_date, DATE_FORMAT(a.death_date, '%Y-%m-%d') as death_date, a.born_place, a.death_place, " +
         "a.born_country_id, cb.name AS born_country_name, cb.fullName AS born_country_fullName, cb.short AS born_country_short, cb.flag AS born_country_flag, " +
         "a.death_country_id, cd.name AS death_country_name, cd.fullName AS death_country_fullName, cd.short AS death_country_short, cd.flag AS death_country_flag " +
         "FROM author a " +
@@ -212,7 +212,7 @@ export default class AuthorModel {
     const [rows] = await (
       await conn
     ).execute(
-      "SELECT a.id, a.name, a.fullName, a.birth_date, a.death_date, a.born_place, a.death_place, " +
+      "SELECT a.id, a.name, a.fullName, DATE_FORMAT(a.birth_date, '%Y-%m-%d') as birth_date, DATE_FORMAT(a.death_date, '%Y-%m-%d') as death_date, a.born_place, a.death_place, " +
         "a.born_country_id, cb.name AS born_country_name, cb.fullName AS born_country_fullName, cb.short AS born_country_short, cb.flag AS born_country_flag, " +
         "a.death_country_id, cd.name AS death_country_name, cd.fullName AS death_country_fullName, cd.short AS death_country_short, cd.flag AS death_country_flag " +
         "FROM author a " +
@@ -268,7 +268,7 @@ export default class AuthorModel {
     const [rows] = await (
       await conn
     ).execute(
-      "SELECT a.id, a.name, a.fullName, a.birth_date, a.death_date, a.born_place, a.death_place, " +
+      "SELECT a.id, a.name, a.fullName, DATE_FORMAT(a.birth_date, '%Y-%m-%d') as birth_date, DATE_FORMAT(a.death_date, '%Y-%m-%d') as death_date, a.born_place, a.death_place, " +
         "a.born_country_id, cb.name AS born_country_name, cb.fullName AS born_country_fullName, cb.short AS born_country_short, cb.flag AS born_country_flag, " +
         "a.death_country_id, cd.name AS death_country_name, cd.fullName AS death_country_fullName, cd.short AS death_country_short, cd.flag AS death_country_flag " +
         "FROM author a " +
@@ -326,7 +326,7 @@ export default class AuthorModel {
     const [rows] = await (
       await conn
     ).execute(
-      "SELECT a.id, a.name, a.fullName, a.birth_date, a.death_date, a.born_place, a.death_place, " +
+      "SELECT a.id, a.name, a.fullName, DATE_FORMAT(a.birth_date, '%Y-%m-%d') as birth_date, DATE_FORMAT(a.death_date, '%Y-%m-%d') as death_date, a.born_place, a.death_place, " +
         "a.born_country_id, cb.name AS born_country_name, cb.fullName AS born_country_fullName, cb.short AS born_country_short, cb.flag AS born_country_flag, " +
         "a.death_country_id, cd.name AS death_country_name, cd.fullName AS death_country_fullName, cd.short AS death_country_short, cd.flag AS death_country_flag " +
         "FROM author a " +
