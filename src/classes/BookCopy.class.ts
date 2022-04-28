@@ -1,4 +1,4 @@
-import { BookCopyData } from "../interfaces/BookCopy.interface";
+import { BookCopyData, BookCopyDataInterfaces } from "../interfaces/BookCopy.interface";
 import { ResponseData } from "../interfaces/Common.interface";
 import Book from "./Book.class";
 import Person from "./Person.class";
@@ -111,15 +111,15 @@ export default class BookCopy {
    * return the correct array format, this is usefull to avoid '_' before propertie names
    * @returns st: @BookCopyData
    */
-  public toJson(): BookCopyData {
-    const st: BookCopyData = {
+  public toJson(): BookCopyDataInterfaces {
+    const st: BookCopyDataInterfaces = {
       id: this._id,
       description: this._description,
       buy_or_gift: this._buy_or_gift,
       buy_or_gift_date: this._buy_or_gift_date,
       obs: this._obs,
-      receiver_person: this._receiver_person,
-      book: this._book,
+      receiver_person: this._receiver_person.toJson(),
+      book: this._book.toJson(),
       photo: this._photo,
     };
 

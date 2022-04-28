@@ -1,0 +1,8 @@
+# to get a specific book copy, must return the complete data for the book with the given id - you DON'T need the token here
+GET http://localhost:8000/api/bookcopy/1
+
+to get all books
+GET http://localhost:8000/api/bookcopy
+
+to delete a book
+DELETE http://localhost:8000/api/bookcopy/2
