@@ -178,6 +178,7 @@ export default class BookModel {
       let authorsBook: Author[] = await AuthorModel.findAllAuthorsFromBook(book.id);
       book.authors = authorsBook;
       book.style = arrBook.style;
+      book.publisher = arrBook.publisher;
       book.genre = arrBook.genre;
       book.idiom = arrBook.idiom;
     } else book = new Book();
@@ -248,6 +249,7 @@ export default class BookModel {
       );
       let authorsBook: Author[] = await AuthorModel.findAllAuthorsFromBook(book.id);
       book.authors = authorsBook;
+      book.publisher = arrBook.publisher;
       book.style = arrBook.style;
       book.genre = arrBook.genre;
       book.idiom = arrBook.idiom;
@@ -359,6 +361,7 @@ export default class BookModel {
         );
 
         newBook.authors = await AuthorModel.findAllAuthorsFromBook(newBook.id);
+        newBook.publisher = arrBook.publisher;
         newBook.style = arrBook.style;
         newBook.genre = arrBook.genre;
         newBook.idiom = arrBook.idiom;
