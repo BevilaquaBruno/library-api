@@ -1,8 +1,39 @@
 # to get a specific book copy, must return the complete data for the book with the given id - you DON'T need the token here
-GET http://localhost:8000/api/bookcopy/1
+GET http://localhost:8000/api/bookcopy/<bookId>
 
-to get all books
+to get all copies
 GET http://localhost:8000/api/bookcopy
 
-to delete a book
-DELETE http://localhost:8000/api/bookcopy/2
+to delete a book copy
+DELETE http://localhost:8000/api/bookcopy/<bookId>
+x-access-token: <token>
+
+to create a book copy
+POST http://localhost:8000/api/bookCopy
+Content-Type: application/json
+x-access-token: <token>
+
+{
+  "description": "Descrição do da edição do livro",
+  "buy_or_gift": "B",
+  "buy_or_gift_date": null,
+  "obs": null,
+  "receiver_person_id": 1,
+  "book_id": 1,
+  "photo": null
+}
+
+to update a book copy
+PUT http://localhost:8000/api/bookCopy/4
+Content-Type: application/json
+x-access-token: <token>
+
+{
+  "description": "Descrição do da edição do livro 2",
+  "buy_or_gift": "G",
+  "buy_or_gift_date": "2022-12-31",
+  "obs": "obs obs obs obs ",
+  "receiver_person_id": 1,
+  "book_id": 1,
+  "photo": "aaaa.png"
+}

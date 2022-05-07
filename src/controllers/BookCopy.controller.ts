@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
+import Book from "../classes/Book.class";
 import BookCopy from "../classes/BookCopy.class";
 import { ResponseData } from "../interfaces/Common.interface";
+import BookModel from "../models/Book.model";
 import BookCopyModel from "../models/BookCopy.model";
+import PersonModel from "../models/Person.model";
 
 /**
  * BookCopyController class is used for /api/bookcopy route.
@@ -102,6 +105,113 @@ export default class BookCopyController {
         status: {
           error: true,
           message: (e as Error)?.message ?? "Erro ao excluir edição do livro",
+        },
+      };
+    }
+
+    res.json(response);
+  }
+
+  /**
+   * Create a bookCopy
+   * description: description of the book copy
+   * buy or gift: buy or gift number
+   * buy_or_gift_date: buy or gift date pages
+   * obs: observation
+   * photo: photo
+   * receiver_person_id - the person who receive
+   * book_id - book id
+   */
+  public static async create(req: Request, res: Response) {
+    let response: ResponseData;
+
+    try {
+      //1. get and create a bookCop with the given data
+      const bookCopy: BookCopy = new BookCopy(
+        req.body.description,
+        req.body.buy_or_gift,
+        req.body.buy_or_gift_date,
+        req.body.obs,
+        await PersonModel.findById(req.body.receiver_person_id),
+        await BookModel.findById(req.body.book_id),
+        req.body.photo
+      );
+
+      //2. validate bookCopy data
+      const resValidate: ResponseData = bookCopy.validate();
+      if (true === resValidate.status.error) throw new Error(resValidate.status.message);
+
+      //3. insert book
+      const insertId: number = await BookCopyModel.create(bookCopy);
+
+      //4 validate insertion
+      if (insertId !== 0) {
+        bookCopy.id = insertId;
+
+        response = {
+          data: bookCopy.toJson(),
+          status: { error: false, message: "Edição do livro cadastrada" },
+        };
+      } else throw new Error("Erro ao inserir edição do livro");
+    } catch (e: any) {
+      response = {
+        data: {},
+        status: { error: true, message: (e as Error)?.message ?? "Erro ao criar edição do livro" },
+      };
+    }
+
+    res.json(response);
+  }
+
+  /**
+   * Create a bookCopy
+   * id: book copy id
+   * description: description of the book copy
+   * buy or gift: buy or gift number
+   * buy_or_gift_date: buy or gift date pages
+   * obs: observation
+   * photo: photo
+   * receiver_person_id - the person who receive
+   * book_id - book id
+   */
+  public static async update(req: Request, res: Response) {
+    let response: ResponseData;
+
+    try {
+      const id: number = parseInt(req.params.id);
+
+      //1. get and create a bookCop with the given data
+      const bookCopy: BookCopy = new BookCopy(
+        req.body.description,
+        req.body.buy_or_gift,
+        req.body.buy_or_gift_date,
+        req.body.obs,
+        await PersonModel.findById(req.body.receiver_person_id),
+        await BookModel.findById(req.body.book_id),
+        req.body.photo,
+        id
+      );
+
+      //2. validate book data
+      const resValidate: ResponseData = bookCopy.validate();
+      if (true === resValidate.status.error) throw new Error(resValidate.status.message);
+
+      //4. update bookCopy
+      const bookUpdated: boolean = await BookCopyModel.update(bookCopy);
+
+      //5 validate update
+      if (bookUpdated !== false) {
+        response = {
+          data: bookCopy.toJson(),
+          status: { error: false, message: "Edição do livro atualizada" },
+        }
+      } else throw new Error("Erro ao atualizar a edição do livro");
+    } catch (e: any) {
+      response = {
+        data: {},
+        status: {
+          error: true,
+          message: (e as Error)?.message ?? "Erro ao atualizar edição do livro",
         },
       };
     }
