@@ -141,4 +141,4 @@ INSERT INTO book_author(id, author_id, book_id) VALUES (1, 1, 1);
 
 INSERT INTO book_copy (id, description, buy_or_gift, buy_or_gift_date, obs, photo, receiver_person_id, book_id) VALUES (
   1, "Dom Casmurro - Machado de Assis - A obra prima de cada autor", "G", "2010-07-14",
-  "Presente da Salete Bevilaqua com dedicatória na contra capa", "", 1, 1);
+  "Presente da Salete Bevilaqua com dedicatória na contra capa", null, 1, 1);
