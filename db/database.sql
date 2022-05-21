@@ -98,6 +98,27 @@ CREATE TABLE IF NOT EXISTS book_author (
 	book_id INT
 );
 
+CREATE TABLE IF NOT EXISTS book_comment (
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	description TEXT,
+	vote BOOLEAN,
+	visible BOOLEAN,
+	book_id INT NOT NULL,
+	person_id INT
+);
+
+CREATE TABLE IF NOT EXISTS loan (
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	description VARCHAR(100),
+	loan_code VARCHAR(50),
+	loan_date DATE DEFAULT NOW(),
+	return_date DATE,
+	must_return_date DATE,
+	user_id INT NOT NULL,
+	book_copy_id INT NOT NULL,
+	person_id INT NOT NULL
+);
+
 /* Foreign Keys */
 ALTER TABLE publisher ADD CONSTRAINT fk_publisher_country_id FOREIGN KEY (country_id ) REFERENCES country(id);
 
@@ -114,6 +135,13 @@ ALTER TABLE book_copy ADD CONSTRAINT fk_book_copy_book_id FOREIGN KEY (book_id) 
 
 ALTER TABLE book_author ADD CONSTRAINT fk_book_author_author FOREIGN KEY (author_id) REFERENCES author(id);
 ALTER TABLE book_author ADD CONSTRAINT fk_book_author_book FOREIGN KEY (book_id) REFERENCES book(id) ON DELETE CASCADE;
+
+ALTER TABLE book_comment ADD CONSTRAINT fk_book_comment_book FOREIGN KEY (book_id) REFERENCES book(id);
+ALTER TABLE book_comment ADD CONSTRAINT fk_book_comment_person FOREIGN KEY (person_id) REFERENCES person(id);
+
+ALTER TABLE loan ADD CONSTRAINT fk_loan_user FOREIGN KEY (user_id) REFERENCES user(id);
+ALTER TABLE loan ADD CONSTRAINT fk_loan_book_copy FOREIGN KEY (book_copy_id) REFERENCES book_copy(id);
+ALTER TABLE loan ADD CONSTRAINT fk_loan_person FOREIGN KEY (person_id) REFERENCES person(id);
 
 /* PRIMARY INSERTS*/
 INSERT INTO person(id, name, email, phone, birth_date, cpf) VALUES (1, "Bruno Fernando Bevilaqua", "bbbevilaqua2@gmail.com", "5549998320023", "2000-03-05", "103.411.729-79");
@@ -142,3 +170,9 @@ INSERT INTO book_author(id, author_id, book_id) VALUES (1, 1, 1);
 INSERT INTO book_copy (id, description, buy_or_gift, buy_or_gift_date, obs, photo, receiver_person_id, book_id) VALUES (
   1, "Dom Casmurro - Machado de Assis - A obra prima de cada autor", "G", "2010-07-14",
   "Presente da Salete Bevilaqua com dedicatória na contra capa", null, 1, 1);
+
+INSERT INTO book_comment(id, description, vote, visible, book_id, person_id)
+	VALUES(1, 'Bom livro', TRUE, TRUE, 1, 1);
+
+INSERT INTO loan(id, description, loan_code, loan_date, return_date, must_return_date, user_id, book_copy_id, person_id)
+	VALUES(1, 'Emprestado para mostrar para o filho', 'empfilho1', '2022-05-05', NULL, '2022-05-20', 1, 1, 1);
