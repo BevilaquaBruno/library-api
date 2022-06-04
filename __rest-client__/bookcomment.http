@@ -1,0 +1,5 @@
+# to get a specific book copy, must return the complete data for the book with the given id - you DON'T need the token here
+GET http://localhost:8000/api/bookcomment/1
+
+to get all copies
+GET http://localhost:8000/api/bookcomment/book/1

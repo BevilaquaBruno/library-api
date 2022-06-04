@@ -1,3 +1,4 @@
+DROP DATABASE bevilaqualibrary;
 /* Create Database */
 CREATE DATABASE IF NOT EXISTS bevilaqualibrary;
 USE bevilaqualibrary;
@@ -100,9 +101,9 @@ CREATE TABLE IF NOT EXISTS book_author (
 
 CREATE TABLE IF NOT EXISTS book_comment (
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	description TEXT,
-	vote BOOLEAN,
-	visible BOOLEAN,
+	description TEXT NOT NULL,
+	vote BOOLEAN NOT NULL,
+	visible BOOLEAN NOT NULL,
 	book_id INT NOT NULL,
 	person_id INT
 );
@@ -111,7 +112,7 @@ CREATE TABLE IF NOT EXISTS loan (
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	description VARCHAR(100),
 	loan_code VARCHAR(50),
-	loan_date DATE DEFAULT NOW(),
+	loan_date DATE,
 	return_date DATE,
 	must_return_date DATE,
 	user_id INT NOT NULL,
@@ -174,5 +175,14 @@ INSERT INTO book_copy (id, description, buy_or_gift, buy_or_gift_date, obs, phot
 INSERT INTO book_comment(id, description, vote, visible, book_id, person_id)
 	VALUES(1, 'Bom livro', TRUE, TRUE, 1, 1);
 
+INSERT INTO book_comment(id, description, vote, visible, book_id, person_id)
+	VALUES(2, 'Livro ruim', TRUE, TRUE, 1, null);
+
 INSERT INTO loan(id, description, loan_code, loan_date, return_date, must_return_date, user_id, book_copy_id, person_id)
-	VALUES(1, 'Emprestado para mostrar para o filho', 'empfilho1', '2022-05-05', NULL, '2022-05-20', 1, 1, 1);
+	VALUES(1, 'Emprestado para mostrar para o filho 1', 'empfilho1', '2022-05-05', NULL, '2025-01-01', 1, 1, 1);
+
+INSERT INTO loan(id, description, loan_code, loan_date, return_date, must_return_date, user_id, book_copy_id, person_id)
+	VALUES(2, 'Emprestado para mostrar para o filho 2', 'empfilho2', '2022-05-05', '2022-05-10', '2022-05-20', 1, 1, 1);
+
+INSERT INTO loan(id, description, loan_code, loan_date, return_date, must_return_date, user_id, book_copy_id, person_id)
+	VALUES(3, 'Emprestado para mostrar para o filho 3', 'empfilho3', '2022-05-05', NULL, '2022-05-06', 1, 1, 1);
