@@ -1,5 +1,9 @@
 # to get a specific book copy, must return the complete data for the book with the given id - you DON'T need the token here
-GET http://localhost:8000/api/bookcomment/1
+GET http://localhost:8000/api/bookcomment/<bookCommentId>
 
 to get all copies
-GET http://localhost:8000/api/bookcomment/book/1
+GET http://localhost:8000/api/bookcomment/book/<bookId>
+
+to delete a book comment
+DELETE http://localhost:8000/api/bookcomment/<booCommentId>
+x-access-token: <token>

@@ -26,6 +26,6 @@ bookRouter.get("/:id", BookCommentController.findById);
 //bookRouter.put("/:id", verifyJwt, BookCopyController.update);
 
 // DELETE book/:id
-//bookRouter.delete("/:id", verifyJwt, BookCopyController.delete);
+bookRouter.delete("/:id", verifyJwt, BookCommentController.delete);
 
 export default bookRouter;

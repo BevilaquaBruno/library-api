@@ -66,8 +66,8 @@ export default class BookCommentController {
        */
       response = {
         data: {
-          book: (bookCopies[0] != null ? bookCopies[0].book.toJson() : null),
-          comments: bookCopies.map((ct) => ct.toJsonNoBook())
+          book: bookCopies[0] != null ? bookCopies[0].book.toJson() : null,
+          comments: bookCopies.map((ct) => ct.toJsonNoBook()),
         },
         status: { error: false, message: "Lista de todos os comentários do livro" },
       };
@@ -77,6 +77,40 @@ export default class BookCommentController {
         status: {
           error: true,
           message: (e as Error)?.message ?? "Erro ao buscar dados dos comentários do livro",
+        },
+      };
+    }
+
+    res.json(response);
+  }
+
+  /**
+   * delete a book comment
+   * id: id of the book comment
+   */
+  public static async delete(req: Request, res: Response) {
+    let response: ResponseData;
+
+    try {
+      //1. get and parse the given id
+      const id: number = parseInt(req.params.id, 10);
+      //2. validate if exists a book with the given id
+      let bookComment: BookComment = await BookCommentModel.findById(id);
+      if (bookComment.id === 0) throw new Error("Comentário do livro não encontrada");
+
+      //3. delete bookComment
+      let result: boolean = await BookCommentModel.delete(bookComment);
+
+      //4. validate deletion
+      if (true === result)
+        response = { data: {}, status: { error: false, message: "Comentário do livro removido" } };
+      else throw new Error("Erro ao deletar comentário do livro");
+    } catch (e: any) {
+      response = {
+        data: {},
+        status: {
+          error: true,
+          message: (e as Error)?.message ?? "Erro ao excluir comentário do livro",
         },
       };
     }

@@ -1,3 +1,4 @@
+import { ResultSetHeader } from "mysql2";
 import DatabaseConnection from "../../db/db";
 import Author from "../classes/Author.class";
 import Book from "../classes/Book.class";
@@ -234,9 +235,9 @@ export default class BookCommentModel {
         "LEFT JOIN style s ON s.id = b.style_id " +
         "LEFT JOIN genre g ON g.id = b.genre_id " +
         "LEFT JOIN idiom i ON i.id = b.idiom_id " +
-        "LEFT JOIN person pe on pe.id = bc.person_id "+
+        "LEFT JOIN person pe on pe.id = bc.person_id " +
         "WHERE bc.book_id = ?",
-        [bookId]
+      [bookId]
     );
     /**
      * 2. for each book create a @BookComment instance
@@ -256,7 +257,9 @@ export default class BookCommentModel {
           arrBookComment.book.isbn,
           arrBookComment.book.id
         );
-        let authorsBook: Author[] = await AuthorModel.findAllAuthorsFromBook(arrBookComment.book.id);
+        let authorsBook: Author[] = await AuthorModel.findAllAuthorsFromBook(
+          arrBookComment.book.id
+        );
         book.authors = authorsBook;
         book.publisher =
           null == arrBookComment.book.publisher?.id
@@ -314,5 +317,23 @@ export default class BookCommentModel {
     );
 
     return allBookComments;
+  }
+
+  /**
+   * delete a book copy
+   * @param bookComment - the book comment to delete
+   * @return Promise<boolean> true or false, deleted or not
+   */
+  public static async delete(bookComment: BookComment): Promise<boolean> {
+    //1. execute sql
+    const rst: ResultSetHeader | any = await (
+      await conn
+    ).execute("DELETE FROM book_comment WHERE id = ?", [bookComment.id]);
+    let cr: boolean;
+    //2. returns true or false based in sql result
+    if (undefined !== rst[0].affectedRows) cr = true;
+    else cr = false;
+
+    return cr;
   }
 }
