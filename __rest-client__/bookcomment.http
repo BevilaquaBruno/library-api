@@ -1,9 +1,35 @@
 # to get a specific book copy, must return the complete data for the book with the given id - you DON'T need the token here
 GET http://localhost:8000/api/bookcomment/<bookCommentId>
 
-to get all copies
+# to get all copies
 GET http://localhost:8000/api/bookcomment/book/<bookId>
 
-to delete a book comment
+# to delete a book comment
 DELETE http://localhost:8000/api/bookcomment/<booCommentId>
 x-access-token: <token>
+
+# to create a book comment
+POST http://localhost:8000/api/bookcomment
+Content-Type: application/json
+x-access-token: <token>
+
+{
+  "description": "Comentário do livro xyz",
+  "vote": 1,
+  "visible": 0,
+  "person_id": null,
+  "book_id": 1
+}
+
+# to edit a book comment
+PUT http://localhost:8000/api/bookcomment/7
+Content-Type: application/json
+x-access-token: <token>
+
+{
+  "description": "Comentário do livro mno",
+  "vote": 0,
+  "visible": 1,
+  "person_id": null,
+  "book_id": 1
+}

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Book from "../classes/Book.class";
 import BookComment from "../classes/BookComment.class";
+import BookCopy from "../classes/BookCopy.class";
 import { ResponseData } from "../interfaces/Common.interface";
 import BookModel from "../models/Book.model";
 import BookCommentModel from "../models/BookComment.model";
@@ -111,6 +112,111 @@ export default class BookCommentController {
         status: {
           error: true,
           message: (e as Error)?.message ?? "Erro ao excluir comentário do livro",
+        },
+      };
+    }
+
+    res.json(response);
+  }
+
+  /**
+   * Create a bookComment
+   * description: body of the book comment
+   * vote: the vote true or false
+   * visible: if the comment is visible or not
+   * person_id - the person who comments
+   * book_id - book id
+   */
+  public static async create(req: Request, res: Response) {
+    let response: ResponseData;
+
+    try {
+      //1. get and create a bookCop with the given data
+      const bookComment: BookComment = new BookComment(
+        req.body.description,
+        req.body.vote,
+        req.body.visible
+      );
+
+      bookComment.book = await BookModel.findById(req.body.book_id);
+      bookComment.person =
+        req.body.person_id !== null ? await PersonModel.findById(req.body.person_id) : null;
+
+      //2. validate bookComment data
+      const resValidate: ResponseData = bookComment.validate();
+      if (true === resValidate.status.error) throw new Error(resValidate.status.message);
+
+      //3. insert book
+      const insertId: number = await BookCommentModel.create(bookComment);
+
+      //4 validate insertion
+      if (insertId !== 0) {
+        bookComment.id = insertId;
+
+        response = {
+          data: bookComment.toJson(),
+          status: { error: false, message: "Comentário do livro inserido" },
+        };
+      } else throw new Error("Erro ao inserir comentário do livro");
+    } catch (e: any) {
+      response = {
+        data: {},
+        status: {
+          error: true,
+          message: (e as Error)?.message ?? "Erro ao criar comentário do livro",
+        },
+      };
+    }
+
+    res.json(response);
+  }
+
+  /**
+   * Edit a bookComment
+   * description: body of the book comment
+   * vote: the vote true or false
+   * visible: if the comment is visible or not
+   * person_id - the person who comments
+   * book_id - book id
+   */
+  public static async update(req: Request, res: Response) {
+    let response: ResponseData;
+
+    try {
+      const id: number = parseInt(req.params.id);
+
+      //1. get and create a bookCop with the given data
+      const bookComment: BookComment = new BookComment(
+        req.body.description,
+        req.body.vote,
+        req.body.visible,
+        id
+      );
+
+      bookComment.book = await BookModel.findById(req.body.book_id);
+      bookComment.person =
+        req.body.person_id !== null ? await PersonModel.findById(req.body.person_id) : null;
+
+      //2. validate book data
+      const resValidate: ResponseData = bookComment.validate();
+      if (true === resValidate.status.error) throw new Error(resValidate.status.message);
+
+      //4. update bookComment
+      const bookCommentUpdated: boolean = await BookCommentModel.update(bookComment);
+
+      //5 validate update
+      if (bookCommentUpdated !== false) {
+        response = {
+          data: bookComment.toJson(),
+          status: { error: false, message: "Comentário do livro atualizado" },
+        };
+      } else throw new Error("Erro ao atualizar o comentário do livro");
+    } catch (e: any) {
+      response = {
+        data: {},
+        status: {
+          error: true,
+          message: (e as Error)?.message ?? "Erro ao atualizar o comentário do livro",
         },
       };
     }

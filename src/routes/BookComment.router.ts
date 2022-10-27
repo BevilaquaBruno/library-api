@@ -20,10 +20,10 @@ bookRouter.get("/book/:id", BookCommentController.findAllFromBook);
 bookRouter.get("/:id", BookCommentController.findById);
 
 // POST book
-//bookRouter.post("/", verifyJwt, BookCopyController.create);
+bookRouter.post("/", verifyJwt, BookCommentController.create);
 
 // PUT book/:id
-//bookRouter.put("/:id", verifyJwt, BookCopyController.update);
+bookRouter.put("/:id", verifyJwt, BookCommentController.update);
 
 // DELETE book/:id
 bookRouter.delete("/:id", verifyJwt, BookCommentController.delete);

@@ -320,6 +320,62 @@ export default class BookCommentModel {
   }
 
   /**
+   * Create a book comment
+   * @param bookComment - the book comment to insert
+   * @return Promise<number> the id of the inserted book
+   */
+  public static async create(bookComment: BookComment): Promise<number> {
+    //1. execute sql to insert the book
+    const rst: ResultSetHeader | any = await (
+      await conn
+    ).execute(
+      "INSERT INTO book_comment (description, vote, visible, book_id, person_id) " +
+        " VALUES (?, ?, ?, ?, ?)",
+      [
+        bookComment.description,
+        bookComment.vote,
+        bookComment.visible,
+        bookComment.book.id,
+        bookComment.person !== null ? bookComment.person.id_person : null,
+      ]
+    );
+
+    let bookId: number;
+    //2. if returned id is undefined returns 0 for function else returns the id
+    if (undefined !== rst[0].insertId) bookId = rst[0].insertId;
+    else bookId = 0;
+
+    return bookId;
+  }
+
+  /**
+   * update a book comment
+   * @param bookComment - the bookComment to update
+   * @return Promise<boolean> true or false, updated or not
+   */
+  public static async update(bookComment: BookComment): Promise<boolean> {
+    //1. execute sql
+    const rst: ResultSetHeader | any = await (
+      await conn
+    ).execute(
+      "UPDATE book_comment SET description = ?, vote = ?, visible = ? WHERE id = ?",
+      [
+        bookComment.description,
+        bookComment.vote,
+        bookComment.visible,
+        bookComment.id,
+      ]
+    );
+
+    let cr: boolean;
+    //2. if return id is undefined returns 0 for function, else returns the id
+    if (undefined !== rst[0].affectedRows) cr = true;
+    else cr = false;
+
+    return cr;
+  }
+
+  /**
    * delete a book copy
    * @param bookComment - the book comment to delete
    * @return Promise<boolean> true or false, deleted or not
