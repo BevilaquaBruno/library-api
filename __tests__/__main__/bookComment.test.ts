@@ -1,17 +1,13 @@
 import Author from "../../src/classes/Author.class";
 import Book from "../../src/classes/Book.class";
 import BookComment from "../../src/classes/BookComment.class";
-import BookCopy from "../../src/classes/BookCopy.class";
 import Country from "../../src/classes/Country.class";
 import Genre from "../../src/classes/Genre.class";
 import Idiom from "../../src/classes/Idiom.class";
 import Person from "../../src/classes/Person.class";
 import Publisher from "../../src/classes/Publisher.class";
 import Style from "../../src/classes/Style.class";
-import BookController from "../../src/controllers/Book.controller";
 import { AuthorDataInterfaces } from "../../src/interfaces/Author.interface";
-import { BookDataInterfaces } from "../../src/interfaces/Book.interface";
-import { BookCopyDataInterfaces } from "../../src/interfaces/BookCopy.interface";
 import { ResponseData } from "../../src/interfaces/Common.interface";
 import AuthFetch from "../__fetches__/auth.fetch";
 import BookCommentFetch from "../__fetches__/bookComment.fetch";
